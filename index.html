@@ -16,15 +16,15 @@
 
 <style>
   :root{
-    --hull:      #161311;
-    --hull-2:    #211B17;
-    --paper:     #E9E6E1;
-    --paper-2:   #D9D4CC;
-    --ink:       #14100D;
-    --rule:      #A39A8E;
-    --dim:       #7A7266;
-    --starboard: #E0621F;
-    --port:      #C7281F;
+    --hull:      #101A1D;
+    --hull-2:    #17272C;
+    --paper:     #E7E8E2;
+    --paper-2:   #D6D9D2;
+    --ink:       #0C1315;
+    --rule:      #9AA5A2;
+    --dim:       #6F7C79;
+    --starboard: #1E9B63;
+    --port:      #C0453B;
 
     --display: "Archivo", system-ui, sans-serif;
     --body:    "Newsreader", Georgia, serif;
@@ -93,10 +93,10 @@
 
   /* ---- hero ------------------------------------------------------------ */
   .hero{ background:var(--hull); color:var(--paper); overflow:hidden; padding-block:clamp(3.5rem,9vw,6.5rem) clamp(3rem,7vw,5rem); }
-  .hero .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
+  .hero .wrap{ display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
   @media(max-width:860px){ .hero .wrap{ grid-template-columns:1fr; } }
-  .hero .eyebrow{ color:#B0A08E; }
-  .hero .eyebrow::before{ background:#4A3E33; }
+  .hero .eyebrow{ color:#8FA09C; }
+  .hero .eyebrow::before{ background:#43585A; }
   .hero h1{
     font-family:var(--display); font-weight:800;
     font-size:clamp(2.6rem,8vw,4.9rem); line-height:.94;
@@ -104,36 +104,39 @@
   }
   .roles{
     font-family:var(--mono); font-size:.74rem; letter-spacing:.16em;
-    text-transform:uppercase; color:#C9BBA8; margin:0 0 1.75rem;
+    text-transform:uppercase; color:#9DAEAA; margin:0 0 1.75rem;
   }
   .roles span{ color:var(--starboard); margin-inline:.45rem; }
-  .hero-sub{ font-family:var(--body); font-weight:300; font-size:1.08rem; line-height:1.62; color:#D8CFC2; max-width:38ch; margin:0 0 2.25rem; }
+  .hero-sub{ font-family:var(--body); font-weight:300; font-size:1.08rem; line-height:1.62; color:#C9D2CF; max-width:38ch; margin:0 0 2.25rem; }
   .cta-row{ display:flex; flex-wrap:wrap; gap:.75rem; }
   .btn{
     font-family:var(--mono); font-size:.72rem; letter-spacing:.12em;
     text-transform:uppercase; text-decoration:none; padding:.7rem 1.2rem;
-    border:1px solid #4A3E33; color:var(--paper);
+    border:1px solid #3A4E51; color:var(--paper);
     transition:background .2s, border-color .2s, color .2s;
   }
-  .btn:hover, .btn:focus-visible{ background:var(--starboard); border-color:var(--starboard); color:#170F09; }
+  .btn:hover, .btn:focus-visible{ background:var(--starboard); border-color:var(--starboard); color:#06120C; }
   .btn.solid{ background:var(--paper); color:var(--hull); border-color:var(--paper); }
-  .btn.solid:hover, .btn.solid:focus-visible{ background:var(--starboard); border-color:var(--starboard); color:#170F09; }
+  .btn.solid:hover, .btn.solid:focus-visible{ background:var(--starboard); border-color:var(--starboard); color:#06120C; }
 
-  /* ---- signature: isotherm / heat-diffusion contour --------------------- */
+  /* ---- signature: isotherm / melting-front diagram, teal nautical palette ---- */
   .isotherm{ width:100%; height:auto; }
   .isotherm .ring{ fill:none; stroke-width:1.1; vector-effect:non-scaling-stroke; }
-  .isotherm .ring.r1{ stroke:#3A2E24; }
-  .isotherm .ring.r2{ stroke:#5C3B22; }
-  .isotherm .ring.r3{ stroke:#8A4A22; }
-  .isotherm .ring.r4{ stroke:#C05A22; }
-  .isotherm .ring.r5{ stroke:#E0621F; }
-  .isotherm .ring.r6{ stroke:#F2A33A; }
-  .isotherm .grid{ stroke:#2C241E; stroke-width:.6; }
-  .isotherm .axis{ stroke:#4A3E33; stroke-width:1; stroke-dasharray:6 4 1.5 4; opacity:.7; }
+  .isotherm .ring.r1{ stroke:#2E4245; }
+  .isotherm .ring.r2{ stroke:#3A5750; }
+  .isotherm .ring.r3{ stroke:#3F6E5C; }
+  .isotherm .ring.r4{ stroke:#39825E; }
+  .isotherm .ring.r5{ stroke:#2F8F63; }
+  .isotherm .ring.r6{ stroke:var(--starboard); }
+  .isotherm .axis{ stroke:var(--starboard); stroke-width:1; stroke-dasharray:6 4 1.5 4; opacity:.7; }
   .isotherm .node{ fill:var(--starboard); }
-  .isotherm text{ font-family:var(--mono); font-size:8px; fill:#8C7E6E; letter-spacing:.08em; }
-  .draw{ stroke-dasharray:var(--len,600); stroke-dashoffset:var(--len,600); animation:draw 1.5s cubic-bezier(.32,.72,.36,1) forwards; }
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .draw{ stroke-dasharray:var(--len,600); stroke-dashoffset:var(--len,600); animation:draw 3.2s ease-in-out infinite; }
+  @keyframes draw{
+    0%   { stroke-dashoffset:var(--len,600); }
+    45%  { stroke-dashoffset:0; }
+    75%  { stroke-dashoffset:0; }
+    100% { stroke-dashoffset:calc(var(--len,600) * -1); }
+  }
   .pulse{ animation:pulse 2.2s ease-in-out .9s infinite; transform-origin:center; }
   @keyframes pulse{ 0%,100%{ opacity:.55; } 50%{ opacity:1; } }
 
@@ -150,9 +153,9 @@
   /* ---- sections -------------------------------------------------------- */
   section{ padding-block:clamp(3.25rem,8vw,5.5rem); }
   section.dark{ background:var(--hull); color:var(--paper); }
-  section.dark .eyebrow{ color:#B0A08E; }
-  section.dark .eyebrow::before{ background:#4A3E33; }
-  section.dark .muted{ color:#A89C8C; }
+  section.dark .eyebrow{ color:#8FA09C; }
+  section.dark .eyebrow::before{ background:#43585A; }
+  section.dark .muted{ color:#93A4A0; }
   section.tight{ padding-top:0; }
 
   .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.5rem,4vw,3.5rem); }
@@ -177,16 +180,16 @@
     font-family:var(--mono); font-size:.72rem; letter-spacing:.05em;
     border:1px solid var(--rule); padding:.3rem .7rem; color:var(--ink);
   }
-  section.dark .chips li{ border-color:#4A3E33; color:#D3C8B8; }
+  section.dark .chips li{ border-color:#3A4E51; color:#C3CECB; }
 
   /* ---- publications ----------------------------------------------------- */
-  .pub{ padding:1.6rem 0; border-top:1px solid #332A22; }
-  .pub:last-of-type{ border-bottom:1px solid #332A22; }
-  .pub .num{ font-family:var(--mono); font-size:.7rem; color:#9C8E7C; letter-spacing:.1em; }
+  .pub{ padding:1.6rem 0; border-top:1px solid #2A3E41; }
+  .pub:last-of-type{ border-bottom:1px solid #2A3E41; }
+  .pub .num{ font-family:var(--mono); font-size:.7rem; color:#7B8C88; letter-spacing:.1em; }
   .pub .ttl{ font-family:var(--body); font-weight:400; font-size:1.14rem; line-height:1.45; margin:.5rem 0 .6rem; color:var(--paper); }
-  .pub .authors{ font-family:var(--body); font-weight:300; font-size:.96rem; color:#BDAF9C; margin:0 0 .5rem; }
+  .pub .authors{ font-family:var(--body); font-weight:300; font-size:.96rem; color:#A9B7B4; margin:0 0 .5rem; }
   .pub .authors b{ color:var(--paper); font-weight:500; }
-  .pub .venue{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:#B0A08E; }
+  .pub .venue{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:#8FA09C; }
   .status{
     font-family:var(--mono); font-size:.63rem; letter-spacing:.12em; text-transform:uppercase;
     border:1px solid var(--starboard); color:var(--starboard); padding:.12rem .5rem; margin-left:.5rem; white-space:nowrap;
@@ -211,19 +214,19 @@
   /* ---- results table ------------------------------------------------------ */
   .results{ width:100%; border-collapse:collapse; font-family:var(--mono); font-size:.82rem; margin-top:.5rem; }
   .results caption{ text-align:left; caption-side:top; margin-bottom:1.25rem; }
-  .results th{ text-align:left; font-weight:500; font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:#B0A08E; padding:0 0 .7rem; border-bottom:1px solid #3E3226; }
-  .results td{ padding:.8rem 0; border-bottom:1px solid #2A2119; color:#A89C8C; }
+  .results th{ text-align:left; font-weight:500; font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:#8FA09C; padding:0 0 .7rem; border-bottom:1px solid #33474A; }
+  .results td{ padding:.8rem 0; border-bottom:1px solid #223437; color:#93A4A0; }
   .results td:last-child{ text-align:right; }
   .results tr.win td{ color:var(--paper); }
   .results tr.win .place{ color:var(--port); font-weight:500; }
 
-  .vessel{ border:1px solid #3E3226; padding:1.4rem 1.5rem; margin-top:2rem; }
+  .vessel{ border:1px solid #33474A; padding:1.4rem 1.5rem; margin-top:2rem; }
   .vessel .name{ font-family:var(--display); font-weight:800; font-size:1.55rem; letter-spacing:-.02em; margin:0 0 .5rem; }
-  .vessel p{ margin:0; color:#C9BFAF; font-weight:300; font-size:1rem; }
+  .vessel p{ margin:0; color:#B7C3C0; font-weight:300; font-size:1rem; }
 
   /* ---- tick lists ---------------------------------------------------------- */
   .ticklist{ list-style:none; padding:0; margin:0; }
-  .ticklist li{ position:relative; padding:.55rem 0 .55rem 1.6rem; border-bottom:1px solid #2A2119; font-size:1rem; font-weight:300; color:#D3C8B8; }
+  .ticklist li{ position:relative; padding:.55rem 0 .55rem 1.6rem; border-bottom:1px solid #223437; font-size:1rem; font-weight:300; color:#C3CECB; }
   .ticklist li::before{ content:""; position:absolute; left:0; top:1.15rem; width:.6rem; height:1px; background:var(--starboard); }
   section:not(.dark) .ticklist li{ color:var(--ink); border-bottom-color:color-mix(in srgb,var(--rule) 55%,transparent); }
 
@@ -258,10 +261,10 @@
   .contact-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(195px,1fr)); gap:2rem; margin-top:2rem; }
   .contact-grid a{
     font-family:var(--mono); font-size:.84rem; text-decoration:none; color:var(--paper);
-    border-bottom:1px solid #4A3E33; padding-bottom:.2rem; transition:border-color .2s;
+    border-bottom:1px solid #3A4E51; padding-bottom:.2rem; transition:border-color .2s;
   }
   .contact-grid a:hover, .contact-grid a:focus-visible{ border-bottom-color:var(--starboard); }
-  .contact-grid .k{ font-family:var(--mono); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:#9C8E7C; display:block; margin-bottom:.5rem; }
+  .contact-grid .k{ font-family:var(--mono); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:#7B8C88; display:block; margin-bottom:.5rem; }
 
   footer{
     background:var(--hull); color:#6F817D; font-family:var(--mono);
@@ -307,7 +310,7 @@
       <p class="eyebrow">Thermal Management Research · BUET</p>
       <h1>Atiqur<br>Rahaman</h1>
       <p class="roles">Thermal Management <span>/</span> Phase Change Materials <span>/</span> CFD</p>
-      <p class="hero-sub">Naval architect and researcher working on phase change material systems for thermal management &mdash; currently developing enhanced PCM/fin structures for battery cooling, alongside earlier work on offshore wind mooring dynamics and ferry design.</p>
+      <p class="hero-sub">Naval architect and researcher working on phase change material systems for thermal management, currently developing enhanced PCM/fin structures for battery cooling, alongside earlier work on offshore wind mooring dynamics and ferry design.</p>
       <div class="cta-row">
         <a class="btn solid" href="#publications">Publications</a>
         <a class="btn" href="assets/cv.pdf">Download CV</a>
@@ -318,26 +321,17 @@
     <!-- SIGNATURE: isotherm / melting-front diagram around a fin heat source in a PCM enclosure. -->
     <div>
       <svg class="isotherm" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of concentric isotherm contours spreading outward from a fin inside a phase-change-material enclosure.">
-        <!-- enclosure boundary -->
-        <rect class="grid draw" style="--len:760;animation-delay:.05s" x="45" y="40" width="330" height="220" fill="none"/>
-        <line class="grid draw" style="--len:220;animation-delay:.1s" x1="45" y1="150" x2="375" y2="150"/>
-        <line class="grid draw" style="--len:330;animation-delay:.1s" x1="210" y1="40" x2="210" y2="260"/>
-
-        <!-- concentric melting-front isotherms, cool (outer) to hot (inner) -->
-        <circle class="ring r1 draw" style="--len:691;animation-delay:.25s" cx="196" cy="150" r="110"/>
-        <circle class="ring r2 draw" style="--len:553;animation-delay:.35s" cx="196" cy="150" r="88"/>
-        <circle class="ring r3 draw" style="--len:427;animation-delay:.45s" cx="196" cy="150" r="68"/>
-        <circle class="ring r4 draw" style="--len:314;animation-delay:.55s" cx="196" cy="150" r="50"/>
-        <circle class="ring r5 draw" style="--len:214;animation-delay:.65s" cx="196" cy="150" r="34"/>
-        <circle class="ring r6 draw" style="--len:113;animation-delay:.75s" cx="196" cy="150" r="18"/>
+        <!-- concentric melting-front isotherms, cool (outer) to warm (inner) -->
+        <circle class="ring r1 draw" style="--len:754;animation-delay:.15s" cx="210" cy="150" r="120"/>
+        <circle class="ring r2 draw" style="--len:628;animation-delay:.28s" cx="210" cy="150" r="100"/>
+        <circle class="ring r3 draw" style="--len:503;animation-delay:.41s" cx="210" cy="150" r="80"/>
+        <circle class="ring r4 draw" style="--len:377;animation-delay:.54s" cx="210" cy="150" r="60"/>
+        <circle class="ring r5 draw" style="--len:251;animation-delay:.67s" cx="210" cy="150" r="40"/>
+        <circle class="ring r6 draw" style="--len:126;animation-delay:.8s"  cx="210" cy="150" r="20"/>
 
         <!-- K-shaped fin at the heat source -->
-        <path class="axis draw" style="--len:120;animation-delay:.85s" d="M196,150 L226,120 M196,150 L226,180"/>
-        <circle class="node pulse" cx="196" cy="150" r="4"/>
-
-        <text x="52"  y="285">PCM ENCLOSURE</text>
-        <text x="290" y="285">MELT FRONT &#8594;</text>
-        <text x="208" y="34">FIN</text>
+        <path class="axis draw" style="--len:120;animation-delay:.95s" d="M210,150 L240,120 M210,150 L240,180"/>
+        <circle class="node pulse" cx="210" cy="150" r="4"/>
       </svg>
     </div>
   </div>
@@ -361,12 +355,12 @@
           <p class="lede">I completed my B.Sc. in Naval Architecture and Marine Engineering at the <a href="https://www.buet.ac.bd/">Bangladesh University of Engineering and Technology</a>, and now work as a researcher focused on thermal management. I&rsquo;m applying for PhD study in the United States in this field.</p>
           <div class="two-col">
             <div>
-              <p>My current work is on phase change materials (PCM) for thermal management. I&rsquo;m investigating PCM and fin network structures for cooling lithium-ion battery packs under repeated charge&ndash;discharge cycles, and I&rsquo;m a co-author on a paper under review at <em>Applied Thermal Engineering</em> on melting enhancement in a PCM-filled enclosure using K-shaped fins &mdash; looking at how fin angle and arm length ratio change melting behaviour. I&rsquo;m actively writing up a new paper from this line of work now.</p>
-              <p>This grew out of my undergraduate thesis on mooring dynamics for a 15 MW floating offshore wind turbine, where heat transfer and convection kept surfacing as the more interesting problem underneath the structural one &mdash; which is what pulled me toward PCM and thermal systems specifically.</p>
+              <p>My current work is on phase change materials (PCM) for thermal management. I&rsquo;m investigating PCM and fin network structures for cooling lithium-ion battery packs under repeated charge/discharge cycles, and I&rsquo;m a co-author on a paper under review at <em>Applied Thermal Engineering</em> on melting enhancement in a PCM-filled enclosure using K-shaped fins, looking at how fin angle and arm length ratio change melting behaviour. I&rsquo;m actively writing up a new paper from this line of work now.</p>
+              <p>This grew out of my undergraduate thesis on mooring dynamics for a 15 MW floating offshore wind turbine, where heat transfer and convection kept surfacing as the more interesting problem underneath the structural one, which is what pulled me toward PCM and thermal systems specifically.</p>
             </div>
             <div>
               <p>Before that I designed a 175-passenger ferry for the circular waterways around Dhaka, and interned for a month at the Bangladesh Navy&rsquo;s Dockyard and Engineering Works in Narayanganj.</p>
-              <p>Outside the research, I&rsquo;m a semi-professional photographer and served as Vice President of the BUET Photographic Society. I&rsquo;m deeply people-oriented and enjoy organising initiatives and taking on front-facing coordination &mdash; strengths I want to carry into a research group, not just a lab bench.</p>
+              <p>Outside the research, I&rsquo;m a semi-professional photographer and served as Vice President of the BUET Photographic Society. I&rsquo;m deeply people-oriented and enjoy organising initiatives and taking on front-facing coordination, strengths I want to carry into a research group, not just a lab bench.</p>
             </div>
           </div>
 
@@ -416,7 +410,7 @@
 
     <div class="reveal">
       <article class="entry split">
-        <div class="yr">Apr 2025 &mdash;<br>Jun 2026</div>
+        <div class="yr">Apr 2025 to<br>Jun 2026</div>
         <div>
           <h3>Undergraduate thesis</h3>
           <p class="sup">Supervisor: Dr. Md. Shahidul Islam &middot; NAME, BUET</p>
@@ -433,7 +427,7 @@
       </article>
 
       <article class="entry split">
-        <div class="yr">Jan 2024 &mdash;<br>Feb 2025</div>
+        <div class="yr">Jan 2024 to<br>Feb 2025</div>
         <div>
           <h3>175-passenger ferry design</h3>
           <p class="sup">Supervisor: Dr. Mir Tareque Ali &middot; Undergraduate project</p>
@@ -444,7 +438,7 @@
       <article class="entry split">
         <div class="yr">1 month</div>
         <div>
-          <h3>Intern &mdash; Dockyard &amp; Engineering Works Ltd</h3>
+          <h3>Intern, Dockyard &amp; Engineering Works Ltd</h3>
           <p class="sup">Bangladesh Navy &middot; Narayanganj, Bangladesh</p>
         </div>
       </article>
@@ -469,7 +463,7 @@
       <div class="two-col">
         <div class="scale reveal">
           <div class="stage now">
-            <span class="yr">Jan 2022 &mdash; Jun 2026</span>
+            <span class="yr">Jan 2022 to Jun 2026</span>
             <h3>B.Sc. in Naval Architecture &amp; Marine Engineering</h3>
             <p class="inst">Bangladesh University of Engineering and Technology, Dhaka</p>
             <span class="gpa">CGPA 3.78 / 4.00</span>
@@ -516,10 +510,10 @@
     <div class="two-col">
       <div class="reveal">
         <p class="muted" style="font-weight:300">Team Black Pearl is a student-led competitive design team from the Department of Naval Architecture and Marine Engineering at BUET. Since 2021 the team has entered the International Student Design Competition for a Safe and Affordable Ferry, organised by the Worldwide Ferry Safety Association.</p>
-        <p class="muted" style="font-weight:300">The team runs a structured knowledge-transfer model: experienced members mentor junior fellows and hand over responsibility each year. I joined for the 2025 campaign &mdash; the team&rsquo;s first championship title in the competition &mdash; and continued through 2026.</p>
+        <p class="muted" style="font-weight:300">The team runs a structured knowledge-transfer model: experienced members mentor junior fellows and hand over responsibility each year. I joined for the 2025 campaign, the team&rsquo;s first championship title in the competition, and continued through 2026.</p>
 
         <div class="vessel">
-          <p class="eyebrow" style="color:#9C8E7C;margin-bottom:.6rem">Winning design &mdash; 2025</p>
+          <p class="eyebrow" style="color:#7B8C88;margin-bottom:.6rem">Winning design (2025)</p>
           <p class="name">Naija Spirit</p>
           <p>A safe, affordable and context-appropriate ferry, designed around real operational and safety constraints.</p>
         </div>
@@ -540,8 +534,8 @@
 
         <p class="eyebrow" style="margin-top:2.5rem">Scholarships &amp; prizes</p>
         <ul class="ticklist">
-          <li>University Merit Scholarship &mdash; 8 times across 8 semesters</li>
-          <li>University Dean&rsquo;s List Scholarship &mdash; 1st and 2nd year</li>
+          <li>University Merit Scholarship (8 times across 8 semesters)</li>
+          <li>University Dean&rsquo;s List Scholarship (1st and 2nd year)</li>
           <li>Education Board Technical Scholarship, BUET</li>
           <li>1st prize, NAME Olympiad at NAME Fest 2023</li>
           <li>Award and certificate from the Chairman of BIWTC, recognising performance in the WFSA international competition</li>
@@ -558,11 +552,11 @@
       <div class="reveal">
         <p class="eyebrow">Leadership &amp; activities</p>
         <ul class="ticklist">
-          <li><strong>Team Member</strong>, Black Pearl, BUET &mdash; WFSA Design Competition <span class="muted">(Sept 2024 &ndash; present)</span></li>
-          <li><strong>Vice President</strong>, BUET Photographic Society <span class="muted">(Jun 2025 &ndash; Jul 2026)</span></li>
-          <li><strong>Director of Design and Creation</strong>, BUET Entrepreneurship Development Club <span class="muted">(Jun 2025 &ndash; Jul 2026)</span></li>
-          <li><strong>Class Representative</strong>, Dept. of NAME, BUET <span class="muted">(Jan 2022 &ndash; Feb 2023)</span></li>
-          <li><strong>Volunteer</strong>, MARTEC 2022 &mdash; International Conference on Marine Technology <span class="muted">(Dec 2022)</span></li>
+          <li><strong>Team Member</strong>, Black Pearl, BUET, WFSA Design Competition <span class="muted">(Sept 2024 to present)</span></li>
+          <li><strong>Vice President</strong>, BUET Photographic Society <span class="muted">(Jun 2025 to Jul 2026)</span></li>
+          <li><strong>Director of Design and Creation</strong>, BUET Entrepreneurship Development Club <span class="muted">(Jun 2025 to Jul 2026)</span></li>
+          <li><strong>Class Representative</strong>, Dept. of NAME, BUET <span class="muted">(Jan 2022 to Feb 2023)</span></li>
+          <li><strong>Volunteer</strong>, MARTEC 2022, International Conference on Marine Technology <span class="muted">(Dec 2022)</span></li>
         </ul>
       </div>
 
@@ -604,7 +598,7 @@
     <div class="after-marks">
       <p class="eyebrow reveal">Photography</p>
       <h2 class="reveal">Looking at things<br>from other angles.</h2>
-      <p class="reveal" style="max-width:52ch;margin-top:-.75rem">Ten ongoing series. Links currently point to the galleries on my old site &mdash; swap in local images as you migrate them.</p>
+      <p class="reveal" style="max-width:52ch;margin-top:-.75rem">Ten ongoing series. Links currently point to the galleries on my old site; swap in local images as you migrate them.</p>
 
       <div class="gallery reveal">
         <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/street"><span class="label">Street</span></a>
