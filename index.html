@@ -46,6 +46,14 @@
   img{ max-width:100%; display:block; }
   .wrap{ max-width:var(--maxw); margin:0 auto; padding-inline:var(--pad); }
 
+  /* Justified running prose. Headings, labels, nav, and eyebrows stay left-aligned by not matching this selector. */
+  section p, .vessel p, .pub .authors{
+    text-align:justify;
+    text-justify:inter-word;
+    hyphens:auto;
+  }
+  .hero-sub, .lede{ text-align:left; } /* short lede lines look better ragged, not justified */
+
   /* ---- type ------------------------------------------------------------ */
   .eyebrow{
     font-family:var(--mono); font-size:.688rem; letter-spacing:.18em;
@@ -152,11 +160,8 @@
   .portrait-block{ display:grid; grid-template-columns:250px 1fr; gap:clamp(1.5rem,4vw,3rem); align-items:start; }
   @media(max-width:760px){ .portrait-block{ grid-template-columns:1fr; } }
   .portrait{
-    aspect-ratio:4/5; background:var(--paper-2); border:1px solid var(--rule);
-    display:grid; place-items:center; font-family:var(--mono); font-size:.65rem;
-    letter-spacing:.1em; text-transform:uppercase; color:var(--dim);
-    text-align:center; padding:1rem;
-    /* ADD YOUR PHOTO: background:url('assets/img/portrait.jpg') center/cover; */
+    aspect-ratio:4/5; border:1px solid var(--rule);
+    background:url('assets/img/portrait.jpg') center/cover;
   }
 
   /* chips */
@@ -294,8 +299,8 @@
     <div>
       <p class="eyebrow">Naval Architecture &amp; Marine Engineering · BUET</p>
       <h1>Atiqur<br>Rahaman</h1>
-      <p class="roles">CFD <span>/</span> Offshore Structures <span>/</span> Floating Wind</p>
-      <p class="hero-sub">Naval architect and researcher working on the numerical side of ocean engineering &mdash; mooring dynamics for floating offshore wind, phase change materials for thermal management, and ferry design for inland waterways.</p>
+      <p class="roles">Thermal Management <span>/</span> Phase Change Materials <span>/</span> CFD</p>
+      <p class="hero-sub">Naval architect and researcher working on phase change material systems for thermal management &mdash; currently developing enhanced PCM/fin structures for battery cooling, alongside earlier work on offshore wind mooring dynamics and ferry design.</p>
       <div class="cta-row">
         <a class="btn solid" href="#publications">Publications</a>
         <a class="btn" href="assets/cv.pdf">Download CV</a>
@@ -348,26 +353,26 @@
     <div class="after-marks">
       <p class="eyebrow reveal">About</p>
       <div class="portrait-block">
-        <div class="portrait reveal">Add portrait.jpg<br>to assets/img/</div>
+        <div class="portrait reveal" role="img" aria-label="Portrait of Atiqur Rahaman"></div>
         <div class="reveal">
-          <p class="lede">I completed my B.Sc. in Naval Architecture and Marine Engineering at the <a href="https://www.buet.ac.bd/">Bangladesh University of Engineering and Technology</a>, and now work as a researcher. I&rsquo;m applying for PhD study in the United States.</p>
+          <p class="lede">I completed my B.Sc. in Naval Architecture and Marine Engineering at the <a href="https://www.buet.ac.bd/">Bangladesh University of Engineering and Technology</a>, and now work as a researcher focused on thermal management. I&rsquo;m applying for PhD study in the United States in this field.</p>
           <div class="two-col">
             <div>
-              <p>My work sits on the numerical side of ocean engineering. My undergraduate thesis examined how mooring line count and angular spacing affect the dynamic motion of a 15 MW semi-submersible offshore wind turbine platform, modelled in AQWA. Alongside that I work on melting enhancement in phase change materials, and on thermal management of lithium-ion battery packs using PCM and fin network structures.</p>
-              <p>Before that I designed a 175-passenger ferry for the circular waterways around Dhaka, and spent a year interning at the Bangladesh Navy&rsquo;s Dockyard and Engineering Works in Narayanganj &mdash; which put the drawings I&rsquo;d been making next to steel that people actually sail on.</p>
+              <p>My current work is on phase change materials (PCM) for thermal management. I&rsquo;m investigating PCM and fin network structures for cooling lithium-ion battery packs under repeated charge&ndash;discharge cycles, and I&rsquo;m a co-author on a paper under review at <em>Applied Thermal Engineering</em> on melting enhancement in a PCM-filled enclosure using K-shaped fins &mdash; looking at how fin angle and arm length ratio change melting behaviour. I&rsquo;m actively writing up a new paper from this line of work now.</p>
+              <p>This grew out of my undergraduate thesis on mooring dynamics for a 15 MW floating offshore wind turbine, where heat transfer and convection kept surfacing as the more interesting problem underneath the structural one &mdash; which is what pulled me toward PCM and thermal systems specifically.</p>
             </div>
             <div>
-              <p>Outside the numerical work I&rsquo;m a semi-professional photographer, and served as Vice President of the BUET Photographic Society. Photography lets me observe people, places and moments from new perspectives, both literally and figuratively; music fuels my focus and emotional balance.</p>
-              <p>I&rsquo;m deeply people-oriented and enjoy meaningful conversations, organising initiatives, and taking responsibility as a front-facing coordinator. My long-term aim is to combine strong technical expertise with management and strategic responsibility &mdash; to work where engineering knowledge informs real decisions.</p>
+              <p>Before that I designed a 175-passenger ferry for the circular waterways around Dhaka, and interned for a month at the Bangladesh Navy&rsquo;s Dockyard and Engineering Works in Narayanganj.</p>
+              <p>Outside the research, I&rsquo;m a semi-professional photographer and served as Vice President of the BUET Photographic Society. I&rsquo;m deeply people-oriented and enjoy organising initiatives and taking on front-facing coordination &mdash; strengths I want to carry into a research group, not just a lab bench.</p>
             </div>
           </div>
 
           <p class="eyebrow" style="margin-top:2.5rem">Research interests</p>
           <ul class="chips">
-            <li>Computational Fluid Dynamics</li>
             <li>Phase Change Materials</li>
+            <li>Battery Thermal Management</li>
             <li>Convection Heat Transfer</li>
-            <li>Floating Wind Turbines</li>
+            <li>Computational Fluid Dynamics</li>
             <li>Offshore Structures</li>
           </ul>
         </div>
@@ -434,7 +439,7 @@
       </article>
 
       <article class="entry split">
-        <div class="yr">Jan 2024 &mdash;<br>Feb 2025</div>
+        <div class="yr">1 month</div>
         <div>
           <h3>Intern &mdash; Dockyard &amp; Engineering Works Ltd</h3>
           <p class="sup">Bangladesh Navy &middot; Narayanganj, Bangladesh</p>
@@ -619,7 +624,7 @@
   <div class="wrap">
     <p class="eyebrow reveal">Contact</p>
     <h2 class="reveal">Say hello.</h2>
-    <p class="reveal muted" style="max-width:46ch;margin-top:-.75rem;font-weight:300">Open to PhD opportunities in computational fluid dynamics, offshore structures and floating offshore wind.</p>
+    <p class="reveal muted" style="max-width:46ch;margin-top:-.75rem;font-weight:300">Open to PhD opportunities in thermal management, phase change materials, and heat transfer.</p>
 
     <div class="contact-grid reveal">
       <div>
