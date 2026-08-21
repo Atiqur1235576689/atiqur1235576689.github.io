@@ -140,14 +140,6 @@
   .pulse{ animation:pulse 2.2s ease-in-out .9s infinite; transform-origin:center; }
   @keyframes pulse{ 0%,100%{ opacity:.55; } 50%{ opacity:1; } }
 
-  /* ---- draft-mark divider ---------------------------------------------- */
-  .draftmarks{ display:flex; align-items:flex-end; height:34px; border-bottom:1px solid var(--rule); opacity:.55; }
-  .draftmarks .tick{ flex:1; border-left:1px solid var(--rule); height:8px; }
-  .draftmarks .tick.major{ height:18px; }
-  .draftmarks .tick.major::after{
-    content:attr(data-m); font-family:var(--mono); font-size:.6rem;
-    color:var(--dim); position:relative; top:-1.15rem; left:.3rem;
-  }
   .after-marks{ padding-top:clamp(2.5rem,6vw,4rem); }
 
   /* ---- sections -------------------------------------------------------- */
@@ -339,13 +331,6 @@
 <!-- ============================ ABOUT ============================ -->
 <section id="about">
   <div class="wrap">
-    <div class="draftmarks" aria-hidden="true">
-      <span class="tick major" data-m="01"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-      <span class="tick major" data-m="02"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-      <span class="tick major" data-m="03"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-      <span class="tick major" data-m="04"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-    </div>
-
     <div class="after-marks">
       <p class="eyebrow reveal">About</p>
       <div class="portrait-block">
@@ -448,13 +433,6 @@
 <!-- ============================ EDUCATION ============================ -->
 <section id="education" class="tight">
   <div class="wrap">
-    <div class="draftmarks" aria-hidden="true">
-      <span class="tick major" data-m="05"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-      <span class="tick major" data-m="06"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-      <span class="tick major" data-m="07"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-      <span class="tick major" data-m="08"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-    </div>
-
     <div class="after-marks">
       <p class="eyebrow reveal">Education</p>
       <h2 class="reveal">Academic background.</h2>
@@ -587,13 +565,6 @@
 <!-- ============================ PHOTOGRAPHY ============================ -->
 <section id="photography" class="tight">
   <div class="wrap">
-    <div class="draftmarks" aria-hidden="true">
-      <span class="tick major" data-m="09"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-      <span class="tick major" data-m="10"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-      <span class="tick major" data-m="11"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-      <span class="tick major" data-m="12"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-    </div>
-
     <div class="after-marks">
       <p class="eyebrow reveal">Photography</p>
       <h2 class="reveal">Looking at things<br>from other angles.</h2>
