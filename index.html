@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atiqur Rahaman — Naval Architecture &amp; Marine Engineering</title>
+<meta name="description" content="Atiqur Rahaman — Naval Architecture and Marine Engineering, BUET. CFD, offshore structures, floating wind turbines and phase change materials.">
+
+<meta property="og:title" content="Atiqur Rahaman">
+<meta property="og:description" content="Naval architect and researcher. CFD, offshore structures, floating offshore wind.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --hull:      #101A1D;
+    --hull-2:    #17272C;
+    --paper:     #E7E8E2;
+    --paper-2:   #D6D9D2;
+    --ink:       #0C1315;
+    --rule:      #9AA5A2;
+    --dim:       #6F7C79;
+    --starboard: #1E9B63;
+    --port:      #C0453B;
+
+    --display: "Archivo", system-ui, sans-serif;
+    --body:    "Newsreader", Georgia, serif;
+    --mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+    --pad: clamp(1.25rem, 5vw, 5rem);
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--body);
+    font-size:clamp(1.02rem, .55vw + .9rem, 1.14rem);
+    line-height:1.72; -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding-inline:var(--pad); }
+
+  /* ---- type ------------------------------------------------------------ */
+  .eyebrow{
+    font-family:var(--mono); font-size:.688rem; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--dim); margin:0 0 1.25rem;
+  }
+  .eyebrow::before{
+    content:""; display:inline-block; width:1.75rem; height:1px;
+    background:var(--rule); vertical-align:middle; margin-right:.75rem;
+  }
+  h2{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(1.85rem,4vw,3rem); letter-spacing:-.02em;
+    line-height:1.04; margin:0 0 1.75rem;
+  }
+  h3{ font-family:var(--display); font-weight:600; font-size:1.1rem; letter-spacing:-.01em; margin:0 0 .35rem; }
+  .lede{ font-size:1.14em; }
+  .muted{ color:var(--dim); }
+
+  /* ---- nav ------------------------------------------------------------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid color-mix(in srgb, var(--rule) 45%, transparent);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; gap:1rem; height:56px; }
+  .brand{ font-family:var(--display); font-weight:800; letter-spacing:-.01em; text-decoration:none; font-size:.95rem; }
+  .navlinks{ display:flex; gap:clamp(.7rem,1.8vw,1.5rem); overflow-x:auto; }
+  .navlinks a{
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.1em;
+    text-transform:uppercase; text-decoration:none; color:var(--dim);
+    padding-block:.4rem; border-bottom:1px solid transparent; white-space:nowrap;
+    transition:color .2s, border-color .2s;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{ color:var(--ink); border-bottom-color:var(--starboard); }
+  @media(max-width:760px){ .navlinks a[data-optional]{ display:none; } }
+
+  /* ---- hero ------------------------------------------------------------ */
+  .hero{ background:var(--hull); color:var(--paper); overflow:hidden; padding-block:clamp(3.5rem,9vw,6.5rem) clamp(3rem,7vw,5rem); }
+  .hero .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
+  @media(max-width:860px){ .hero .wrap{ grid-template-columns:1fr; } }
+  .hero .eyebrow{ color:#8FA09C; }
+  .hero .eyebrow::before{ background:#43585A; }
+  .hero h1{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(2.6rem,8vw,4.9rem); line-height:.94;
+    letter-spacing:-.035em; margin:0 0 1.1rem;
+  }
+  .roles{
+    font-family:var(--mono); font-size:.74rem; letter-spacing:.16em;
+    text-transform:uppercase; color:#9DAEAA; margin:0 0 1.75rem;
+  }
+  .roles span{ color:var(--starboard); margin-inline:.45rem; }
+  .hero-sub{ font-family:var(--body); font-weight:300; font-size:1.08rem; line-height:1.62; color:#C9D2CF; max-width:38ch; margin:0 0 2.25rem; }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:.75rem; }
+  .btn{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.12em;
+    text-transform:uppercase; text-decoration:none; padding:.7rem 1.2rem;
+    border:1px solid #3A4E51; color:var(--paper);
+    transition:background .2s, border-color .2s, color .2s;
+  }
+  .btn:hover, .btn:focus-visible{ background:var(--starboard); border-color:var(--starboard); color:#06120C; }
+  .btn.solid{ background:var(--paper); color:var(--hull); border-color:var(--paper); }
+  .btn.solid:hover, .btn.solid:focus-visible{ background:var(--starboard); border-color:var(--starboard); color:#06120C; }
+
+  /* ---- signature: hull lines plan -------------------------------------- */
+  .linesplan{ width:100%; height:auto; }
+  .linesplan .station{ fill:none; stroke:#5E7B7C; stroke-width:1.1; vector-effect:non-scaling-stroke; }
+  .linesplan .station.fwd{ stroke:#4B6668; }
+  .linesplan .wl{ stroke:#2E4245; stroke-width:.75; fill:none; }
+  .linesplan .cl{ stroke:var(--starboard); stroke-width:1; stroke-dasharray:6 4 1.5 4; opacity:.75; }
+  .linesplan .base{ stroke:#43595C; stroke-width:1.25; }
+  .linesplan text{ font-family:var(--mono); font-size:8px; fill:#6C8385; letter-spacing:.08em; }
+  .draw{ stroke-dasharray:var(--len,600); stroke-dashoffset:var(--len,600); animation:draw 1.5s cubic-bezier(.32,.72,.36,1) forwards; }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  /* ---- draft-mark divider ---------------------------------------------- */
+  .draftmarks{ display:flex; align-items:flex-end; height:34px; border-bottom:1px solid var(--rule); opacity:.55; }
+  .draftmarks .tick{ flex:1; border-left:1px solid var(--rule); height:8px; }
+  .draftmarks .tick.major{ height:18px; }
+  .draftmarks .tick.major::after{
+    content:attr(data-m); font-family:var(--mono); font-size:.6rem;
+    color:var(--dim); position:relative; top:-1.15rem; left:.3rem;
+  }
+  .after-marks{ padding-top:clamp(2.5rem,6vw,4rem); }
+
+  /* ---- sections -------------------------------------------------------- */
+  section{ padding-block:clamp(3.25rem,8vw,5.5rem); }
+  section.dark{ background:var(--hull); color:var(--paper); }
+  section.dark .eyebrow{ color:#8FA09C; }
+  section.dark .eyebrow::before{ background:#43585A; }
+  section.dark .muted{ color:#93A4A0; }
+  section.tight{ padding-top:0; }
+
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.5rem,4vw,3.5rem); }
+  @media(max-width:820px){ .two-col{ grid-template-columns:1fr; } }
+  .two-col > div > p:first-child{ margin-top:0; }
+
+  .split{ display:grid; grid-template-columns:minmax(0,7.5rem) 1fr; gap:clamp(1rem,3vw,2.5rem); }
+  @media(max-width:700px){ .split{ grid-template-columns:1fr; gap:.5rem; } }
+  .split .yr{ font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); padding-top:.35rem; }
+
+  /* portrait */
+  .portrait-block{ display:grid; grid-template-columns:250px 1fr; gap:clamp(1.5rem,4vw,3rem); align-items:start; }
+  @media(max-width:760px){ .portrait-block{ grid-template-columns:1fr; } }
+  .portrait{
+    aspect-ratio:4/5; background:var(--paper-2); border:1px solid var(--rule);
+    display:grid; place-items:center; font-family:var(--mono); font-size:.65rem;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--dim);
+    text-align:center; padding:1rem;
+    /* ADD YOUR PHOTO: background:url('assets/img/portrait.jpg') center/cover; */
+  }
+
+  /* chips */
+  .chips{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem; list-style:none; padding:0; }
+  .chips li{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.05em;
+    border:1px solid var(--rule); padding:.3rem .7rem; color:var(--ink);
+  }
+  section.dark .chips li{ border-color:#3A4E51; color:#C3CECB; }
+
+  /* ---- publications ----------------------------------------------------- */
+  .pub{ padding:1.6rem 0; border-top:1px solid #2A3E41; }
+  .pub:last-of-type{ border-bottom:1px solid #2A3E41; }
+  .pub .num{ font-family:var(--mono); font-size:.7rem; color:#7B8C88; letter-spacing:.1em; }
+  .pub .ttl{ font-family:var(--body); font-weight:400; font-size:1.14rem; line-height:1.45; margin:.5rem 0 .6rem; color:var(--paper); }
+  .pub .authors{ font-family:var(--body); font-weight:300; font-size:.96rem; color:#A9B7B4; margin:0 0 .5rem; }
+  .pub .authors b{ color:var(--paper); font-weight:500; }
+  .pub .venue{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:#8FA09C; }
+  .status{
+    font-family:var(--mono); font-size:.63rem; letter-spacing:.12em; text-transform:uppercase;
+    border:1px solid var(--starboard); color:var(--starboard); padding:.12rem .5rem; margin-left:.5rem; white-space:nowrap;
+  }
+
+  /* ---- entries ----------------------------------------------------------- */
+  .entry{ padding:1.5rem 0; border-top:1px solid color-mix(in srgb,var(--rule) 55%,transparent); }
+  .entry:last-child{ border-bottom:1px solid color-mix(in srgb,var(--rule) 55%,transparent); }
+  .entry p{ margin:.4rem 0 0; }
+  .entry .sup{ font-size:.94rem; color:var(--dim); font-style:italic; }
+
+  /* ---- education scale --------------------------------------------------- */
+  .scale{ border-left:1px solid var(--rule); margin-top:.5rem; }
+  .stage{ position:relative; padding:0 0 2.25rem 2rem; }
+  .stage:last-child{ padding-bottom:0; }
+  .stage::before{ content:""; position:absolute; left:-1px; top:.65rem; width:1.15rem; height:1px; background:var(--rule); }
+  .stage.now::after{ content:""; position:absolute; left:-4px; top:calc(.65rem - 3.5px); width:8px; height:8px; border-radius:50%; background:var(--starboard); }
+  .stage .yr{ font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; color:var(--dim); text-transform:uppercase; display:block; margin-bottom:.4rem; }
+  .stage .inst{ font-weight:300; color:var(--dim); margin:.15rem 0 0; font-size:.97rem; }
+  .gpa{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; border:1px solid var(--rule); padding:.15rem .5rem; display:inline-block; margin-top:.6rem; }
+
+  /* ---- results table ------------------------------------------------------ */
+  .results{ width:100%; border-collapse:collapse; font-family:var(--mono); font-size:.82rem; margin-top:.5rem; }
+  .results caption{ text-align:left; caption-side:top; margin-bottom:1.25rem; }
+  .results th{ text-align:left; font-weight:500; font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:#8FA09C; padding:0 0 .7rem; border-bottom:1px solid #33474A; }
+  .results td{ padding:.8rem 0; border-bottom:1px solid #223437; color:#93A4A0; }
+  .results td:last-child{ text-align:right; }
+  .results tr.win td{ color:var(--paper); }
+  .results tr.win .place{ color:var(--port); font-weight:500; }
+
+  .vessel{ border:1px solid #33474A; padding:1.4rem 1.5rem; margin-top:2rem; }
+  .vessel .name{ font-family:var(--display); font-weight:800; font-size:1.55rem; letter-spacing:-.02em; margin:0 0 .5rem; }
+  .vessel p{ margin:0; color:#B7C3C0; font-weight:300; font-size:1rem; }
+
+  /* ---- tick lists ---------------------------------------------------------- */
+  .ticklist{ list-style:none; padding:0; margin:0; }
+  .ticklist li{ position:relative; padding:.55rem 0 .55rem 1.6rem; border-bottom:1px solid #223437; font-size:1rem; font-weight:300; color:#C3CECB; }
+  .ticklist li::before{ content:""; position:absolute; left:0; top:1.15rem; width:.6rem; height:1px; background:var(--starboard); }
+  section:not(.dark) .ticklist li{ color:var(--ink); border-bottom-color:color-mix(in srgb,var(--rule) 55%,transparent); }
+
+  /* ---- skills -------------------------------------------------------------- */
+  .skills{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1.75rem 2.5rem; margin-top:2rem; }
+  .skills .k{ font-family:var(--mono); font-size:.65rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); display:block; margin-bottom:.6rem; }
+  .skills .v{ font-family:var(--mono); font-size:.85rem; line-height:1.85; }
+
+  /* ---- photography --------------------------------------------------------- */
+  .gallery{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr));
+    gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:2.5rem;
+  }
+  .shot{
+    position:relative; aspect-ratio:4/3; background:var(--paper-2);
+    text-decoration:none; display:flex; align-items:flex-end; padding:.85rem; overflow:hidden;
+    /* ADD YOUR PHOTO: style="background:url('assets/img/street.jpg') center/cover" */
+  }
+  .shot::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(12,19,21,.78), rgba(12,19,21,0) 62%);
+    opacity:0; transition:opacity .3s;
+  }
+  .shot:hover::after, .shot:focus-visible::after{ opacity:1; }
+  .shot .label{
+    position:relative; z-index:1; font-family:var(--mono); font-size:.67rem;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--dim); transition:color .3s;
+  }
+  .shot:hover .label, .shot:focus-visible .label{ color:var(--paper); }
+
+  /* ---- contact -------------------------------------------------------------- */
+  .contact-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(195px,1fr)); gap:2rem; margin-top:2rem; }
+  .contact-grid a{
+    font-family:var(--mono); font-size:.84rem; text-decoration:none; color:var(--paper);
+    border-bottom:1px solid #3A4E51; padding-bottom:.2rem; transition:border-color .2s;
+  }
+  .contact-grid a:hover, .contact-grid a:focus-visible{ border-bottom-color:var(--starboard); }
+  .contact-grid .k{ font-family:var(--mono); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:#7B8C88; display:block; margin-bottom:.5rem; }
+
+  footer{
+    background:var(--hull); color:#6F817D; font-family:var(--mono);
+    font-size:.67rem; letter-spacing:.1em; text-transform:uppercase;
+    padding-block:2rem; border-top:1px solid #23383B;
+  }
+  footer .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+
+  /* ---- reveal + a11y --------------------------------------------------------- */
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  :focus-visible{ outline:2px solid var(--starboard); outline-offset:3px; }
+
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+    .reveal{ opacity:1; transform:none; }
+    .draw{ stroke-dashoffset:0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">ATIQUR RAHAMAN</a>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#publications">Publications</a>
+      <a href="#research">Research</a>
+      <a href="#education" data-optional>Education</a>
+      <a href="#awards" data-optional>Awards</a>
+      <a href="#photography">Photography</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Naval Architecture &amp; Marine Engineering · BUET</p>
+      <h1>Atiqur<br>Rahaman</h1>
+      <p class="roles">CFD <span>/</span> Offshore Structures <span>/</span> Floating Wind</p>
+      <p class="hero-sub">Naval architect and researcher working on the numerical side of ocean engineering &mdash; mooring dynamics for floating offshore wind, phase change materials for thermal management, and ferry design for inland waterways.</p>
+      <div class="cta-row">
+        <a class="btn solid" href="#publications">Publications</a>
+        <a class="btn" href="assets/cv.pdf">Download CV</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <!-- SIGNATURE: hull body plan. Fore sections left of centreline, aft sections right. -->
+    <div>
+      <svg class="linesplan" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Body plan drawing of a ship hull: nested station curves either side of the centreline.">
+        <line class="wl draw" style="--len:340;animation-delay:.05s" x1="45" y1="100" x2="375" y2="100"/>
+        <line class="wl draw" style="--len:340;animation-delay:.1s"  x1="45" y1="140" x2="375" y2="140"/>
+        <line class="wl draw" style="--len:340;animation-delay:.15s" x1="45" y1="180" x2="375" y2="180"/>
+        <line class="wl draw" style="--len:340;animation-delay:.2s"  x1="45" y1="220" x2="375" y2="220"/>
+        <line class="base draw" style="--len:340;animation-delay:.25s" x1="45" y1="258" x2="375" y2="258"/>
+
+        <path class="station draw" style="--len:330;animation-delay:.45s" d="M210,258 L322,258 Q352,258 352,224 L352,66"/>
+        <path class="station draw" style="--len:325;animation-delay:.55s" d="M210,258 L308,258 Q340,258 340,220 L340,68"/>
+        <path class="station draw" style="--len:315;animation-delay:.65s" d="M210,258 L288,258 Q324,258 324,214 L324,72"/>
+        <path class="station draw" style="--len:305;animation-delay:.75s" d="M210,258 L262,258 Q302,258 302,204 L302,78"/>
+        <path class="station draw" style="--len:295;animation-delay:.85s" d="M210,258 L232,258 Q276,256 276,190 L276,86"/>
+        <path class="station draw" style="--len:285;animation-delay:.95s" d="M210,258 Q246,252 250,172 L250,94"/>
+
+        <path class="station fwd draw" style="--len:330;animation-delay:.45s" d="M210,258 L98,258 Q68,258 68,224 L68,66"/>
+        <path class="station fwd draw" style="--len:322;animation-delay:.55s" d="M210,258 L112,257 Q80,254 80,216 L80,70"/>
+        <path class="station fwd draw" style="--len:310;animation-delay:.65s" d="M210,258 Q126,254 106,196 L100,76"/>
+        <path class="station fwd draw" style="--len:296;animation-delay:.75s" d="M210,258 Q160,250 132,180 L122,84"/>
+        <path class="station fwd draw" style="--len:280;animation-delay:.85s" d="M210,258 Q186,242 160,168 L144,92"/>
+        <path class="station fwd draw" style="--len:266;animation-delay:.95s" d="M210,258 Q200,232 182,158 L168,100"/>
+
+        <line class="cl draw" style="--len:210;animation-delay:.35s" x1="210" y1="52" x2="210" y2="266"/>
+        <text x="70"  y="278">FORE</text>
+        <text x="330" y="278">AFT</text>
+        <text x="188" y="46">&#8593; CL</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ ABOUT ============================ -->
+<section id="about">
+  <div class="wrap">
+    <div class="draftmarks" aria-hidden="true">
+      <span class="tick major" data-m="01"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      <span class="tick major" data-m="02"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      <span class="tick major" data-m="03"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      <span class="tick major" data-m="04"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+    </div>
+
+    <div class="after-marks">
+      <p class="eyebrow reveal">About</p>
+      <div class="portrait-block">
+        <div class="portrait reveal">Add portrait.jpg<br>to assets/img/</div>
+        <div class="reveal">
+          <p class="lede">I completed my B.Sc. in Naval Architecture and Marine Engineering at the <a href="https://www.buet.ac.bd/">Bangladesh University of Engineering and Technology</a>, and now work as a researcher. I&rsquo;m applying for PhD study in the United States.</p>
+          <div class="two-col">
+            <div>
+              <p>My work sits on the numerical side of ocean engineering. My undergraduate thesis examined how mooring line count and angular spacing affect the dynamic motion of a 15 MW semi-submersible offshore wind turbine platform, modelled in AQWA. Alongside that I work on melting enhancement in phase change materials, and on thermal management of lithium-ion battery packs using PCM and fin network structures.</p>
+              <p>Before that I designed a 175-passenger ferry for the circular waterways around Dhaka, and spent a year interning at the Bangladesh Navy&rsquo;s Dockyard and Engineering Works in Narayanganj &mdash; which put the drawings I&rsquo;d been making next to steel that people actually sail on.</p>
+            </div>
+            <div>
+              <p>Outside the numerical work I&rsquo;m a semi-professional photographer, and served as Vice President of the BUET Photographic Society. Photography lets me observe people, places and moments from new perspectives, both literally and figuratively; music fuels my focus and emotional balance.</p>
+              <p>I&rsquo;m deeply people-oriented and enjoy meaningful conversations, organising initiatives, and taking responsibility as a front-facing coordinator. My long-term aim is to combine strong technical expertise with management and strategic responsibility &mdash; to work where engineering knowledge informs real decisions.</p>
+            </div>
+          </div>
+
+          <p class="eyebrow" style="margin-top:2.5rem">Research interests</p>
+          <ul class="chips">
+            <li>Computational Fluid Dynamics</li>
+            <li>Phase Change Materials</li>
+            <li>Convection Heat Transfer</li>
+            <li>Floating Wind Turbines</li>
+            <li>Offshore Structures</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PUBLICATIONS ============================ -->
+<section id="publications" class="dark">
+  <div class="wrap">
+    <p class="eyebrow reveal">Publications</p>
+    <h2 class="reveal">Under review.</h2>
+
+    <div class="reveal">
+      <article class="pub">
+        <span class="num">01</span>
+        <p class="ttl">Numerical Investigation of Melting Enhancement in a Phase Change Material-Filled Enclosure Using K-Shaped Fins: Effects of Fin Angle and Arm Length Ratio</p>
+        <p class="authors">Md Tanvir Anjum Zenith, Adri Das, Shafollo Proshad Gupto, <b>Md. Atiqur Rahaman</b>, Md. Khairul Islam</p>
+        <span class="venue">Applied Thermal Engineering</span><span class="status">Under review</span>
+      </article>
+
+      <article class="pub">
+        <span class="num">02</span>
+        <p class="ttl">Effect of Mooring Line Angular Spacing on the Wave-Frequency Motion Response of a 15 MW Semi-Submersible Floating Offshore Wind Turbine Based on AQWA</p>
+        <p class="authors">Dr. Md. Shahidul Islam, <b>Md. Atiqur Rahaman</b>, Md Tanvir Anjum Zenith</p>
+        <span class="venue">Manuscript</span><span class="status">Under review</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ RESEARCH & PROJECTS ============================ -->
+<section id="research">
+  <div class="wrap">
+    <p class="eyebrow reveal">Research &amp; projects</p>
+    <h2 class="reveal">What I&rsquo;ve been<br>working on.</h2>
+
+    <div class="reveal">
+      <article class="entry split">
+        <div class="yr">Apr 2025 &mdash;<br>Jun 2026</div>
+        <div>
+          <h3>Undergraduate thesis</h3>
+          <p class="sup">Supervisor: Dr. Md. Shahidul Islam &middot; NAME, BUET</p>
+          <p>Numerical investigation of mooring line count and angular spacing on the dynamic motion of a 15 MW semi-submersible offshore wind turbine platform.</p>
+        </div>
+      </article>
+
+      <article class="entry split">
+        <div class="yr">Ongoing</div>
+        <div>
+          <h3>PCM and fin network thermal management</h3>
+          <p>Numerical investigation of the thermal management performance of phase change material and fin network structures for lithium-ion batteries over cyclic periods.</p>
+        </div>
+      </article>
+
+      <article class="entry split">
+        <div class="yr">Jan 2024 &mdash;<br>Feb 2025</div>
+        <div>
+          <h3>175-passenger ferry design</h3>
+          <p class="sup">Supervisor: Dr. Mir Tareque Ali &middot; Undergraduate project</p>
+          <p>Design of a 175-passenger ferry for the circular waterways around Dhaka.</p>
+        </div>
+      </article>
+
+      <article class="entry split">
+        <div class="yr">Jan 2024 &mdash;<br>Feb 2025</div>
+        <div>
+          <h3>Intern &mdash; Dockyard &amp; Engineering Works Ltd</h3>
+          <p class="sup">Bangladesh Navy &middot; Narayanganj, Bangladesh</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ EDUCATION ============================ -->
+<section id="education" class="tight">
+  <div class="wrap">
+    <div class="draftmarks" aria-hidden="true">
+      <span class="tick major" data-m="05"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      <span class="tick major" data-m="06"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      <span class="tick major" data-m="07"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      <span class="tick major" data-m="08"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+    </div>
+
+    <div class="after-marks">
+      <p class="eyebrow reveal">Education</p>
+      <h2 class="reveal">Barisal to BUET.</h2>
+
+      <div class="two-col">
+        <div class="scale reveal">
+          <div class="stage now">
+            <span class="yr">Jan 2022 &mdash; Jun 2026</span>
+            <h3>B.Sc. in Naval Architecture &amp; Marine Engineering</h3>
+            <p class="inst">Bangladesh University of Engineering and Technology, Dhaka</p>
+            <span class="gpa">CGPA 3.78 / 4.00</span>
+          </div>
+          <div class="stage">
+            <span class="yr">2020</span>
+            <h3>Higher Secondary Certificate</h3>
+            <p class="inst">Government Syed Hatem Ali College, Barisal</p>
+            <span class="gpa">GPA 5.00 / 5.00</span>
+          </div>
+          <div class="stage">
+            <span class="yr">2018</span>
+            <h3>Secondary School Certificate</h3>
+            <p class="inst">Palordi Model School and College, Gournadi, Barisal</p>
+            <span class="gpa">GPA 5.00 / 5.00</span>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <p class="eyebrow">Relevant coursework</p>
+          <ul class="chips" style="margin-top:0">
+            <li>Fluid Mechanics</li>
+            <li>Marine Hydrodynamics</li>
+            <li>Computational Fluid Dynamics</li>
+            <li>Advanced Ship Structure</li>
+            <li>Ship Vibration</li>
+            <li>FEM for Ship Structure</li>
+            <li>Resistance &amp; Propulsion of Ships</li>
+            <li>Heat Transfer</li>
+            <li>Power &amp; Propulsion Systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ AWARDS + BLACK PEARL ============================ -->
+<section id="awards" class="dark">
+  <div class="wrap">
+    <p class="eyebrow reveal">Honours &amp; awards</p>
+    <h2 class="reveal">Team Black Pearl<br>&amp; other honours.</h2>
+
+    <div class="two-col">
+      <div class="reveal">
+        <p class="muted" style="font-weight:300">Team Black Pearl is a student-led competitive design team from the Department of Naval Architecture and Marine Engineering at BUET. Since 2021 the team has entered the International Student Design Competition for a Safe and Affordable Ferry, organised by the Worldwide Ferry Safety Association.</p>
+        <p class="muted" style="font-weight:300">The team runs a structured knowledge-transfer model: experienced members mentor junior fellows and hand over responsibility each year. I joined for the 2025 campaign &mdash; the team&rsquo;s first championship title in the competition &mdash; and continued through 2026.</p>
+
+        <div class="vessel">
+          <p class="eyebrow" style="color:#7B8C88;margin-bottom:.6rem">Winning design &mdash; 2025</p>
+          <p class="name">Naija Spirit</p>
+          <p>A safe, affordable and context-appropriate ferry, designed around real operational and safety constraints.</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <table class="results">
+          <caption class="eyebrow">WFSA competition record</caption>
+          <thead><tr><th scope="col">Year</th><th scope="col">Result</th></tr></thead>
+          <tbody>
+            <tr><td>2026</td><td class="place">3rd Prize</td></tr>
+            <tr class="win"><td>2025</td><td class="place">Champion</td></tr>
+            <tr><td>2024</td><td class="place">1st Runner-Up</td></tr>
+            <tr><td>2023</td><td class="place">Honourable Mention</td></tr>
+            <tr><td>2021</td><td class="place">2nd Runner-Up</td></tr>
+          </tbody>
+        </table>
+
+        <p class="eyebrow" style="margin-top:2.5rem">Scholarships &amp; prizes</p>
+        <ul class="ticklist">
+          <li>University Merit Scholarship &mdash; 8 times across 8 semesters</li>
+          <li>University Dean&rsquo;s List Scholarship &mdash; 1st and 2nd year</li>
+          <li>Education Board Technical Scholarship, BUET</li>
+          <li>1st prize, NAME Olympiad at NAME Fest 2023</li>
+          <li>Award and certificate from the Chairman of BIWTC, recognising performance in the WFSA international competition</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ LEADERSHIP + SKILLS ============================ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="reveal">
+        <p class="eyebrow">Leadership &amp; activities</p>
+        <ul class="ticklist">
+          <li><strong>Team Member</strong>, Black Pearl, BUET &mdash; WFSA Design Competition <span class="muted">(Sept 2024 &ndash; present)</span></li>
+          <li><strong>Vice President</strong>, BUET Photographic Society <span class="muted">(Jun 2025 &ndash; Jul 2026)</span></li>
+          <li><strong>Director of Design and Creation</strong>, BUET Entrepreneurship Development Club <span class="muted">(Jun 2025 &ndash; Jul 2026)</span></li>
+          <li><strong>Class Representative</strong>, Dept. of NAME, BUET <span class="muted">(Jan 2022 &ndash; Feb 2023)</span></li>
+          <li><strong>Volunteer</strong>, MARTEC 2022 &mdash; International Conference on Marine Technology <span class="muted">(Dec 2022)</span></li>
+        </ul>
+      </div>
+
+      <div class="reveal">
+        <p class="eyebrow">Technical skills</p>
+        <div class="skills" style="margin-top:0">
+          <div>
+            <span class="k">Simulation</span>
+            <div class="v">ANSYS Fluent<br>ANSYS AQWA<br>Abaqus</div>
+          </div>
+          <div>
+            <span class="k">Programming</span>
+            <div class="v">C++<br>Python<br>Fortran</div>
+          </div>
+          <div>
+            <span class="k">CAD &amp; 3D modelling</span>
+            <div class="v">AutoCAD<br>Rhinoceros 3D</div>
+          </div>
+          <div>
+            <span class="k">Ship design</span>
+            <div class="v">Maxsurf<br>DELFTship</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PHOTOGRAPHY ============================ -->
+<section id="photography" class="tight">
+  <div class="wrap">
+    <div class="draftmarks" aria-hidden="true">
+      <span class="tick major" data-m="09"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      <span class="tick major" data-m="10"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      <span class="tick major" data-m="11"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      <span class="tick major" data-m="12"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+    </div>
+
+    <div class="after-marks">
+      <p class="eyebrow reveal">Photography</p>
+      <h2 class="reveal">Looking at things<br>from other angles.</h2>
+      <p class="reveal" style="max-width:52ch;margin-top:-.75rem">Ten ongoing series. Links currently point to the galleries on my old site &mdash; swap in local images as you migrate them.</p>
+
+      <div class="gallery reveal">
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/street"><span class="label">Street</span></a>
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/portraits"><span class="label">Portraits</span></a>
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/long-exposure-photography"><span class="label">Long Exposure</span></a>
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/urban-architecture"><span class="label">Urban Architecture</span></a>
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/concert"><span class="label">Concert</span></a>
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/candid"><span class="label">Candid</span></a>
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/nature"><span class="label">Nature</span></a>
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/campus-activity"><span class="label">Campus Activity</span></a>
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/experimental"><span class="label">Experimental</span></a>
+        <a class="shot" href="https://sites.google.com/view/atiqur-rahaman/photography/model-photography"><span class="label">Model</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section id="contact" class="dark">
+  <div class="wrap">
+    <p class="eyebrow reveal">Contact</p>
+    <h2 class="reveal">Say hello.</h2>
+    <p class="reveal muted" style="max-width:46ch;margin-top:-.75rem;font-weight:300">Open to PhD opportunities in computational fluid dynamics, offshore structures and floating offshore wind.</p>
+
+    <div class="contact-grid reveal">
+      <div>
+        <span class="k">Email</span>
+        <a href="mailto:rhatik.atik.1@gmail.com">rhatik.atik.1@gmail.com</a>
+      </div>
+      <div>
+        <span class="k">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/atiqurrahaman/">/in/atiqurrahaman</a>
+      </div>
+      <div>
+        <span class="k">Curriculum vitae</span>
+        <a href="assets/cv.pdf">Download PDF</a>
+      </div>
+      <div>
+        <span class="k">Instagram</span>
+        <a href="https://www.instagram.com/atiqur0112/">@atiqur0112</a>
+      </div>
+      <div>
+        <span class="k">Facebook</span>
+        <a href="https://www.facebook.com/rhatik2845">rhatik2845</a>
+      </div>
+      <div>
+        <span class="k">Telegram</span>
+        <a href="https://t.me/Atik987">@Atik987</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="yr">2026</span> Atiqur Rahaman</span>
+    <span>Dhaka, Bangladesh</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 70 + 'ms';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
