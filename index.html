@@ -1073,19 +1073,33 @@
     <!-- mooring explorer -->
     <p class="eyebrow reveal" style="margin-top:3.5rem">Load case explorer</p>
     <p class="reveal muted" style="max-width:62ch;font-weight:300;margin-top:-.5rem">
-      Plan view, schematic. &#952; is the angle between mooring lines&nbsp;2 and&nbsp;3; &#945; is the direction the waves arrive from, measured from the line&nbsp;1 axis. Every cell in the matrix was run as a separate coupled simulation.
+      Plan view, schematic. &#952; is the mooring line spread angle, between lines&nbsp;2 and&nbsp;3. &#945; is the wave incident angle, measured from the horizontal; the waves arrive from the lower left and run toward mooring line&nbsp;1. Every cell in the matrix was run as a separate coupled simulation.
     </p>
 
     <div class="explorer reveal">
       <div class="stage-svg">
         <svg viewBox="0 0 660 500" xmlns="http://www.w3.org/2000/svg" role="img"
-             aria-label="Plan view of a three-line catenary mooring spread around a semi-submersible platform, with an incident wave direction arrow. Spread angle and wave heading change with the controls below.">
+             aria-label="Plan view of the three-line catenary mooring spread. Mooring line 1 runs to the right; lines 2 and 3 run to the upper and lower left, separated by the spread angle. Waves arrive from the lower left at the incident angle, measured from the horizontal.">
+          <!-- watch circle -->
           <circle cx="330" cy="250" r="196" fill="none" stroke="#1E3236" stroke-width="1" stroke-dasharray="3 6"/>
-          <text class="glyph" x="330" y="34" text-anchor="middle">ANCHOR RADIUS 837.6 m &#183; WATER DEPTH 200 m</text>
+          <text class="glyph" x="330" y="26" text-anchor="middle">ANCHOR RADIUS 837.6 m &#183; WATER DEPTH 200 m</text>
 
-          <line class="moorline" id="m1" x1="330" y1="250" x2="330" y2="250"/>
-          <line class="moorline" id="m2" x1="330" y1="250" x2="330" y2="250"/>
-          <line class="moorline" id="m3" x1="330" y1="250" x2="330" y2="250"/>
+          <!-- horizontal reference that alpha is measured from -->
+          <line class="dimline" x1="330" y1="250" x2="134" y2="250"/>
+
+          <!-- incident wave train, arriving from the lower left -->
+          <path class="wavefront" id="w1"/>
+          <path class="wavefront" id="w2"/>
+          <path class="wavefront" id="w3"/>
+          <path class="headarrow" id="wArrow"/>
+          <text class="glyph" id="wLbl" fill="#5FA8D3"></text>
+          <path class="arc" id="alphaArc" stroke="#5FA8D3"/>
+          <text class="glyph hi" id="alphaLbl" fill="#5FA8D3"></text>
+
+          <!-- mooring lines: fairlead on a column, anchor on the watch circle -->
+          <line class="moorline" id="m1"/>
+          <line class="moorline" id="m2"/>
+          <line class="moorline" id="m3"/>
           <circle class="anchor" id="a1" r="4.5"/>
           <circle class="anchor" id="a2" r="4.5"/>
           <circle class="anchor" id="a3" r="4.5"/>
@@ -1093,23 +1107,18 @@
           <text class="glyph" id="t2"></text>
           <text class="glyph" id="t3"></text>
 
+          <!-- spread angle between lines 2 and 3 -->
           <path class="arc" id="spreadArc"/>
           <text class="glyph hi" id="spreadLbl"></text>
 
+          <!-- platform: outer columns sit under the three mooring lines,
+               i.e. at 0, 120 and 240 degrees, matching the reference layout -->
           <g id="hull">
-            <polygon class="hull-plan" points="330,208 366,271 294,271"/>
-            <circle class="hull-plan" cx="330" cy="206" r="15"/>
-            <circle class="hull-plan" cx="368" cy="272" r="15"/>
-            <circle class="hull-plan" cx="292" cy="272" r="15"/>
+            <polygon class="hull-plan" points="372,250 309,213.6 309,286.4"/>
+            <circle class="hull-plan" cx="372" cy="250" r="15"/>
+            <circle class="hull-plan" cx="309" cy="213.6" r="15"/>
+            <circle class="hull-plan" cx="309" cy="286.4" r="15"/>
             <circle cx="330" cy="250" r="11" fill="#2A4A50" stroke="#5FA8D3" stroke-width="1.5"/>
-          </g>
-
-          <g id="waves">
-            <path class="wavefront" id="w1"/>
-            <path class="wavefront" id="w2"/>
-            <path class="wavefront" id="w3"/>
-            <path class="headarrow" id="wArrow"/>
-            <text class="glyph" id="wLbl" fill="#5FA8D3"></text>
           </g>
         </svg>
       </div>
@@ -1356,59 +1365,87 @@
     draw();
   })();
   /* ================= PAPER 02 — mooring plan explorer =================
-     Schematic. Tested geometry grid only; no response data in this file. */
+     Schematic, following Figure 4 of the manuscript:
+       - Mooring line 1 runs horizontally to the right (0 deg).
+       - Lines 2 and 3 run to the upper and lower left, separated by theta.
+       - The platform columns sit under the three lines at 0 / 120 / 240 deg.
+       - Waves arrive FROM the lower left and travel toward line 1; alpha is
+         measured from the horizontal reference running left of the platform,
+         so the wave source bearing is 180 + alpha.
+     Tested geometry only; no response data in this file. */
   (function(){
-    const CX = 330, CY = 250, R = 196, FR = 42;
-    const spread = $('spread'), head = $('head'), readout = $('moorReadout');
+    var CX = 330, CY = 250, R = 196, FR = 42;
+    var COLUMN = { m1: 0, m2: 120, m3: 240 };   // fairlead bearings, fixed with the hull
+    var spread = $('spread'), head = $('head'), readout = $('moorReadout');
 
-    function pt(deg,r){ const a = deg*Math.PI/180; return [CX + r*Math.cos(a), CY - r*Math.sin(a)]; }
+    function pt(deg, r){
+      var a = deg * Math.PI / 180;
+      return [CX + r * Math.cos(a), CY - r * Math.sin(a)];
+    }
+    function anchorText(node, deg, r, label){
+      var t = pt(deg, r), c = Math.cos(deg * Math.PI / 180);
+      node.setAttribute('x', t[0]); node.setAttribute('y', t[1] + 4);
+      node.setAttribute('text-anchor', c < -0.3 ? 'end' : (c > 0.3 ? 'start' : 'middle'));
+      node.textContent = label;
+    }
 
-    function line(id, anchorId, txtId, deg, label){
-      const f = pt(deg,FR), a = pt(deg,R), t = pt(deg,R+26), c = Math.cos(deg*Math.PI/180);
-      const L = $(id); L.setAttribute('x1',f[0]); L.setAttribute('y1',f[1]); L.setAttribute('x2',a[0]); L.setAttribute('y2',a[1]);
-      const A = $(anchorId); A.setAttribute('cx',a[0]); A.setAttribute('cy',a[1]);
-      const T = $(txtId); T.setAttribute('x',t[0]); T.setAttribute('y',t[1]+4);
-      T.setAttribute('text-anchor', c < -0.3 ? 'end' : (c > 0.3 ? 'start' : 'middle'));
-      T.textContent = label;
+    /* One line: fairlead stays on its column, the anchor moves with theta. */
+    function line(id, anchorId, txtId, colDeg, anchorDeg, label){
+      var f = pt(colDeg, FR), a = pt(anchorDeg, R);
+      var L = $(id);
+      L.setAttribute('x1', f[0]); L.setAttribute('y1', f[1]);
+      L.setAttribute('x2', a[0]); L.setAttribute('y2', a[1]);
+      var A = $(anchorId); A.setAttribute('cx', a[0]); A.setAttribute('cy', a[1]);
+      anchorText($(txtId), anchorDeg, R + 26, label);
     }
 
     function draw(){
-      const th = +spread.value, al = +head.value;
-      const d2 = 180 - th/2, d3 = 180 + th/2;
+      var th = +spread.value, al = +head.value;
+      var d2 = 180 - th / 2, d3 = 180 + th / 2;
 
-      line('m1','a1','t1', 0, 'CABLE 1');
-      line('m2','a2','t2', d2, 'CABLE 2');
-      line('m3','a3','t3', d3, 'CABLE 3');
+      line('m1', 'a1', 't1', COLUMN.m1, 0,  'MOORING LINE 1');
+      line('m2', 'a2', 't2', COLUMN.m2, d2, 'MOORING LINE 2');
+      line('m3', 'a3', 't3', COLUMN.m3, d3, 'MOORING LINE 3');
 
-      const r = 74, s = pt(d2,r), e = pt(d3,r), lp = pt(180, r+20);
-      $('spreadArc').setAttribute('d','M ' + s[0] + ' ' + s[1] + ' A ' + r + ' ' + r + ' 0 0 0 ' + e[0] + ' ' + e[1]);
-      $('spreadLbl').setAttribute('x', lp[0]-6); $('spreadLbl').setAttribute('y', lp[1]+4);
-      $('spreadLbl').setAttribute('text-anchor','end');
-      $('spreadLbl').textContent = '\u03B8 = ' + th + '\u00B0';
+      /* theta arc, swept between lines 2 and 3 across the left side */
+      var r = 78, s2 = pt(d2, r), s3 = pt(d3, r), lp = pt(180, r + 22);
+      $('spreadArc').setAttribute('d',
+        'M ' + s2[0] + ' ' + s2[1] + ' A ' + r + ' ' + r + ' 0 0 0 ' + s3[0] + ' ' + s3[1]);
+      anchorText($('spreadLbl'), 180, r + 22, '\u03B8 = ' + th + '\u00B0');
 
-      const a = al*Math.PI/180, ux = Math.cos(a), uy = -Math.sin(a), px = -uy, py = ux;
-      [['w1',175],['w2',205],['w3',235]].forEach(function(pair){
-        const bx = CX + ux*pair[1], by = CY + uy*pair[1], h = 52;
-        $(pair[0]).setAttribute('d',
-          'M ' + (bx - px*h) + ' ' + (by - py*h) +
-          ' Q ' + (bx + ux*14) + ' ' + (by + uy*14) + ' ' + (bx + px*h) + ' ' + (by + py*h));
+      /* waves arrive from bearing 180 + alpha and travel toward line 1 */
+      var src = 180 + al, a = src * Math.PI / 180;
+      var ux = Math.cos(a), uy = -Math.sin(a);   // centre -> source
+      var px = -uy, py = ux;                     // along the crest
+
+      [['w1', 152], ['w2', 178], ['w3', 204]].forEach(function(p){
+        var bx = CX + ux * p[1], by = CY + uy * p[1], h = 46;
+        $(p[0]).setAttribute('d',
+          'M ' + (bx - px * h) + ' ' + (by - py * h) +
+          ' Q ' + (bx + ux * 13) + ' ' + (by + uy * 13) + ' ' + (bx + px * h) + ' ' + (by + py * h));
       });
-      const sx = CX + ux*250, sy = CY + uy*250, ex = CX + ux*150, ey = CY + uy*150, hx = -ux*13, hy = -uy*13;
+
+      var sx = CX + ux * 218, sy = CY + uy * 218, ex = CX + ux * 126, ey = CY + uy * 126;
+      var hx = -ux * 13, hy = -uy * 13;
       $('wArrow').setAttribute('d',
         'M ' + sx + ' ' + sy + ' L ' + ex + ' ' + ey +
-        ' M ' + ex + ' ' + ey + ' l ' + (hx - py*8) + ' ' + (hy + px*8) +
-        ' M ' + ex + ' ' + ey + ' l ' + (hx + py*8) + ' ' + (hy - px*8));
-      $('wLbl').setAttribute('x', CX + ux*272); $('wLbl').setAttribute('y', CY + uy*272 + 4);
-      $('wLbl').setAttribute('text-anchor', ux < -0.3 ? 'end' : (ux > 0.3 ? 'start' : 'middle'));
-      $('wLbl').textContent = '\u03B1 = ' + al + '\u00B0';
+        ' M ' + ex + ' ' + ey + ' l ' + (hx - py * 8) + ' ' + (hy + px * 8) +
+        ' M ' + ex + ' ' + ey + ' l ' + (hx + py * 8) + ' ' + (hy - px * 8));
+      anchorText($('wLbl'), src, 236, 'WAVES');
+
+      /* alpha arc, from the horizontal reference round to the wave direction */
+      var ar = 116, h0 = pt(180, ar), hA = pt(src, ar);
+      $('alphaArc').setAttribute('d', al === 0 ? '' :
+        'M ' + h0[0] + ' ' + h0[1] + ' A ' + ar + ' ' + ar + ' 0 0 0 ' + hA[0] + ' ' + hA[1]);
+      anchorText($('alphaLbl'), 180 + al / 2, ar + 18, '\u03B1 = ' + al + '\u00B0');
 
       $('spreadOut').textContent = th + '\u00B0';
       $('headOut').textContent = al + '\u00B0';
 
       readout.innerHTML =
-        'Cable 1 at <b>0\u00B0</b> &nbsp;\u00B7&nbsp; cable 2 at <b>' + d2 + '\u00B0</b> &nbsp;\u00B7&nbsp; cable 3 at <b>' + d3 +
-        '\u00B0</b> &nbsp;\u00B7&nbsp; waves from <b>' + al + '\u00B0</b> ' +
-        (al === 0 ? '(head sea)' : al === 80 ? '(near beam sea)' : '(oblique sea)') +
+        'Line 1 at <b>0\u00B0</b> &nbsp;\u00B7&nbsp; line 2 at <b>' + d2 + '\u00B0</b> &nbsp;\u00B7&nbsp; line 3 at <b>' + d3 +
+        '\u00B0</b> &nbsp;\u00B7&nbsp; waves from <b>' + al + '\u00B0</b> off the horizontal ' +
+        (al === 0 ? '(head sea, running along line 1)' : al === 80 ? '(near beam sea)' : '(oblique sea)') +
         ' &nbsp;\u00B7&nbsp; ' + (th === 120 ? 'even 120\u00B0 spacing, the reference layout' : 'tightened from the 120\u00B0 reference layout');
 
       document.querySelectorAll('#matrix .cell').forEach(function(c){
@@ -1417,17 +1454,17 @@
     }
 
     (function buildMatrix(){
-      const m = $('matrix'), spreads = [120,115,110,105,100], heads = [0,20,40,60,80];
-      m.insertAdjacentHTML('beforeend','<div class="hd"></div>');
-      heads.forEach(function(h){ m.insertAdjacentHTML('beforeend','<div class="hd">\u03B1 ' + h + '\u00B0</div>'); });
-      spreads.forEach(function(s){
-        m.insertAdjacentHTML('beforeend','<div class="rh">\u03B8 ' + s + '\u00B0</div>');
+      var m = $('matrix'), spreads = [120,115,110,105,100], heads = [0,20,40,60,80];
+      m.insertAdjacentHTML('beforeend', '<div class="hd"></div>');
+      heads.forEach(function(h){ m.insertAdjacentHTML('beforeend', '<div class="hd">\u03B1 ' + h + '\u00B0</div>'); });
+      spreads.forEach(function(sp){
+        m.insertAdjacentHTML('beforeend', '<div class="rh">\u03B8 ' + sp + '\u00B0</div>');
         heads.forEach(function(h){
-          m.insertAdjacentHTML('beforeend','<div class="cell" data-th="' + s + '" data-al="' + h + '">\u00B7</div>');
+          m.insertAdjacentHTML('beforeend', '<div class="cell" data-th="' + sp + '" data-al="' + h + '">\u00B7</div>');
         });
       });
       m.addEventListener('click', function(e){
-        const c = e.target.closest('.cell'); if(!c) return;
+        var c = e.target.closest('.cell'); if (!c) return;
         spread.value = c.dataset.th; head.value = c.dataset.al; draw();
       });
     })();
