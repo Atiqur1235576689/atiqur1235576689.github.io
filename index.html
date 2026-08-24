@@ -298,6 +298,7 @@
 
   /* explorer geometry primitives */
   .enc{ fill:none; stroke:#3A5054; stroke-width:1.5; }
+  .wall{ fill:#3B4A4D; stroke:#5A7276; stroke-width:1; }
   .hotwall{ stroke:var(--port); stroke-width:4; stroke-linecap:square; }
   .pcm{ fill:#16292D; }
   .fin{ stroke:var(--starboard); stroke-linecap:round; }
@@ -900,28 +901,38 @@
 
     <div class="explorer reveal">
       <div class="stage-svg">
-        <svg viewBox="0 0 640 470" xmlns="http://www.w3.org/2000/svg" role="img"
-             aria-label="Scale drawing of the rectangular PCM enclosure with a K-shaped fin attached to the heated left wall. The fin angle and arm lengths change with the controls below.">
-          <rect class="pcm" x="140" y="70" width="385" height="350"/>
-          <rect class="enc" x="140" y="70" width="385" height="350"/>
-          <line class="hotwall" x1="140" y1="70" x2="140" y2="420"/>
-          <text class="glyph" x="46" y="240" transform="rotate(-90 46 240)">HEATED WALL 70&#176;C</text>
-          <text class="glyph" x="332" y="56" text-anchor="middle">ADIABATIC</text>
-          <text class="glyph" x="332" y="444" text-anchor="middle">ADIABATIC</text>
-          <text class="glyph" x="540" y="240" transform="rotate(90 540 240)" text-anchor="middle">ADIABATIC</text>
+        <svg viewBox="0 0 660 480" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="Scale drawing of the PCM enclosure: a 5 mm heated wall held at 70 degrees Celsius on the left, a 50 by 50 mm phase change material field, and a K-shaped fin of 2 mm thickness attached to the wall. The fin angle and arm lengths change with the controls below.">
+          <!-- PCM field, 50 x 50 mm -->
+          <rect class="pcm" x="175" y="70" width="350" height="350"/>
+          <rect class="enc" x="175" y="70" width="350" height="350"/>
+          <text class="glyph" x="492" y="98" text-anchor="end" style="font-size:15px;fill:#8FA09C">PCM</text>
 
-          <line class="dimline" x1="140" y1="436" x2="525" y2="436"/>
-          <text class="glyph" x="332" y="462" text-anchor="middle">W = 55 mm</text>
-          <line class="dimline" x1="126" y1="70" x2="126" y2="420"/>
-          <text class="glyph" x="112" y="248" transform="rotate(-90 112 248)" text-anchor="middle">H = 50 mm</text>
+          <!-- heated wall, 5 mm slab -->
+          <rect class="wall" x="140" y="70" width="35" height="350"/>
+          <text class="glyph" x="128" y="245" transform="rotate(-90 128 245)" text-anchor="middle" style="fill:#C0453B">CONSTANT T = 70&#176;C</text>
 
+          <!-- adiabatic boundaries -->
+          <text class="glyph" x="350" y="60" text-anchor="middle">ADIABATIC WALL</text>
+          <text class="glyph" x="350" y="440" text-anchor="middle">ADIABATIC WALL</text>
+          <text class="glyph" x="540" y="245" transform="rotate(90 540 245)" text-anchor="middle">ADIABATIC WALL</text>
+
+          <!-- dimensions -->
+          <line class="dimline" x1="140" y1="458" x2="175" y2="458"/>
+          <text class="glyph" x="157" y="476" text-anchor="middle">5 mm</text>
+          <line class="dimline" x1="175" y1="458" x2="525" y2="458"/>
+          <text class="glyph" x="350" y="476" text-anchor="middle">50 mm</text>
+          <line class="dimline" x1="566" y1="70" x2="566" y2="420"/>
+          <text class="glyph" x="580" y="245" transform="rotate(-90 580 245)" text-anchor="middle">50 mm</text>
+
+          <!-- K-shaped fin -->
           <path class="arc" id="angArc"/>
-          <line class="fin" id="armU" x1="140" y1="245" x2="140" y2="245"/>
-          <line class="fin" id="armL" x1="140" y1="245" x2="140" y2="245"/>
-          <circle cx="140" cy="245" r="4" fill="#1E9B63"/>
+          <line class="fin" id="armU"/>
+          <line class="fin" id="armL"/>
           <text class="glyph hi" id="lblU"></text>
           <text class="glyph hi" id="lblL"></text>
           <text class="glyph hi" id="lblT"></text>
+          <text class="glyph hi" id="lblThk"></text>
         </svg>
       </div>
 
@@ -950,7 +961,7 @@
     <div class="two-col">
       <div class="reveal">
         <h3>Domain and physics</h3>
-        <p>A two-dimensional rectangular enclosure represents the latent-heat store. The left vertical wall is held at a constant 70&nbsp;&deg;C; the remaining walls are adiabatic. The domain starts uniformly solid at 25&nbsp;&deg;C and at rest. Melting is captured with the enthalpy&ndash;porosity formulation, where the mushy region is treated as a porous zone whose permeability collapses as the liquid fraction falls to zero. Buoyancy enters through the Boussinesq approximation, flow is laminar, and the fins are modelled as conducting solid walls with no slip.</p>
+        <p>A two-dimensional enclosure represents the latent-heat store: a 50 &times; 50&nbsp;mm field of PCM against a 5&nbsp;mm wall held at a constant 70&nbsp;&deg;C, with the remaining three boundaries adiabatic. The domain starts uniformly solid at 25&nbsp;&deg;C and at rest. Melting is captured with the enthalpy&ndash;porosity formulation, where the mushy region is treated as a porous zone whose permeability collapses as the liquid fraction falls to zero. Buoyancy enters through the Boussinesq approximation, flow is laminar, and the fins are modelled as conducting solid walls with no slip.</p>
 
         <h3 style="margin-top:2rem">What is varied</h3>
         <ul class="ticklist">
@@ -1306,43 +1317,61 @@
     fromHash();
   })();
   /* ================= PAPER 01 — K-fin geometry explorer =================
-     Draws the tested parameter space only. No result data in this file. */
+     Scale drawing following Figure 2 of the manuscript: a 5 mm heated wall on
+     the left, a 50 x 50 mm PCM field, and a K-shaped fin of fixed 2 mm
+     thickness whose vertex sits on the wall face at mid-height.
+     Tested parameter space only; no result data in this file. */
   (function(){
-    const CASES = [
+    var CASES = [
       { label:'1:1', ku:30, kl:30, max:80 },
       { label:'5:7', ku:25, kl:35, max:70 },
       { label:'2:4', ku:20, kl:40, max:60 },
       { label:'7:5', ku:35, kl:25, max:70 },
       { label:'4:2', ku:40, kl:20, max:60 }
     ];
-    const PX = 7, JX = 140, JY = 245;   // px per mm; fin junction on the heated wall
-    const armU = $('armU'), armL = $('armL'), arc = $('angArc');
-    const lblU = $('lblU'), lblL = $('lblL'), lblT = $('lblT');
-    const angle = $('angle'), angleOut = $('angleOut'), readout = $('finReadout');
-    let active = 0;
+    var PX = 7;                  // px per mm
+    var JX = 175, JY = 245;      // fin vertex: on the wall face, mid-height
+    var armU = $('armU'), armL = $('armL'), arc = $('angArc');
+    var lblU = $('lblU'), lblL = $('lblL'), lblT = $('lblT'), lblThk = $('lblThk');
+    var angle = $('angle'), angleOut = $('angleOut'), readout = $('finReadout');
+    var active = 0;
 
     function draw(){
-      const c = CASES[active], th = +angle.value, half = (th/2) * Math.PI/180;
-      const ux = JX + c.ku*PX*Math.cos(half), uy = JY - c.ku*PX*Math.sin(half);
-      const lx = JX + c.kl*PX*Math.cos(half), ly = JY + c.kl*PX*Math.sin(half);
+      var c = CASES[active], th = +angle.value, half = (th / 2) * Math.PI / 180;
+      var ux = JX + c.ku * PX * Math.cos(half), uy = JY - c.ku * PX * Math.sin(half);
+      var lx = JX + c.kl * PX * Math.cos(half), ly = JY + c.kl * PX * Math.sin(half);
 
-      armU.setAttribute('x2',ux); armU.setAttribute('y2',uy); armU.setAttribute('stroke-width',2*PX);
-      armL.setAttribute('x2',lx); armL.setAttribute('y2',ly); armL.setAttribute('stroke-width',2*PX);
+      armU.setAttribute('x1', JX); armU.setAttribute('y1', JY);
+      armU.setAttribute('x2', ux); armU.setAttribute('y2', uy);
+      armL.setAttribute('x1', JX); armL.setAttribute('y1', JY);
+      armL.setAttribute('x2', lx); armL.setAttribute('y2', ly);
+      armU.setAttribute('stroke-width', 2 * PX);
+      armL.setAttribute('stroke-width', 2 * PX);
 
-      const r = 52;
+      /* angle arc between the two arms, opening away from the wall */
+      var r = 46;
       arc.setAttribute('d',
-        'M ' + (JX + r*Math.cos(half)) + ' ' + (JY - r*Math.sin(half)) +
-        ' A ' + r + ' ' + r + ' 0 0 1 ' + (JX + r*Math.cos(half)) + ' ' + (JY + r*Math.sin(half)));
+        'M ' + (JX + r * Math.cos(half)) + ' ' + (JY - r * Math.sin(half)) +
+        ' A ' + r + ' ' + r + ' 0 0 1 ' + (JX + r * Math.cos(half)) + ' ' + (JY + r * Math.sin(half)));
 
-      lblU.setAttribute('x', ux + 12); lblU.setAttribute('y', uy - 8);
+      /* arm labels sit along each arm, offset clear of the 2 mm body */
+      var mu = 0.55, ml = 0.55;
+      lblU.setAttribute('x', JX + (ux - JX) * mu - 6);
+      lblU.setAttribute('y', JY + (uy - JY) * mu - 14);
       lblU.textContent = 'Ku = ' + c.ku + ' mm';
-      lblL.setAttribute('x', lx + 12); lblL.setAttribute('y', ly + 18);
+      lblL.setAttribute('x', JX + (lx - JX) * ml - 6);
+      lblL.setAttribute('y', JY + (ly - JY) * ml + 22);
       lblL.textContent = 'Kl = ' + c.kl + ' mm';
-      lblT.setAttribute('x', JX + r + 10); lblT.setAttribute('y', JY + 5);
+
+      lblT.setAttribute('x', JX + r + 12); lblT.setAttribute('y', JY + 5);
       lblT.textContent = '\u03B8 = ' + th + '\u00B0';
+
+      lblThk.setAttribute('x', ux + 14); lblThk.setAttribute('y', uy + 4);
+      lblThk.textContent = '2 mm';
+
       angleOut.textContent = th + '\u00B0';
 
-      const inRange = th <= c.max;
+      var inRange = th <= c.max;
       readout.innerHTML =
         'Ratio <b>' + c.label + '</b> &nbsp;\u00B7&nbsp; upper arm <b>' + c.ku + ' mm</b>, lower arm <b>' + c.kl +
         ' mm</b>, total <b>' + (c.ku + c.kl) + ' mm</b> &nbsp;\u00B7&nbsp; thickness <b>2 mm</b> &nbsp;\u00B7&nbsp; angle <b>' + th + '\u00B0</b>' +
@@ -1354,9 +1383,9 @@
     }
 
     angle.addEventListener('input', draw);
-    document.querySelectorAll('#caseBtns button').forEach(b => {
-      b.addEventListener('click', () => {
-        document.querySelectorAll('#caseBtns button').forEach(x => x.setAttribute('aria-pressed','false'));
+    document.querySelectorAll('#caseBtns button').forEach(function(b){
+      b.addEventListener('click', function(){
+        document.querySelectorAll('#caseBtns button').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
         b.setAttribute('aria-pressed','true');
         active = +b.dataset.case;
         draw();
