@@ -345,7 +345,9 @@
   /* ---- award page: hero slot, photo grid, ribbon ------------------------- */
   .slot-wide{ aspect-ratio:16/7; }
   .slot-tall{ aspect-ratio:3/4; }
-  .slot-doc{ aspect-ratio:auto; }
+  /* Note: no bare .slot-doc rule here — that would also strip the shape
+     from the *placeholder* box when the file is missing. Sizing for
+     slot-doc is scoped to img.slot-doc only, below. */
   .photogrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin-top:2rem; }
   .photogrid figure{ margin:0; }
   .ribbon{
@@ -562,7 +564,24 @@
           <a href="#awards" role="menuitem"><span class="dall">All honours</span></a>
         </div>
       </div>
-      <a href="#photography">Photography</a>
+      <div class="navitem" data-dropdown>
+        <button type="button" aria-expanded="false" aria-haspopup="true">Beyond Academics <span class="caret" aria-hidden="true"></span></button>
+        <div class="dropdown" role="menu">
+          <a href="#life-photography" role="menuitem">
+            <span class="dnum">01</span>
+            <p class="dttl">Photography</p>
+          </a>
+          <a href="#life-music" role="menuitem">
+            <span class="dnum">02</span>
+            <p class="dttl">Music</p>
+          </a>
+          <a href="#life-organizing" role="menuitem">
+            <span class="dnum">03</span>
+            <p class="dttl">Organizing &amp; taking responsibility</p>
+          </a>
+          <a href="#life-teaser" role="menuitem"><span class="dall">All beyond academics</span></a>
+        </div>
+      </div>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -611,7 +630,7 @@
       <p class="eyebrow reveal">About</p>
       <div class="portrait-block">
         <div class="portrait reveal">
-          <img class="slot slot-doc" src="assets/img/portrait.jpg" alt="Portrait of Atiqur Rahaman" loading="lazy" data-path="assets/img/portrait.jpg" data-label="Portrait" onerror="slotFallback(this)">
+          <img class="slot slot-doc" src="assets/img/portrait.jpg" alt="Portrait of Atiqur Rahaman" loading="lazy" data-path="assets/img/portrait.jpg" data-ratio="4/5" data-label="Portrait" onerror="slotFallback(this)">
         </div>
         <div class="reveal">
           <p class="lede">I completed my B.Sc. in Naval Architecture and Marine Engineering at the <a href="https://www.buet.ac.bd/">Bangladesh University of Engineering and Technology</a>, and now work as a researcher focused on thermal management. I&rsquo;m applying for PhD study in the United States in this field.</p>
@@ -816,6 +835,22 @@
 </section>
 
 
+<!-- ============================ LIFE BESIDE ACADEMICS (teaser) ============================ -->
+<section id="life-teaser">
+  <div class="wrap">
+    <p class="eyebrow reveal">Beyond academics</p>
+    <h2 class="reveal">Not just a lab bench.</h2>
+    <p class="reveal" style="max-width:64ch">Photography, a guitar I'm still learning, and a habit of ending up in charge of things &mdash; a department fest's cultural program, a month of feeding 550 people out of a dorm kitchen. The people-facing side of engineering doesn't show up in a CFD result, but it's a real part of how I work.</p>
+
+    <div class="reveal" style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem">
+      <a class="btn" href="#life-photography" style="border-color:var(--rule);color:var(--ink)">Photography</a>
+      <a class="btn" href="#life-music" style="border-color:var(--rule);color:var(--ink)">Music</a>
+      <a class="btn" href="#life-organizing" style="border-color:var(--rule);color:var(--ink)">Organizing &amp; responsibility</a>
+    </div>
+  </div>
+</section>
+
+
 <!-- ============================ LEADERSHIP + SKILLS ============================ -->
 <section id="leadership">
   <div class="wrap">
@@ -865,29 +900,6 @@
 </section>
 
 <!-- ============================ PHOTOGRAPHY ============================ -->
-<section id="photography" class="tight">
-  <div class="wrap">
-    <div class="after-marks">
-      <p class="eyebrow reveal">Photography</p>
-      <h2 class="reveal">Looking at things<br>from other angles.</h2>
-      <p class="reveal" style="max-width:52ch;margin-top:-.75rem">Ten ongoing series. Links currently point to the galleries on my old site; swap in local images as you migrate them.</p>
-
-      <div class="gallery reveal">
-        <a class="shot" style="background:url('assets/img/street.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/street"><span class="label">Street</span></a>
-        <a class="shot" style="background:url('assets/img/portraits.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/portraits"><span class="label">Portraits</span></a>
-        <a class="shot" style="background:url('assets/img/long-exposure.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/long-exposure-photography"><span class="label">Long Exposure</span></a>
-        <a class="shot" style="background:url('assets/img/urban-architecture.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/urban-architecture"><span class="label">Urban Architecture</span></a>
-        <a class="shot" style="background:url('assets/img/concert.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/concert"><span class="label">Concert</span></a>
-        <a class="shot" style="background:url('assets/img/candid.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/candid"><span class="label">Candid</span></a>
-        <a class="shot" style="background:url('assets/img/nature.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/nature"><span class="label">Nature</span></a>
-        <a class="shot" style="background:url('assets/img/campus-activity.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/campus-activity"><span class="label">Campus Activity</span></a>
-        <a class="shot" style="background:url('assets/img/experimental.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/experimental"><span class="label">Experimental</span></a>
-        <a class="shot" style="background:url('assets/img/model.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/model-photography"><span class="label">Model</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============================ CONTACT ============================ -->
 <section id="contact" class="dark">
   <div class="wrap">
@@ -1349,7 +1361,7 @@
 <section>
   <div class="wrap">
     <figure style="margin:0">
-      <img class="slot slot-doc" src="assets/img/wfsa/naija-spirit-render.jpg" alt="Naija spirit render" loading="lazy" data-path="assets/img/wfsa/naija-spirit-render.jpg" data-label="Naija spirit render" onerror="slotFallback(this)">
+      <img class="slot slot-doc" src="assets/img/wfsa/naija-spirit-render.jpg" alt="Naija spirit render" loading="lazy" data-path="assets/img/wfsa/naija-spirit-render.jpg" data-ratio="4/5" data-label="Naija spirit render" onerror="slotFallback(this)">
       <figcaption>The three-quarter render from the cover of the submission. Strongest single image the project has.</figcaption>
     </figure>
   </div>
@@ -1740,7 +1752,7 @@
 <section>
   <div class="wrap">
     <figure style="margin:0">
-      <img class="slot slot-doc" src="assets/img/wfsa2026/niger-drift-render.jpg" alt="Niger drift render" loading="lazy" data-path="assets/img/wfsa2026/niger-drift-render.jpg" data-label="Niger drift render" onerror="slotFallback(this)">
+      <img class="slot slot-doc" src="assets/img/wfsa2026/niger-drift-render.jpg" alt="Niger drift render" loading="lazy" data-path="assets/img/wfsa2026/niger-drift-render.jpg" data-ratio="4/5" data-label="Niger drift render" onerror="slotFallback(this)">
       <figcaption>The cover render &mdash; front and aft views of Niger Drift at a charging berth.</figcaption>
     </figure>
   </div>
@@ -2379,6 +2391,148 @@
 </main>
 
 
+<!-- ==================== PAGE: BEYOND ACADEMICS — PHOTOGRAPHY ==================== -->
+<main id="page-life-photography" hidden>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="backlink" href="#life-teaser">Beyond academics</a>
+    <p class="eyebrow">Beyond academics &middot; Photography</p>
+    <h1>Looking at things<br>from other angles.</h1>
+    <p class="byline">Semi-professional &middot; former Vice President, BUET Photographic Society</p>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <p class="reveal" style="max-width:56ch">Ten ongoing series. Links currently point to the galleries on my old site; swap in local images as you migrate them.</p>
+
+    <div class="gallery reveal">
+      <a class="shot" style="background:url('assets/img/street.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/street"><span class="label">Street</span></a>
+      <a class="shot" style="background:url('assets/img/portraits.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/portraits"><span class="label">Portraits</span></a>
+      <a class="shot" style="background:url('assets/img/long-exposure.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/long-exposure-photography"><span class="label">Long Exposure</span></a>
+      <a class="shot" style="background:url('assets/img/urban-architecture.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/urban-architecture"><span class="label">Urban Architecture</span></a>
+      <a class="shot" style="background:url('assets/img/concert.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/concert"><span class="label">Concert</span></a>
+      <a class="shot" style="background:url('assets/img/candid.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/candid"><span class="label">Candid</span></a>
+      <a class="shot" style="background:url('assets/img/nature.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/nature"><span class="label">Nature</span></a>
+      <a class="shot" style="background:url('assets/img/campus-activity.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/campus-activity"><span class="label">Campus Activity</span></a>
+      <a class="shot" style="background:url('assets/img/experimental.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/experimental"><span class="label">Experimental</span></a>
+      <a class="shot" style="background:url('assets/img/model.jpg') center/cover" href="https://sites.google.com/view/atiqur-rahaman/photography/model-photography"><span class="label">Model</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:0">
+    <a class="nextpaper" href="#life-music">
+      <span class="k">Beyond academics</span>
+      <p class="t">Music</p>
+    </a>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ==================== PAGE: BEYOND ACADEMICS — MUSIC ==================== -->
+<main id="page-life-music" hidden>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="backlink" href="#life-teaser">Beyond academics</a>
+    <p class="eyebrow">Beyond academics &middot; Music</p>
+    <h1>Guitar, mostly<br>to reset.</h1>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <div class="reveal" style="max-width:66ch">
+      <p class="lede">I'm a beginner on guitar, honestly. I don't play it to perform &mdash; I play it when my head is too full of fin geometries or mooring angles and needs a hard restart. It's less a skill I'm showcasing and more a habit that keeps the rest of the work sustainable.</p>
+    </div>
+
+    <div class="note reveal">
+      <span class="k">Covers to link here</span>
+      <p>Send me the Instagram and YouTube links for the covers you want featured, and I'll drop them in as a proper linked list below &mdash; same treatment as the press coverage on the WFSA page.</p>
+    </div>
+
+    <!--
+      Once you send the links, this becomes something like:
+      <ul class="ticklist">
+        <li><strong>Song title</strong> &mdash; <a href="INSTAGRAM_URL">Instagram</a> / <a href="YOUTUBE_URL">YouTube</a></li>
+      </ul>
+    -->
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:0">
+    <a class="nextpaper" href="#life-organizing">
+      <span class="k">Beyond academics</span>
+      <p class="t">Organizing &amp; taking responsibility</p>
+    </a>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ==================== PAGE: BEYOND ACADEMICS — ORGANIZING & RESPONSIBILITY ==================== -->
+<main id="page-life-organizing" hidden>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="backlink" href="#life-teaser">Beyond academics</a>
+    <p class="eyebrow">Beyond academics &middot; Organizing &amp; responsibility</p>
+    <h1>Turns out I'm the one<br>who ends up in charge.</h1>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <div class="reveal">
+      <article class="entry split">
+        <div class="yr">2026</div>
+        <div>
+          <h3>Cultural Program Lead, NAME Fest 2026</h3>
+          <p class="sup">Department of Naval Architecture and Marine Engineering, BUET</p>
+          <p>NAME Fest is organised department-wide, by students, for the department. For the 2026 edition I led the cultural program alongside the rest of the organising team &mdash; the performances, the schedule, the moving parts that have to land on the night rather than on paper.</p>
+        </div>
+      </article>
+
+      <article class="entry split">
+        <div class="yr">1 month</div>
+        <div>
+          <h3>Dining committee, university dormitory</h3>
+          <p class="sup">Team of 5 &middot; ~550 diners</p>
+          <p>Ran the dorm's dining operation for a month with four other students &mdash; sourcing, budgeting, and serving roughly 550 people a day. Nothing about a CFD mesh prepares you to haggle with a supplier over the price of rice, but a month of doing exactly that taught me more about on-the-ground negotiation and finance than any course did.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="eyebrow reveal" style="margin-top:2.5rem">What it actually taught me</p>
+    <ul class="ticklist reveal">
+      <li>Budgeting and procurement for a group two orders of magnitude larger than a project team</li>
+      <li>Negotiating with suppliers &mdash; haggling, repeatedly, on real money</li>
+      <li>Running an event where the schedule is public and the audience doesn't wait for you to catch up</li>
+      <li>Coordinating a small team under a hard deadline that isn't a submission portal</li>
+    </ul>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:0">
+    <a class="nextpaper" href="#life-photography">
+      <span class="k">Beyond academics</span>
+      <p class="t">Photography</p>
+    </a>
+  </div>
+</section>
+
+</main>
+
+
+
 <footer>
   <div class="wrap">
     <span>&copy; <span id="yr">2026</span> Atiqur Rahaman</span>
@@ -2399,6 +2553,8 @@
   function slotFallback(img){
     var div = document.createElement('div');
     div.className = img.className;
+    var ratio = img.getAttribute('data-ratio');
+    if (ratio) { div.style.aspectRatio = ratio; }
     div.innerHTML = img.getAttribute('data-path') + '<br>' + img.getAttribute('data-label');
     img.replaceWith(div);
   }
@@ -2445,7 +2601,10 @@
       'research-pcm-battery': { el:'page-research-pcm',         title:'Iso-volume fin geometries for PCM battery cooling \u2014 Atiqur Rahaman' },
       'research-thesis':      { el:'page-research-thesis',      title:'Undergraduate thesis, FOWT mooring dynamics \u2014 Atiqur Rahaman' },
       'research-ferry':       { el:'page-research-ferry',       title:'175-passenger ferry design \u2014 Atiqur Rahaman' },
-      'research-internship':  { el:'page-research-internship',  title:'Internship, Dockyard & Engineering Works \u2014 Atiqur Rahaman' }
+      'research-internship':  { el:'page-research-internship',  title:'Internship, Dockyard & Engineering Works \u2014 Atiqur Rahaman' },
+      'life-photography': { el:'page-life-photography', title:'Photography \u2014 Atiqur Rahaman' },
+      'life-music':       { el:'page-life-music',       title:'Music \u2014 Atiqur Rahaman' },
+      'life-organizing':  { el:'page-life-organizing',  title:'Organizing & taking responsibility \u2014 Atiqur Rahaman' }
     };
 
     function show(key, anchor){
