@@ -250,6 +250,11 @@
   a.vessel:hover .name, a.vessel:focus-visible .name{ color:var(--starboard); }
   .vessel .more{ font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; display:inline-block; margin-top:1rem; }
   .vessel .more::after{ content:"\2192"; margin-left:.5rem; }
+  .entry .more{
+    font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--starboard); text-decoration:none; display:inline-block; margin-top:.9rem;
+  }
+  .entry .more::after{ content:"\2192"; margin-left:.5rem; }
   .vessel .name{ font-family:var(--display); font-weight:800; font-size:1.55rem; letter-spacing:-.02em; margin:0 0 .5rem; }
   .vessel p{ margin:0; color:#B7C3C0; font-weight:300; font-size:1rem; }
 
@@ -510,7 +515,28 @@
           <a href="#publications" role="menuitem"><span class="dall">All publications</span></a>
         </div>
       </div>
-      <a href="#research">Research</a>
+      <div class="navitem" data-dropdown>
+        <button type="button" aria-expanded="false" aria-haspopup="true">Research <span class="caret" aria-hidden="true"></span></button>
+        <div class="dropdown" role="menu">
+          <a href="#research-pcm-battery" role="menuitem">
+            <span class="dnum">01</span>
+            <p class="dttl">Iso-volume fin geometries for PCM battery cooling</p>
+          </a>
+          <a href="#research-thesis" role="menuitem">
+            <span class="dnum">02</span>
+            <p class="dttl">Undergraduate thesis &middot; FOWT mooring dynamics</p>
+          </a>
+          <a href="#research-ferry" role="menuitem">
+            <span class="dnum">03</span>
+            <p class="dttl">175-passenger ferry design</p>
+          </a>
+          <a href="#research-internship" role="menuitem">
+            <span class="dnum">04</span>
+            <p class="dttl">Internship &middot; Dockyard &amp; Engineering Works</p>
+          </a>
+          <a href="#research" role="menuitem"><span class="dall">All research &amp; projects</span></a>
+        </div>
+      </div>
       <a href="#education" data-optional>Education</a>
       <div class="navitem" data-dropdown>
         <button type="button" aria-expanded="false" aria-haspopup="true">Awards <span class="caret" aria-hidden="true"></span></button>
@@ -652,6 +678,7 @@
           <h3>Iso-volume comparison of fin geometries for PCM battery cooling</h3>
           <p class="sup">Ongoing research</p>
           <p>Shape-ranking study of PCM and fin arrangements for lithium-ion battery packs, in ANSYS Fluent. Every arrangement is given the same amount of fin metal, so the comparison reflects geometry rather than material budget, and the comparison runs over many charge&ndash;discharge cycles rather than a single one &mdash; an arrangement that holds temperature well at first can lose that ability once the PCM stops fully recovering between cycles.</p>
+          <a href="#research-pcm-battery" class="more">Project details</a>
         </div>
       </article>
 
@@ -661,6 +688,7 @@
           <h3>Undergraduate thesis</h3>
           <p class="sup">Supervisor: Dr. Md. Shahidul Islam &middot; NAME, BUET</p>
           <p>A hydrodynamic study of edge turbines in a floating wind farm, which face undisturbed waves and reach shutdown limits earlier than sheltered interior turbines. Built a coupled frequency- and time-domain model of the IEA 15 MW reference turbine on the UMaine VolturnUS-S platform in ANSYS AQWA, validated against published data. Written up as <a href="#mooring-spread">paper 02</a>.</p>
+          <a href="#research-thesis" class="more">Project details</a>
         </div>
       </article>
 
@@ -670,6 +698,7 @@
           <h3>175-passenger ferry design</h3>
           <p class="sup">Supervisor: Dr. Mir Tareque Ali &middot; Undergraduate project</p>
           <p>Full concept-to-preliminary design of a passenger ferry for the circular waterways around Dhaka, working through the design spiral from principal dimensions and lines plan to hydrostatics, resistance, powering, weight and stability in linked spreadsheets, and designing the propulsion system including propeller selection with a cavitation check and sizing of the engine, gearbox and foundation.</p>
+          <a href="#research-ferry" class="more">Project details</a>
         </div>
       </article>
 
@@ -679,6 +708,7 @@
           <h3>Intern, Dockyard &amp; Engineering Works Ltd</h3>
           <p class="sup">Bangladesh Navy &middot; Narayanganj, Bangladesh</p>
           <p>Industrial attachment at a working shipyard, with training on marine propulsion systems, shipboard air conditioning, thermal management of engine rooms, and CNC plate cutting.</p>
+          <a href="#research-internship" class="more">Project details</a>
         </div>
       </article>
     </div>
@@ -1099,7 +1129,7 @@
 
         <div class="note reveal">
           <span class="k">Preliminary indication</span>
-          <p>Tighter mooring spreads reduce surge and yaw in head seas, with the effect fading or reversing at other headings; heave, roll and pitch stay largely unaffected. That is a direction, not a result &mdash; the quantitative motion statistics and every figure stay embargoed until the paper is out.</p>
+          <p>Tightening the mooring spread consistently reduces surge, but its effect on sway and yaw depends on wave heading: a tighter spread helps in head seas but can work against sway control in oblique and beam seas. Heave stays largely insensitive throughout. The takeaway is that no single spread angle is best across all headings &mdash; the exact numbers and figures stay embargoed until the paper is out.</p>
         </div>
         <p class="reveal muted" style="font-size:.95rem">Grew out of my undergraduate thesis, supervised by Dr. Md. Shahidul Islam.</p>
       </div>
@@ -1236,10 +1266,10 @@
 
     <p class="eyebrow reveal" style="margin-top:2.5rem">Environment held constant across all cases</p>
     <ul class="ticklist reveal">
-      <li>Regular wave, chosen to sit clear of every rigid-body natural frequency</li>
-      <li>Steady current, identical in all 25 runs, contributing a common mean offset</li>
-      <li>Steady wind loading on the rotor</li>
-      <li>Deep-water conditions confirmed at the design depth; steepness well below the breaking limit</li>
+      <li>Regular wave, 10 m height and 10 s period</li>
+      <li>Steady current, 0.5 m/s, identical in all 25 runs</li>
+      <li>Steady wind, 10 m/s, applied on the rotor</li>
+      <li>500 s simulation duration per case</li>
     </ul>
     <p class="reveal muted" style="max-width:66ch;font-size:.95rem">Regular rather than irregular waves are used deliberately. A single frequency and direction strips out spectral content and directional spreading, so any difference in response can be attributed to the two angles under study. The trade-off is that magnitudes are comparative rather than design-transferable, and irregular directional seas are the stated next step.</p>
 
@@ -1327,7 +1357,6 @@
         <p class="eyebrow reveal" style="margin-top:2.5rem">My contribution</p>
         <ul class="ticklist reveal">
           <li>Propulsion and hydrodynamics, under propulsion system lead Md. Abdul Kader</li>
-          <li>Resistance and power estimation, propeller design and CFD validation</li>
           <li>Thruster and motor selection</li>
           <li>Full design of the auxiliary power system, including the hydrogen fuel cell</li>
           <li>Report writing for these sections</li>
@@ -1987,6 +2016,357 @@
 
 
 
+<!-- ==================== PAGE: RESEARCH — PCM BATTERY COOLING ==================== -->
+<main id="page-research-pcm" hidden>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="backlink" href="#research">All research &amp; projects</a>
+    <p class="eyebrow">Research &middot; Thermal management</p>
+    <h1>Iso-volume fin geometries<br>for PCM battery cooling.</h1>
+    <p class="byline">Ongoing &middot; started August 2026</p>
+    <div class="metaline">
+      <span class="venue">ANSYS Fluent</span><span class="status hold">Ongoing</span>
+    </div>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <div class="side">
+      <div>
+        <p class="eyebrow reveal">The question</p>
+        <div class="reveal">
+          <p class="lede">A phase change material and fin arrangement can look good in a single test and still fail in service, because a battery pack is never charged once. It cycles &mdash; charge, discharge, rest, repeat &mdash; for thousands of cycles over its life. This project asks a simple question that most single-cycle studies can&rsquo;t answer: does a fin shape that manages heat well on cycle one still manage it on cycle fifty?</p>
+          <p>The full title is <em>Iso-Volume Comparison of Fin Geometries for PCM-Based Battery Thermal Management: Shape Ranking under Repeated Charge and Discharge Cycling</em>. &ldquo;Iso-volume&rdquo; is the constraint that makes the comparison fair: every fin arrangement tested is given the same amount of metal. So when one shape outperforms another, the difference is the geometry itself, not one design getting a bigger material budget than its rivals.</p>
+          <p>The comparison runs in ANSYS Fluent, tracking how much of the PCM stays melted from one cycle to the next. An arrangement can look excellent in the first cycle and still lose that edge later, if the material never fully re-solidifies during the rest period &mdash; a failure mode a single-cycle study would never catch.</p>
+        </div>
+
+        <p class="eyebrow reveal" style="margin-top:2.5rem">Why it matters</p>
+        <ul class="ticklist reveal">
+          <li>Extends the enclosure work behind <a href="#pcm-k-fin">paper 01</a> into a cyclic, load-driven setting</li>
+          <li>A battery pack has to both absorb heat during discharge and reject it before the next cycle &mdash; a harder problem than melting once</li>
+          <li>Fixing the fin volume isolates shape as the variable, rather than confounding it with material cost</li>
+        </ul>
+      </div>
+
+      <aside class="rail reveal">
+        <dl>
+          <dt>Status</dt><dd>Ongoing, since Aug 2026</dd>
+          <dt>Tool</dt><dd>ANSYS Fluent</dd>
+          <dt>Application</dt><dd>Li-ion battery pack cooling</dd>
+          <dt>Constraint</dt><dd>Fixed fin volume across all shapes</dd>
+          <dt>Loading</dt><dd>Repeated charge&ndash;discharge cycles</dd>
+          <dt>Related work</dt><dd><a href="#pcm-k-fin" style="color:var(--starboard)">Paper 01, K-shaped fins</a></dd>
+        </dl>
+        <ul class="chips">
+          <li>Phase change materials</li>
+          <li>Battery thermal management</li>
+          <li>Cyclic loading</li>
+          <li>CFD</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="note reveal">
+      <span class="k">Nothing to show yet</span>
+      <p>This project is early enough that there are no figures or findings to publish. This page will fill in as the study progresses &mdash; check back, or see <a href="#pcm-k-fin">paper 01</a> for the finished enclosure study this one builds on.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:0">
+    <a class="nextpaper" href="#research-thesis">
+      <span class="k">More research &amp; projects</span>
+      <p class="t">Undergraduate thesis &middot; FOWT mooring dynamics</p>
+    </a>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ==================== PAGE: RESEARCH — UNDERGRADUATE THESIS ==================== -->
+<main id="page-research-thesis" hidden>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="backlink" href="#research">All research &amp; projects</a>
+    <p class="eyebrow">Research &middot; Offshore structures</p>
+    <h1>Undergraduate thesis:<br>the turbines on the edge.</h1>
+    <p class="byline">Supervisor: Dr. Md. Shahidul Islam &middot; Department of Naval Architecture and Marine Engineering, BUET</p>
+    <div class="metaline">
+      <span class="venue">Apr 2025 &ndash; Jun 2026</span><span class="status">Complete</span>
+    </div>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <div class="side">
+      <div>
+        <p class="eyebrow reveal">The motivation</p>
+        <div class="reveal">
+          <p class="lede">A floating wind farm is not one turbine's problem repeated many times over. Turbines toward the interior of the array sit in each other's wake and see a narrowed, filtered range of wave directions. Turbines on the outer row don't get that shelter &mdash; they take the site's full directional wave climate head-on, and reach their motion-based shutdown limits earlier as a result.</p>
+          <p>The thesis builds a coupled frequency- and time-domain model of the IEA 15 MW reference turbine on the UMaine VolturnUS-S semi-submersible platform in ANSYS AQWA, validated against published data, to ask how much of that edge-turbine penalty can be designed around through the mooring system alone &mdash; specifically, the angle between the mooring lines.</p>
+        </div>
+
+        <p class="eyebrow reveal" style="margin-top:2.5rem">What this thesis became</p>
+        <p class="reveal">The full method, the 25-case simulation matrix, and the load-case explorer are written up as a manuscript, currently under review. Rather than duplicate that page, this entry points to it directly.</p>
+        <a class="vessel reveal" href="#mooring-spread" style="display:block;text-decoration:none;margin-top:1rem">
+          <p class="name" style="margin-bottom:0">Read the full paper</p>
+          <p>Model, method, load-case explorer, and status &mdash; paper 02, under review.</p>
+          <span class="more" style="color:var(--starboard)">Mooring spread angle and wave heading</span>
+        </a>
+      </div>
+
+      <aside class="rail reveal">
+        <dl>
+          <dt>Status</dt><dd>Complete &middot; written up as paper 02</dd>
+          <dt>Supervisor</dt><dd>Dr. Md. Shahidul Islam</dd>
+          <dt>Period</dt><dd>Apr 2025 &ndash; Jun 2026</dd>
+          <dt>Tool</dt><dd>ANSYS AQWA</dd>
+          <dt>Platform</dt><dd>IEA 15 MW / UMaine VolturnUS-S</dd>
+        </dl>
+        <ul class="chips">
+          <li>Floating offshore wind</li>
+          <li>Mooring dynamics</li>
+          <li>Semi-submersible</li>
+          <li>Potential flow</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:0">
+    <a class="nextpaper" href="#research-ferry">
+      <span class="k">More research &amp; projects</span>
+      <p class="t">175-passenger ferry design</p>
+    </a>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ==================== PAGE: RESEARCH — 175-PASSENGER FERRY ==================== -->
+<!-- ==================== PAGE: RESEARCH — 175-PASSENGER FERRY ==================== -->
+<main id="page-research-ferry" hidden>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="backlink" href="#research">All research &amp; projects</a>
+    <p class="eyebrow">Project &middot; Ship design</p>
+    <h1>Design of a 175-passenger<br>ferry for Dhaka's waterways.</h1>
+    <p class="byline">With Md. Kawsar Mhamud Zidan &middot; Supervisor: Dr. Mir Tareque Ali &middot; Department of Naval Architecture and Marine Engineering, BUET</p>
+    <div class="metaline">
+      <span class="venue">NAME 338, Ship Design Project and Presentation</span><span class="status">Complete &middot; Oct 2024</span>
+    </div>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <div class="side">
+      <div>
+        <p class="eyebrow reveal">The brief</p>
+        <div class="reveal">
+          <p class="lede">NAME 338 hands each pair of students a full ship to design end to end &mdash; not one calculation in isolation, but the whole spiral: hull form, hydrostatics, strength, stability, powering, propulsion, right through to whether the numbers make economic sense. This project took that brief for a 175-passenger ferry on the Mirpur&ndash;Shyampur route, part of Dhaka's circular waterways network.</p>
+          <p>The route is 16 km each way (8.64 nautical miles). A basis ship &mdash; an existing 200-passenger vessel with published particulars &mdash; anchored the early ratio analysis: L/B, B/T, D/T and B/D ratios from that vessel were carried across and adjusted for the target capacity and route, then refined through the design spiral until the hull, structure, stability and powering all closed together.</p>
+        </div>
+
+        <p class="eyebrow reveal" style="margin-top:2.5rem">What the project covered</p>
+        <ul class="ticklist reveal">
+          <li>Basis-ship ratio analysis, principal dimensions, lines plan and table of offsets</li>
+          <li>Hydrostatics and stability across lightship, lightship-ready and fully loaded departure conditions</li>
+          <li>Scantling calculation to ABS rules, midship section, longitudinal construction and shell expansion</li>
+          <li>Resistance by the Holtrop &amp; Mennen and Van Oortmerssen methods</li>
+          <li>Propeller design, power calculation, and rudder sizing to DNV/GL practice</li>
+          <li>Engine and gearbox selection, engine foundation and shaft arrangement</li>
+          <li>HSE analysis (ventilation, smoke extraction) and an economic feasibility study</li>
+        </ul>
+      </div>
+
+      <aside class="rail reveal">
+        <dl>
+          <dt>Status</dt><dd>Complete</dd>
+          <dt>Supervisor</dt><dd>Dr. Mir Tareque Ali</dd>
+          <dt>Submitted</dt><dd>October 2024</dd>
+          <dt>Route</dt><dd>Mirpur &ndash; Shyampur, Dhaka</dd>
+          <dt>Distance</dt><dd>16 km (8.64 nm) one-way</dd>
+          <dt>Basis ship</dt><dd>NB 200 PAX passenger boat</dd>
+        </dl>
+        <ul class="chips">
+          <li>Ship design</li>
+          <li>Design spiral</li>
+          <li>Resistance &amp; powering</li>
+          <li>Propulsion</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <p class="eyebrow reveal">The vessel</p>
+    <h2 class="reveal">Sized off a<br>basis ship, then refined.</h2>
+
+    <div class="two-col" style="margin-top:2rem">
+      <div class="reveal">
+        <table class="spec">
+          <caption class="eyebrow">Principal particulars</caption>
+          <tbody>
+            <tr><td>Length (LWL)</td><td>27.79 m</td></tr>
+            <tr><td>Breadth</td><td>6.02 m</td></tr>
+            <tr><td>Depth</td><td>2.33 m</td></tr>
+            <tr><td>Draught</td><td>1.55 m</td></tr>
+            <tr><td>Block coefficient, C<sub>B</sub></td><td>0.53</td></tr>
+            <tr><td>Deadweight coefficient, C<sub>D</sub></td><td>0.22</td></tr>
+            <tr><td>Passengers</td><td>175</td></tr>
+            <tr><td>Crew</td><td>14</td></tr>
+            <tr><td>Service speed</td><td>12 knots</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="reveal">
+        <table class="spec">
+          <caption class="eyebrow">Propulsion &amp; power</caption>
+          <tbody>
+            <tr><td>Propeller diameter</td><td>0.85 m</td></tr>
+            <tr><td>Blades</td><td>4</td></tr>
+            <tr><td>Effective power, P<sub>E</sub></td><td>164.5 kW</td></tr>
+            <tr><td>Delivered power, P<sub>D</sub></td><td>295.0 kW</td></tr>
+            <tr><td>Brake power, continuous</td><td>311 kW (416 hp)</td></tr>
+            <tr><td>Brake power, 85% MCR</td><td>365 kW (490 hp)</td></tr>
+            <tr><td>Quasi-propulsive coefficient</td><td>0.558</td></tr>
+            <tr><td>Resistance method</td><td>Holtrop &amp; Mennen, Van Oortmerssen</td></tr>
+            <tr><td>Rudder standard</td><td>Det Norske Veritas / Germanischer Lloyd</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="figgrid reveal">
+      <figure>
+        <div class="slot">assets/img/research/ferry175-ga.jpg<br>general arrangement</div>
+        <figcaption>General arrangement plan, main deck.</figcaption>
+      </figure>
+      <figure>
+        <div class="slot">assets/img/research/ferry175-lines.jpg<br>lines plan</div>
+        <figcaption>Lines plan and table of offsets.</figcaption>
+      </figure>
+      <figure>
+        <div class="slot">assets/img/research/ferry175-midship.jpg<br>midship section</div>
+        <figcaption>Midship section and longitudinal construction.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow reveal">Route and operations</p>
+    <h2 class="reveal">Sized for the run,<br>not just the passengers.</h2>
+
+    <div class="two-col" style="margin-top:2rem">
+      <div class="reveal">
+        <h3>Duty cycle</h3>
+        <p>Mirpur to Shyampur is 16 km each way. At the 12-knot service speed, a round trip runs about 2 hours, and the vessel was sized around seven round trips across a 14-hour operating day &mdash; the schedule that set the fuel, fresh water and provisioning loads carried into the deadweight estimate.</p>
+      </div>
+      <div class="reveal">
+        <h3>Economics</h3>
+        <p>An NPV analysis over a 25-year service life, at a 12% discount rate, returned a positive net present value against an estimated initial cost of roughly BDT 14.4 crore (~USD 1.3 million at the time). The project treated economic viability as a real design constraint, not an afterthought bolted on at the end.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:0">
+    <a class="nextpaper" href="#research-internship">
+      <span class="k">More research &amp; projects</span>
+      <p class="t">Internship &middot; Dockyard &amp; Engineering Works</p>
+    </a>
+  </div>
+</section>
+
+</main>
+
+
+
+<!-- ==================== PAGE: RESEARCH — DOCKYARD INTERNSHIP ==================== -->
+<main id="page-research-internship" hidden>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="backlink" href="#research">All research &amp; projects</a>
+    <p class="eyebrow">Work experience</p>
+    <h1>Three weeks at a<br>working shipyard.</h1>
+    <p class="byline">Dockyard &amp; Engineering Works Ltd &middot; Bangladesh Navy &middot; Narayanganj, Bangladesh</p>
+    <div class="metaline">
+      <span class="venue">Industrial attachment</span><span class="status">3 weeks</span>
+    </div>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <div class="side">
+      <div>
+        <p class="eyebrow reveal">What this was</p>
+        <div class="reveal">
+          <p class="lede">A three-week industrial attachment at Dockyard &amp; Engineering Works Ltd (DEW), a Bangladesh Navy shipyard in Narayanganj, alongside the design and simulation work at university. Design work explains how something should behave; a shipyard floor shows what actually goes into building and maintaining it.</p>
+          <p>DEW traces back to 1926 &mdash; among the oldest shipyards in the region &mdash; and has been run by the Bangladesh Navy since 2006. The yard covers close to 22 acres with a 900 ft riverfront, can dock vessels up to 1,500 tonnes and 88.4 m in length, and turns out roughly 2,000 tonnes of steelwork a year across patrol craft, landing craft, tugs, tankers, passenger and Ro-Ro ferries, survey vessels and pontoons.</p>
+          <p>The attachment moved across several of the yard's workshops, with training focused on four areas: marine propulsion systems, shipboard air conditioning, thermal management of engine rooms, and CNC plate cutting &mdash; work that runs through the machine shop, the HVAC and engine-room repair bays, and the plater shop respectively.</p>
+        </div>
+
+        <p class="eyebrow reveal" style="margin-top:2.5rem">Training areas</p>
+        <ul class="ticklist reveal">
+          <li>Marine propulsion systems</li>
+          <li>Shipboard air conditioning</li>
+          <li>Thermal management of engine rooms</li>
+          <li>CNC plate cutting</li>
+        </ul>
+
+        <p class="reveal" style="margin-top:1.5rem"><a href="https://www.dewbn.gov.bd/" style="color:var(--starboard);text-decoration:none">Visit Dockyard &amp; Engineering Works Ltd &rarr;</a></p>
+      </div>
+
+      <aside class="rail reveal">
+        <dl>
+          <dt>Organisation</dt><dd>Dockyard &amp; Engineering Works Ltd</dd>
+          <dt>Operator</dt><dd>Bangladesh Navy</dd>
+          <dt>Location</dt><dd>Narayanganj, Bangladesh</dd>
+          <dt>Founded</dt><dd>1926</dd>
+          <dt>Yard area</dt><dd>~22 acres, 900 ft riverfront</dd>
+          <dt>Docking capacity</dt><dd>Up to 1,500 t / 88.4 m</dd>
+          <dt>Duration</dt><dd>3 weeks</dd>
+        </dl>
+        <ul class="chips">
+          <li>Shipbuilding</li>
+          <li>Propulsion systems</li>
+          <li>Thermal management</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:0">
+    <a class="nextpaper" href="#research-pcm-battery">
+      <span class="k">More research &amp; projects</span>
+      <p class="t">Iso-volume fin geometries for PCM battery cooling</p>
+    </a>
+  </div>
+</section>
+
+</main>
+
+
 <footer>
   <div class="wrap">
     <span>&copy; <span id="yr">2026</span> Atiqur Rahaman</span>
@@ -2036,7 +2416,11 @@
       'pcm-k-fin':      { el:'page-pcm',   title:'K-shaped fins for PCM melting enhancement \u2014 Atiqur Rahaman' },
       'mooring-spread': { el:'page-moor',  title:'Mooring spread angle, 15 MW floating wind turbine \u2014 Atiqur Rahaman' },
       'black-pearl-2025': { el:'page-wfsa25', title:'WFSA champion 2025, Team Black Pearl \u2014 Atiqur Rahaman' },
-      'black-pearl-2026': { el:'page-wfsa26', title:'WFSA 2026, Team Black Pearl \u2014 Atiqur Rahaman' }
+      'black-pearl-2026': { el:'page-wfsa26', title:'WFSA 2026, Team Black Pearl \u2014 Atiqur Rahaman' },
+      'research-pcm-battery': { el:'page-research-pcm',         title:'Iso-volume fin geometries for PCM battery cooling \u2014 Atiqur Rahaman' },
+      'research-thesis':      { el:'page-research-thesis',      title:'Undergraduate thesis, FOWT mooring dynamics \u2014 Atiqur Rahaman' },
+      'research-ferry':       { el:'page-research-ferry',       title:'175-passenger ferry design \u2014 Atiqur Rahaman' },
+      'research-internship':  { el:'page-research-internship',  title:'Internship, Dockyard & Engineering Works \u2014 Atiqur Rahaman' }
     };
 
     function show(key, anchor){
