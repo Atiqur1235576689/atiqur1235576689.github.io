@@ -270,55 +270,55 @@
   .ticklist li::before{ content:""; position:absolute; left:0; top:1.15rem; width:.6rem; height:1px; background:var(--starboard); }
   section:not(.dark) .ticklist li{ color:var(--ink); border-bottom-color:color-mix(in srgb,var(--rule) 55%,transparent); }
 
-  /* ---- explorer: the interactive geometry panels --------------------------- */
-  .explorer{ border:1px solid #33474A; background:var(--hull-2); padding:clamp(1.1rem,2.5vw,1.75rem); margin-top:2rem; }
-  .explorer .stage-svg{ background:#0C1618; border:1px solid #24393C; }
+  /* ---- explorer: interactive geometry, styled as a drawing sheet --------- */
+  .explorer{
+    border:1px solid var(--rule); background:var(--paper);
+    padding:clamp(1.1rem,2.5vw,1.75rem); margin-top:2rem;
+  }
+  .explorer .stage-svg{
+    background:#FBFBF8;
+    border:1px solid color-mix(in srgb,var(--rule) 60%,transparent);
+  }
   .explorer svg{ width:100%; height:auto; display:block; }
   .controls{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.5rem 2rem; margin-top:1.5rem; }
   .ctl label{
     font-family:var(--mono); font-size:.62rem; letter-spacing:.14em;
-    text-transform:uppercase; color:#8FA09C; display:flex; justify-content:space-between; gap:1rem;
+    text-transform:uppercase; color:var(--dim); display:flex; justify-content:space-between; gap:1rem;
   }
-  .ctl label output{ color:var(--starboard); }
+  .ctl label output{ color:var(--ink); font-weight:500; }
   .ctl input[type=range]{ width:100%; margin:.65rem 0 0; accent-color:var(--starboard); background:transparent; }
   .segmented{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.65rem; }
   .segmented button{
     font-family:var(--mono); font-size:.72rem; letter-spacing:.04em;
-    background:transparent; color:#93A4A0; border:1px solid #3A4E51;
+    background:transparent; color:var(--dim); border:1px solid var(--rule);
     padding:.32rem .6rem; cursor:pointer; transition:background .18s,color .18s,border-color .18s;
   }
-  .segmented button:hover{ color:var(--paper); border-color:#5A7276; }
-  .segmented button[aria-pressed="true"]{ background:var(--starboard); border-color:var(--starboard); color:#06120C; }
+  .segmented button:hover{ color:var(--ink); border-color:var(--ink); }
+  .segmented button[aria-pressed="true"]{ background:var(--hull); border-color:var(--hull); color:var(--paper); }
   .readout{
-    font-family:var(--mono); font-size:.72rem; color:#8FA09C;
-    margin-top:1.25rem; padding-top:1rem; border-top:1px solid #24393C; line-height:1.9;
+    font-family:var(--mono); font-size:.72rem; color:var(--dim);
+    margin-top:1.25rem; padding-top:1rem;
+    border-top:1px solid color-mix(in srgb,var(--rule) 55%,transparent); line-height:1.9;
   }
-  .readout b{ color:var(--paper); font-weight:500; }
-  .readout .flag{ color:var(--amber); }
+  .readout b{ color:var(--ink); font-weight:500; }
+  .readout .flag{ color:#9A6A16; }
 
-  /* explorer geometry primitives */
-  .enc{ fill:none; stroke:#3A5054; stroke-width:1.5; }
-  .wall{ fill:#3B4A4D; stroke:#5A7276; stroke-width:1; }
-  .hotwall{ stroke:var(--port); stroke-width:4; stroke-linecap:square; }
-  .pcm{ fill:#16292D; }
-  .fin{ stroke:var(--starboard); stroke-linecap:round; }
-  .dimline{ stroke:#5A7276; stroke-width:1; stroke-dasharray:4 4; }
-  .arc{ fill:none; stroke:var(--starboard); stroke-width:1; opacity:.8; }
-  .glyph{ font-family:"IBM Plex Mono",monospace; font-size:11px; fill:#8FA09C; }
-  .glyph.hi{ fill:var(--starboard); }
-  .moorline{ stroke:var(--starboard); stroke-width:2; stroke-linecap:round; }
-  .anchor{ fill:#8FA09C; }
-  .hull-plan{ fill:#1E3438; stroke:#4A6367; stroke-width:1.5; }
-  .wavefront{ stroke:#3D6E8C; stroke-width:1.5; fill:none; opacity:.75; }
-  .headarrow{ stroke:#5FA8D3; stroke-width:2; fill:none; }
+  /* drawing primitives — ink on paper, as in the manuscript figures */
+  .enc{ fill:none; stroke:#2C3A3D; stroke-width:1.5; }
+  .wall{ fill:#A6AFB0; stroke:#5C6A6C; stroke-width:1; }
+  .pcm{ fill:#C8DDEA; }
+  .fin{ stroke:#6E7B7D; stroke-linecap:butt; }
+  .dimline{ stroke:#7C8A8C; stroke-width:1; stroke-dasharray:5 4; }
+  .arc{ fill:none; stroke:#2C3A3D; stroke-width:1; }
+  .glyph{ font-family:"IBM Plex Mono",monospace; font-size:11px; fill:#4A585B; }
+  .glyph.hi{ fill:#16323C; font-weight:500; }
+  .moorline{ stroke:#2C3A3D; stroke-width:1.6; stroke-linecap:round; }
+  .anchor{ fill:#2C3A3D; }
+  .hull-plan{ fill:#A6AFB0; stroke:#4A585B; stroke-width:1.5; }
+  .watch{ fill:#F2F5F3; stroke:#9AA5A2; stroke-width:1; stroke-dasharray:4 5; }
+  .wavefront{ stroke:#3A7CA5; stroke-width:1.4; fill:none; }
+  .headarrow{ stroke:#1F5C82; stroke-width:2; fill:none; }
 
-  /* load-case matrix */
-  .matrix{ display:grid; grid-template-columns:auto repeat(5,minmax(0,1fr)); gap:.35rem; margin-top:1.5rem; font-family:var(--mono); font-size:.68rem; }
-  .matrix .hd{ color:#7B8C88; letter-spacing:.1em; text-transform:uppercase; font-size:.6rem; padding:.35rem 0; text-align:center; }
-  .matrix .rh{ color:#7B8C88; letter-spacing:.1em; font-size:.6rem; padding-right:.75rem; display:flex; align-items:center; justify-content:flex-end; }
-  .matrix .cell{ border:1px solid #2E4548; aspect-ratio:1.9/1; display:flex; align-items:center; justify-content:center; color:#5E7276; cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
-  .matrix .cell:hover{ border-color:#5A7276; color:#93A4A0; }
-  .matrix .cell.on{ background:var(--starboard); border-color:var(--starboard); color:#06120C; }
 
   /* ---- embargo note -------------------------------------------------------- */
   .note{
@@ -906,11 +906,11 @@
           <!-- PCM field, 50 x 50 mm -->
           <rect class="pcm" x="175" y="70" width="350" height="350"/>
           <rect class="enc" x="175" y="70" width="350" height="350"/>
-          <text class="glyph" x="492" y="98" text-anchor="end" style="font-size:15px;fill:#8FA09C">PCM</text>
+          <text class="glyph" x="492" y="98" text-anchor="end" style="font-size:15px;fill:#1F4D5E;font-weight:500">PCM</text>
 
           <!-- heated wall, 5 mm slab -->
           <rect class="wall" x="140" y="70" width="35" height="350"/>
-          <text class="glyph" x="128" y="245" transform="rotate(-90 128 245)" text-anchor="middle" style="fill:#C0453B">CONSTANT T = 70&#176;C</text>
+          <text class="glyph" x="128" y="245" transform="rotate(-90 128 245)" text-anchor="middle" style="fill:#A33228;font-weight:500">CONSTANT T = 70&#176;C</text>
 
           <!-- adiabatic boundaries -->
           <text class="glyph" x="350" y="60" text-anchor="middle">ADIABATIC WALL</text>
@@ -1092,7 +1092,7 @@
         <svg viewBox="0 0 660 500" xmlns="http://www.w3.org/2000/svg" role="img"
              aria-label="Plan view of the three-line catenary mooring spread. Mooring line 1 runs to the right; lines 2 and 3 run to the upper and lower left, separated by the spread angle. Waves arrive from the lower left at the incident angle, measured from the horizontal.">
           <!-- watch circle -->
-          <circle cx="330" cy="250" r="196" fill="none" stroke="#1E3236" stroke-width="1" stroke-dasharray="3 6"/>
+          <circle class="watch" cx="330" cy="250" r="196"/>
           <text class="glyph" x="330" y="26" text-anchor="middle">ANCHOR RADIUS 837.6 m &#183; WATER DEPTH 200 m</text>
 
           <!-- horizontal reference that alpha is measured from -->
@@ -1103,9 +1103,9 @@
           <path class="wavefront" id="w2"/>
           <path class="wavefront" id="w3"/>
           <path class="headarrow" id="wArrow"/>
-          <text class="glyph" id="wLbl" fill="#5FA8D3"></text>
-          <path class="arc" id="alphaArc" stroke="#5FA8D3"/>
-          <text class="glyph hi" id="alphaLbl" fill="#5FA8D3"></text>
+          <text class="glyph" id="wLbl" fill="#1F5C82" style="font-weight:500"></text>
+          <path class="arc" id="alphaArc" stroke="#1F5C82"/>
+          <text class="glyph hi" id="alphaLbl" fill="#1F5C82"></text>
 
           <!-- mooring lines: fairlead on a column, anchor on the watch circle -->
           <line class="moorline" id="m1"/>
@@ -1129,7 +1129,7 @@
             <circle class="hull-plan" cx="372" cy="250" r="15"/>
             <circle class="hull-plan" cx="309" cy="213.6" r="15"/>
             <circle class="hull-plan" cx="309" cy="286.4" r="15"/>
-            <circle cx="330" cy="250" r="11" fill="#2A4A50" stroke="#5FA8D3" stroke-width="1.5"/>
+            <circle cx="330" cy="250" r="11" fill="#DCE6E4" stroke="#4A585B" stroke-width="1.5"/>
           </g>
         </svg>
       </div>
@@ -1147,8 +1147,6 @@
 
       <div class="readout" id="moorReadout"></div>
 
-      <p class="eyebrow" style="margin-top:2.25rem;color:#7B8C88">Case matrix &middot; 25 runs</p>
-      <div class="matrix" id="matrix"></div>
     </div>
 
     <!-- model -->
@@ -1405,6 +1403,7 @@
   (function(){
     var CX = 330, CY = 250, R = 196, FR = 42;
     var COLUMN = { m1: 0, m2: 120, m3: 240 };   // fairlead bearings, fixed with the hull
+    var SPREADS = [120, 115, 110, 105, 100], HEADS = [0, 20, 40, 60, 80];
     var spread = $('spread'), head = $('head'), readout = $('moorReadout');
 
     function pt(deg, r){
@@ -1475,28 +1474,9 @@
         'Line 1 at <b>0\u00B0</b> &nbsp;\u00B7&nbsp; line 2 at <b>' + d2 + '\u00B0</b> &nbsp;\u00B7&nbsp; line 3 at <b>' + d3 +
         '\u00B0</b> &nbsp;\u00B7&nbsp; waves from <b>' + al + '\u00B0</b> off the horizontal ' +
         (al === 0 ? '(head sea, running along line 1)' : al === 80 ? '(near beam sea)' : '(oblique sea)') +
-        ' &nbsp;\u00B7&nbsp; ' + (th === 120 ? 'even 120\u00B0 spacing, the reference layout' : 'tightened from the 120\u00B0 reference layout');
-
-      document.querySelectorAll('#matrix .cell').forEach(function(c){
-        c.classList.toggle('on', +c.dataset.th === th && +c.dataset.al === al);
-      });
+        ' &nbsp;\u00B7&nbsp; ' + (th === 120 ? 'even 120\u00B0 spacing, the reference layout' : 'tightened from the 120\u00B0 reference layout') +
+        '<br>Case <b>' + (SPREADS.indexOf(th) * HEADS.length + HEADS.indexOf(al) + 1) + '</b> of <b>25</b>';
     }
-
-    (function buildMatrix(){
-      var m = $('matrix'), spreads = [120,115,110,105,100], heads = [0,20,40,60,80];
-      m.insertAdjacentHTML('beforeend', '<div class="hd"></div>');
-      heads.forEach(function(h){ m.insertAdjacentHTML('beforeend', '<div class="hd">\u03B1 ' + h + '\u00B0</div>'); });
-      spreads.forEach(function(sp){
-        m.insertAdjacentHTML('beforeend', '<div class="rh">\u03B8 ' + sp + '\u00B0</div>');
-        heads.forEach(function(h){
-          m.insertAdjacentHTML('beforeend', '<div class="cell" data-th="' + sp + '" data-al="' + h + '">\u00B7</div>');
-        });
-      });
-      m.addEventListener('click', function(e){
-        var c = e.target.closest('.cell'); if (!c) return;
-        spread.value = c.dataset.th; head.value = c.dataset.al; draw();
-      });
-    })();
 
     spread.addEventListener('input', draw);
     head.addEventListener('input', draw);
