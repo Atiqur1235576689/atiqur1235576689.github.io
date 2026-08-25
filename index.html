@@ -177,9 +177,9 @@
   .portrait-block{ display:grid; grid-template-columns:250px 1fr; gap:clamp(1.5rem,4vw,3rem); align-items:start; }
   @media(max-width:760px){ .portrait-block{ grid-template-columns:1fr; } }
   .portrait{
-    border:1px solid var(--rule);
+    aspect-ratio:4/5; border:1px solid var(--rule);
+    background:url('assets/img/portrait.jpg') center/cover;
   }
-  .portrait img{ display:block; width:auto; height:auto; max-width:100%; }
 
   /* chips */
   .chips{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem; list-style:none; padding:0; }
@@ -389,18 +389,27 @@
   .skills .v{ font-family:var(--mono); font-size:.85rem; line-height:1.85; }
 
   /* ---- photography --------------------------------------------------------- */
+  /* Gallery tiles stay cropped to a uniform grid on purpose — ten photos of very
+     different shapes, with a label sitting on top of each. This is the one place
+     cropping is wanted; every single-image figure elsewhere keeps its own ratio. */
   .gallery{
     display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr));
-    gap:1.5rem; margin-top:2.5rem;
+    gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:2.5rem;
   }
-  .shot{ display:block; text-decoration:none; }
-  .shot img{ width:auto; height:auto; max-width:100%; display:block; border:1px solid var(--rule); }
+  .shot{
+    position:relative; aspect-ratio:4/3; background:var(--paper-2);
+    text-decoration:none; display:flex; align-items:flex-end; padding:.85rem; overflow:hidden;
+  }
+  .shot::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(12,19,21,.82), rgba(12,19,21,0) 68%);
+    opacity:1; transition:opacity .3s;
+  }
   .shot .label{
-    display:block; margin-top:.6rem; font-family:var(--mono); font-size:.67rem;
-    letter-spacing:.1em; text-transform:uppercase; color:var(--dim); transition:color .3s;
+    position:relative; z-index:1; font-family:var(--mono); font-size:.67rem;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--paper); transition:color .3s;
   }
   .shot:hover .label, .shot:focus-visible .label{ color:var(--starboard); }
-  .shot:hover img, .shot:focus-visible img{ border-color:var(--starboard); }
 
   /* ---- contact -------------------------------------------------------------- */
   .contact-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(195px,1fr)); gap:2rem; margin-top:2rem; }
@@ -623,9 +632,7 @@
     <div class="after-marks">
       <p class="eyebrow reveal">About</p>
       <div class="portrait-block">
-        <div class="portrait reveal">
-          <img class="slot slot-doc" src="assets/img/portrait.jpg" alt="Portrait of Atiqur Rahaman" loading="lazy" data-path="assets/img/portrait.jpg" data-ratio="4/5" data-label="Portrait" onerror="slotFallback(this)">
-        </div>
+        <div class="portrait reveal" role="img" aria-label="Portrait of Atiqur Rahaman"></div>
         <div class="reveal">
           <p class="lede">I completed my B.Sc. in Naval Architecture and Marine Engineering at the <a href="https://www.buet.ac.bd/">Bangladesh University of Engineering and Technology</a>, and now work as a researcher focused on thermal management. I&rsquo;m applying for PhD study in the United States in this field.</p>
           <div class="two-col">
