@@ -358,7 +358,7 @@
     color:var(--dim); margin-top:.5rem;
   }
 
-  /* ---- figure slots (swap for real images after acceptance) ---------------- */
+  /* ---- figure slots: real <img> once uploaded, dashed placeholder until then --- */
   .figgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; margin-top:2rem; }
   .figgrid figure{ margin:0; }
   .slot{
@@ -368,6 +368,11 @@
     color:var(--dim); padding:1.25rem; line-height:2;
   }
   section.dark .slot{ border-color:#3A4E51; background:#16262A; color:#7B8C88; }
+  /* once the image loads, it renders as a real photo/figure, not a placeholder box */
+  img.slot{
+    width:100%; height:100%; object-fit:cover; border-style:solid;
+    padding:0; display:block; text-indent:-9999px; color:transparent;
+  }
   figcaption{ font-family:var(--mono); font-size:.66rem; letter-spacing:.05em; color:var(--dim); margin-top:.7rem; line-height:1.8; }
   section.dark figcaption{ color:#7B8C88; }
 
@@ -1061,15 +1066,15 @@
     <p class="eyebrow reveal" style="margin-top:3.5rem">Figures</p>
     <div class="figgrid reveal">
       <figure>
-        <div class="slot">assets/img/pcm-mesh.png<br>mesh view</div>
+        <img class="slot" src="assets/img/pcm-mesh.png" alt="PCM mesh" loading="lazy" data-path="assets/img/pcm-mesh.png" data-label="PCM mesh" onerror="slotFallback(this)">
         <figcaption>Mesh around the fin junction. Safe to publish now &mdash; shows discretization, not results.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/pcm-contour.png<br>liquid fraction contour</div>
+        <img class="slot" src="assets/img/pcm-contour.png" alt="PCM contour" loading="lazy" data-path="assets/img/pcm-contour.png" data-label="PCM contour" onerror="slotFallback(this)">
         <figcaption>Melting front at a representative instant. Hold until acceptance.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/pcm-validation.png<br>validation curve</div>
+        <img class="slot" src="assets/img/pcm-validation.png" alt="PCM validation" loading="lazy" data-path="assets/img/pcm-validation.png" data-label="PCM validation" onerror="slotFallback(this)">
         <figcaption>Model against published experimental data. Hold until acceptance.</figcaption>
       </figure>
     </div>
@@ -1277,15 +1282,15 @@
     <p class="eyebrow reveal" style="margin-top:3.5rem">Figures</p>
     <div class="figgrid reveal">
       <figure>
-        <div class="slot">assets/img/aqwa-panel-mesh.png<br>hull panel mesh</div>
+        <img class="slot" src="assets/img/aqwa-panel-mesh.png" alt="AQWA panel mesh" loading="lazy" data-path="assets/img/aqwa-panel-mesh.png" data-label="AQWA panel mesh" onerror="slotFallback(this)">
         <figcaption>Wetted-surface panel model in AQWA. Safe to publish now.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/mooring-layout.png<br>mooring arrangement</div>
+        <img class="slot" src="assets/img/mooring-layout.png" alt="Mooring layout" loading="lazy" data-path="assets/img/mooring-layout.png" data-label="Mooring layout" onerror="slotFallback(this)">
         <figcaption>Three-line catenary layout, plan and elevation. Reference design &mdash; safe now.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/rao-plot.png<br>motion response</div>
+        <img class="slot" src="assets/img/rao-plot.png" alt="RAO plot" loading="lazy" data-path="assets/img/rao-plot.png" data-label="RAO plot" onerror="slotFallback(this)">
         <figcaption>Response across headings and spread angles. Hold until acceptance.</figcaption>
       </figure>
     </div>
@@ -1337,7 +1342,7 @@
 <section>
   <div class="wrap">
     <figure style="margin:0">
-      <div class="slot slot-wide">assets/img/wfsa/naija-spirit-render.jpg<br>vessel render</div>
+      <img class="slot slot-wide" src="assets/img/wfsa/naija-spirit-render.jpg" alt="Naija spirit render" loading="lazy" data-path="assets/img/wfsa/naija-spirit-render.jpg" data-label="Naija spirit render" onerror="slotFallback(this)">
       <figcaption>The three-quarter render from the cover of the submission. Strongest single image the project has.</figcaption>
     </figure>
   </div>
@@ -1474,15 +1479,15 @@
 
     <div class="figgrid reveal">
       <figure>
-        <div class="slot">assets/img/wfsa/general-arrangement.jpg<br>general arrangement</div>
+        <img class="slot" src="assets/img/wfsa/general-arrangement.jpg" alt="General arrangement" loading="lazy" data-path="assets/img/wfsa/general-arrangement.jpg" data-label="General arrangement" onerror="slotFallback(this)">
         <figcaption>Main deck and navigation deck GA. The most informative drawing in the set.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa/structure-3d.jpg<br>3D structural members</div>
+        <img class="slot" src="assets/img/wfsa/structure-3D.jpg" alt="Structure 3D" loading="lazy" data-path="assets/img/wfsa/structure-3D.jpg" data-label="Structure 3D" onerror="slotFallback(this)">
         <figcaption>Longitudinal framing model, scantlings to BV rules.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa/cfd-wave.jpg<br>CFD wave pattern</div>
+        <img class="slot" src="assets/img/wfsa/cfd-wave.jpg" alt="CFD wave" loading="lazy" data-path="assets/img/wfsa/cfd-wave.jpg" data-label="CFD wave" onerror="slotFallback(this)">
         <figcaption>STAR-CCM+ wave field at 20 knots, checked against Maxsurf.</figcaption>
       </figure>
     </div>
@@ -1520,15 +1525,15 @@
 
     <div class="figgrid reveal">
       <figure>
-        <div class="slot">assets/img/wfsa/gz-curve.jpg<br>GZ curve</div>
+        <img class="slot" src="assets/img/wfsa/gz-curve.jpg" alt="GZ curve" loading="lazy" data-path="assets/img/wfsa/gz-curve.jpg" data-label="GZ curve" onerror="slotFallback(this)">
         <figcaption>Righting lever across ballast, lightship and full load departure.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa/evacuation.jpg<br>evacuation simulation</div>
+        <img class="slot" src="assets/img/wfsa/evacuation.jpg" alt="Evacuation" loading="lazy" data-path="assets/img/wfsa/evacuation.jpg" data-label="Evacuation" onerror="slotFallback(this)">
         <figcaption>Pathfinder density plot during egress.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa/damage-zones.jpg<br>damage zones</div>
+        <img class="slot" src="assets/img/wfsa/damage-zones.jpg" alt="Damage zones" loading="lazy" data-path="assets/img/wfsa/damage-zones.jpg" data-label="Damage zones" onerror="slotFallback(this)">
         <figcaption>The six-zone subdivision used for the damage cases.</figcaption>
       </figure>
     </div>
@@ -1579,19 +1584,19 @@
 
     <div class="photogrid reveal">
       <figure>
-        <div class="slot">assets/img/wfsa/team-win.jpg<br>the team</div>
+        <img class="slot" src="assets/img/wfsa/team-win.jpg" alt="Team win" loading="lazy" data-path="assets/img/wfsa/team-win.jpg" data-label="Team win" onerror="slotFallback(this)">
         <figcaption>Team Black Pearl, 2025 campaign.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa/working.jpg<br>the team working</div>
+        <img class="slot" src="assets/img/wfsa/working.jpg" alt="Working" loading="lazy" data-path="assets/img/wfsa/working.jpg" data-label="Working" onerror="slotFallback(this)">
         <figcaption>A review, a whiteboard, a late night.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa/ceremony.jpg<br>award ceremony</div>
+        <img class="slot" src="assets/img/wfsa/ceremony.jpg" alt="Ceremony" loading="lazy" data-path="assets/img/wfsa/ceremony.jpg" data-label="Ceremony" onerror="slotFallback(this)">
         <figcaption>Receiving the award or certificate.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa/biwtc.jpg<br>BIWTC recognition</div>
+        <img class="slot" src="assets/img/wfsa/biwtc.jpg" alt="Biwtc" loading="lazy" data-path="assets/img/wfsa/biwtc.jpg" data-label="Biwtc" onerror="slotFallback(this)">
         <figcaption>Award and certificate from the Chairman of BIWTC.</figcaption>
       </figure>
     </div>
@@ -1728,7 +1733,7 @@
 <section>
   <div class="wrap">
     <figure style="margin:0">
-      <div class="slot slot-wide">assets/img/wfsa2026/niger-drift-render.jpg<br>vessel render</div>
+      <img class="slot slot-wide" src="assets/img/wfsa2026/niger-drift-render.jpg" alt="Niger drift render" loading="lazy" data-path="assets/img/wfsa2026/niger-drift-render.jpg" data-label="Niger drift render" onerror="slotFallback(this)">
       <figcaption>The cover render &mdash; front and aft views of Niger Drift at a charging berth.</figcaption>
     </figure>
   </div>
@@ -1857,15 +1862,15 @@
 
     <div class="figgrid reveal">
       <figure>
-        <div class="slot">assets/img/wfsa2026/general-arrangement.jpg<br>general arrangement</div>
+        <img class="slot" src="assets/img/wfsa2026/general-arrangement.jpg" alt="General arrangement" loading="lazy" data-path="assets/img/wfsa2026/general-arrangement.jpg" data-label="General arrangement" onerror="slotFallback(this)">
         <figcaption>Main deck and navigation deck GA, with the CNG tanks isolated aft.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa2026/structure-3d.jpg<br>3D structural members</div>
+        <img class="slot" src="assets/img/wfsa2026/structure-3D.jpg" alt="Structure 3D" loading="lazy" data-path="assets/img/wfsa2026/structure-3D.jpg" data-label="Structure 3D" onerror="slotFallback(this)">
         <figcaption>Longitudinal framing model, scantlings to BV 2021.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa2026/cfd-resistance.jpg<br>resistance &amp; CFD</div>
+        <img class="slot" src="assets/img/wfsa2026/cfd-resistance.jpg" alt="CFD resistance" loading="lazy" data-path="assets/img/wfsa2026/cfd-resistance.jpg" data-label="CFD resistance" onerror="slotFallback(this)">
         <figcaption>Wave pattern and propeller velocity contour from STAR-CCM+.</figcaption>
       </figure>
     </div>
@@ -1928,15 +1933,15 @@
 
     <div class="figgrid reveal">
       <figure>
-        <div class="slot">assets/img/wfsa2026/gz-curve.jpg<br>GZ curve</div>
+        <img class="slot" src="assets/img/wfsa2026/gz-curve.jpg" alt="GZ curve" loading="lazy" data-path="assets/img/wfsa2026/gz-curve.jpg" data-label="GZ curve" onerror="slotFallback(this)">
         <figcaption>Righting lever across full load, ballast and lightship conditions.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa2026/evacuation.jpg<br>evacuation simulation</div>
+        <img class="slot" src="assets/img/wfsa2026/evacuation.jpg" alt="Evacuation" loading="lazy" data-path="assets/img/wfsa2026/evacuation.jpg" data-label="Evacuation" onerror="slotFallback(this)">
         <figcaption>Pathfinder density plot during egress.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa2026/damage-zones.jpg<br>damage zones</div>
+        <img class="slot" src="assets/img/wfsa2026/damage-zones.jpg" alt="Damage zones" loading="lazy" data-path="assets/img/wfsa2026/damage-zones.jpg" data-label="Damage zones" onerror="slotFallback(this)">
         <figcaption>The five-zone subdivision used for the damage cases.</figcaption>
       </figure>
     </div>
@@ -1986,15 +1991,15 @@
 
     <div class="photogrid reveal">
       <figure>
-        <div class="slot">assets/img/wfsa2026/team.jpg<br>the team</div>
+        <img class="slot" src="assets/img/wfsa2026/team.jpg" alt="Team" loading="lazy" data-path="assets/img/wfsa2026/team.jpg" data-label="Team" onerror="slotFallback(this)">
         <figcaption>Team Black Pearl, 2026 campaign.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa2026/working.jpg<br>the team working</div>
+        <img class="slot" src="assets/img/wfsa2026/working.jpg" alt="Working" loading="lazy" data-path="assets/img/wfsa2026/working.jpg" data-label="Working" onerror="slotFallback(this)">
         <figcaption>A review, a whiteboard, a late night.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/wfsa2026/result.jpg<br>result announcement</div>
+        <img class="slot" src="assets/img/wfsa2026/result.jpg" alt="Result" loading="lazy" data-path="assets/img/wfsa2026/result.jpg" data-label="Result" onerror="slotFallback(this)">
         <figcaption>3rd Prize announced.</figcaption>
       </figure>
     </div>
@@ -2252,15 +2257,15 @@
 
     <div class="figgrid reveal">
       <figure>
-        <div class="slot">assets/img/research/ferry175-ga.jpg<br>general arrangement</div>
+        <img class="slot" src="assets/img/research/ferry175-ga.jpg" alt="Ferry175 ga" loading="lazy" data-path="assets/img/research/ferry175-ga.jpg" data-label="Ferry175 ga" onerror="slotFallback(this)">
         <figcaption>General arrangement plan, main deck.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/research/ferry175-lines.jpg<br>lines plan</div>
+        <img class="slot" src="assets/img/research/ferry175-lines.jpg" alt="Ferry175 lines" loading="lazy" data-path="assets/img/research/ferry175-lines.jpg" data-label="Ferry175 lines" onerror="slotFallback(this)">
         <figcaption>Lines plan and table of offsets.</figcaption>
       </figure>
       <figure>
-        <div class="slot">assets/img/research/ferry175-midship.jpg<br>midship section</div>
+        <img class="slot" src="assets/img/research/ferry175-midship.jpg" alt="Ferry175 midship" loading="lazy" data-path="assets/img/research/ferry175-midship.jpg" data-label="Ferry175 midship" onerror="slotFallback(this)">
         <figcaption>Midship section and longitudinal construction.</figcaption>
       </figure>
     </div>
@@ -2378,6 +2383,19 @@
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   var $ = function(id){ return document.getElementById(id); };
+
+  /* ---- figure slot fallback ----
+     Figures wire straight to a real <img>. If the file isn't in the repo
+     yet (or the path is wrong), this rebuilds the original dashed
+     placeholder box showing the expected path and label, so the page
+     stays legible while images are still being uploaded. */
+  function slotFallback(img){
+    var div = document.createElement('div');
+    div.className = img.className;
+    div.innerHTML = img.getAttribute('data-path') + '<br>' + img.getAttribute('data-label');
+    img.replaceWith(div);
+  }
+  window.slotFallback = slotFallback;
 
   /* ---------- scroll reveal ---------- */
   var observer = new IntersectionObserver(function(entries){
