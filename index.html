@@ -244,7 +244,12 @@
   .results tr.win td{ color:var(--paper); }
   .results tr.win .place{ color:var(--port); font-weight:500; }
 
-  .vessel{ border:1px solid #33474A; padding:1.4rem 1.5rem; margin-top:2rem; }
+  .vessel{ border:1px solid #33474A; padding:1.4rem 1.5rem; margin-top:2rem; transition:border-color .2s; }
+  a.vessel{ text-decoration:none; display:block; }
+  a.vessel:hover, a.vessel:focus-visible{ border-color:var(--starboard); }
+  a.vessel:hover .name, a.vessel:focus-visible .name{ color:var(--starboard); }
+  .vessel .more{ font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; display:inline-block; margin-top:1rem; }
+  .vessel .more::after{ content:"\2192"; margin-left:.5rem; }
   .vessel .name{ font-family:var(--display); font-weight:800; font-size:1.55rem; letter-spacing:-.02em; margin:0 0 .5rem; }
   .vessel p{ margin:0; color:#B7C3C0; font-weight:300; font-size:1rem; }
 
@@ -331,6 +336,22 @@
   }
   .note p{ margin:0; }
   section.dark .note{ color:#B7C3C0; }
+
+  /* ---- award page: hero slot, photo grid, ribbon ------------------------- */
+  .slot-wide{ aspect-ratio:16/7; }
+  .slot-tall{ aspect-ratio:3/4; }
+  .photogrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin-top:2rem; }
+  .photogrid figure{ margin:0; }
+  .ribbon{
+    display:inline-flex; align-items:baseline; gap:.7rem;
+    border:1px solid var(--starboard); padding:.5rem .9rem; margin-bottom:1.6rem;
+  }
+  .ribbon .yr{ font-family:var(--mono); font-size:.66rem; letter-spacing:.14em; color:var(--starboard); }
+  .ribbon .pl{ font-family:var(--display); font-weight:800; font-size:1rem; letter-spacing:-.01em; color:var(--paper); }
+  .credit{
+    font-family:var(--mono); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--dim); margin-top:.5rem;
+  }
 
   /* ---- figure slots (swap for real images after acceptance) ---------------- */
   .figgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; margin-top:2rem; }
@@ -491,7 +512,7 @@
       </div>
       <a href="#research">Research</a>
       <a href="#education" data-optional>Education</a>
-      <a href="#awards" data-optional>Awards</a>
+      <a href="#black-pearl" data-optional>Awards</a>
       <a href="#photography">Photography</a>
       <a href="#contact">Contact</a>
     </div>
@@ -708,11 +729,12 @@
         <p class="muted" style="font-weight:300">Team Black Pearl is a student-led competitive design team from the Department of Naval Architecture and Marine Engineering at BUET. Since 2021 the team has entered the International Student Design Competition for a Safe and Affordable Ferry, organised by the Worldwide Ferry Safety Association.</p>
         <p class="muted" style="font-weight:300">The team runs a structured knowledge-transfer model: experienced members mentor junior fellows and hand over responsibility each year. I joined for the 2025 campaign, the team&rsquo;s first championship title in the competition, and continued through 2026.</p>
 
-        <div class="vessel">
+        <a class="vessel" href="#black-pearl" style="display:block;text-decoration:none">
           <p class="eyebrow" style="color:#7B8C88;margin-bottom:.6rem">Winning design (2025)</p>
           <p class="name">Naija Spirit</p>
           <p>A safe, affordable and context-appropriate ferry, designed around real operational and safety constraints.</p>
-        </div>
+          <span class="more" style="color:var(--starboard)">The championship campaign</span>
+        </a>
       </div>
 
       <div class="reveal">
@@ -1238,6 +1260,199 @@
     </section>
 </main>
 
+<!-- ==================== PAGE: HONOURS — WFSA CHAMPIONSHIP ==================== -->
+<main id="page-wfsa" hidden>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="backlink" href="#awards">All honours</a>
+    <p class="eyebrow">Honours &middot; Worldwide Ferry Safety Association</p>
+    <div class="ribbon">
+      <span class="yr">2025</span>
+      <span class="pl">Champion</span>
+    </div>
+    <h1>Naija Spirit,<br>and a first title.</h1>
+    <p class="byline">Team Black Pearl &middot; Department of Naval Architecture and Marine Engineering, BUET</p>
+    <p class="affil">International Student Design Competition for a Safe and Affordable Ferry</p>
+    <div class="metaline">
+      <span class="venue">Worldwide Ferry Safety Association</span><span class="status">1st place, 2025</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <figure style="margin:0">
+      <div class="slot slot-wide">assets/img/wfsa/team-win.jpg<br>the winning team</div>
+      <figcaption>Team Black Pearl after the 2025 result. Replace with your strongest group photo &mdash; this is the first thing anyone sees on this page.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <div class="side">
+      <div>
+        <p class="eyebrow reveal">The competition</p>
+        <div class="reveal">
+          <p class="lede">Ferries in much of the world are not lost to exotic failures. They are lost to overloading, to poor stability margins, to designs that were affordable to build and impossible to operate safely. The Worldwide Ferry Safety Association runs its student competition against exactly that problem.</p>
+          <p>Each year the competition sets a real route in a real place, with a real set of constraints: passenger numbers, local build capability, budget, sea state, terminal conditions. Entrants have to produce a full design that answers all of them at once. A vessel that is safe but unbuildable at local yards fails. So does one that is cheap and marginal on stability.</p>
+          <p>Team Black Pearl is a student-led design team from the Department of Naval Architecture and Marine Engineering at BUET, entering since 2021. The team runs a deliberate knowledge-transfer model: experienced members mentor junior fellows and hand over responsibility each year, which is why the results have compounded rather than reset with every graduating batch.</p>
+          <p>I joined for the 2025 campaign &mdash; the team&rsquo;s first championship in the competition &mdash; and continued through 2026.</p>
+        </div>
+
+        <p class="eyebrow reveal" style="margin-top:2.5rem">My role</p>
+        <ul class="ticklist reveal">
+          <li>Team member, 2025 championship campaign and 2026 entry</li>
+          <li>Design work on the submitted vessel</li>
+          <li>Preparation of the technical submission package</li>
+        </ul>
+        <p class="reveal muted" style="font-size:.95rem">Edit this list to say exactly what you owned &mdash; hull form, stability, general arrangement, structures, cost model, the report itself. Specific beats modest.</p>
+      </div>
+
+      <aside class="rail reveal">
+        <dl>
+          <dt>Result</dt><dd>Champion, 2025</dd>
+          <dt>Also</dt><dd>3rd prize, 2026</dd>
+          <dt>Vessel</dt><dd>Naija Spirit</dd>
+          <dt>Team</dt><dd>Black Pearl, BUET</dd>
+          <dt>Organiser</dt><dd>Worldwide Ferry Safety Association</dd>
+          <dt>My years</dt><dd>2025, 2026</dd>
+        </dl>
+        <ul class="chips">
+          <li>Ferry design</li>
+          <li>Passenger safety</li>
+          <li>Stability</li>
+          <li>Affordability</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <p class="eyebrow reveal">The design</p>
+    <h2 class="reveal">Naija Spirit.</h2>
+    <p class="reveal muted" style="max-width:60ch;margin-top:-.75rem;font-weight:300">A safe, affordable and context-appropriate ferry, designed around real operational and safety constraints rather than an idealised route.</p>
+
+    <div class="two-col" style="margin-top:2rem">
+      <div class="reveal">
+        <table class="spec">
+          <caption class="eyebrow">Principal particulars</caption>
+          <tbody>
+            <tr><td>Length overall</td><td>&mdash;</td></tr>
+            <tr><td>Beam</td><td>&mdash;</td></tr>
+            <tr><td>Depth / draft</td><td>&mdash;</td></tr>
+            <tr><td>Passenger capacity</td><td>&mdash;</td></tr>
+            <tr><td>Service speed</td><td>&mdash;</td></tr>
+            <tr><td>Propulsion</td><td>&mdash;</td></tr>
+            <tr><td>Hull material</td><td>&mdash;</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="font-size:.95rem">Fill these in from the submission report. Numbers make a design page credible; a page without them reads as a story about a design rather than the design itself.</p>
+      </div>
+
+      <div class="reveal">
+        <h3>What the design had to solve</h3>
+        <ul class="ticklist">
+          <li>Stability margins that hold under realistic, not nominal, loading</li>
+          <li>Evacuation and access that work with the actual passenger flow</li>
+          <li>A structure and hull form buildable by local yards</li>
+          <li>Capital and operating cost the route can actually carry</li>
+        </ul>
+        <p class="muted" style="font-size:.95rem;margin-top:1.25rem">Rewrite these four to match the brief you were given. Naming the constraint you designed against is the most useful thing this page can tell a reader.</p>
+      </div>
+    </div>
+
+    <div class="figgrid reveal">
+      <figure>
+        <div class="slot">assets/img/wfsa/ga-drawing.jpg<br>general arrangement</div>
+        <figcaption>GA drawing. The single most informative image on this page.</figcaption>
+      </figure>
+      <figure>
+        <div class="slot">assets/img/wfsa/hull-render.jpg<br>hull render</div>
+        <figcaption>Rendered hull form, three-quarter view.</figcaption>
+      </figure>
+      <figure>
+        <div class="slot">assets/img/wfsa/stability.jpg<br>stability or structure</div>
+        <figcaption>A stability curve, structural model or seating arrangement.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow reveal">The campaign</p>
+    <h2 class="reveal">People, not just<br>a drawing set.</h2>
+
+    <div class="photogrid reveal">
+      <figure>
+        <div class="slot">assets/img/wfsa/working.jpg<br>the team working</div>
+        <figcaption>Team at work &mdash; a late night, a review, a whiteboard.</figcaption>
+      </figure>
+      <figure>
+        <div class="slot">assets/img/wfsa/presenting.jpg<br>presentation</div>
+        <figcaption>Presenting or defending the design.</figcaption>
+      </figure>
+      <figure>
+        <div class="slot">assets/img/wfsa/ceremony.jpg<br>award ceremony</div>
+        <figcaption>Receiving the award or certificate.</figcaption>
+      </figure>
+      <figure>
+        <div class="slot">assets/img/wfsa/biwtc.jpg<br>BIWTC recognition</div>
+        <figcaption>Award and certificate from the Chairman of BIWTC.</figcaption>
+      </figure>
+    </div>
+    <p class="credit reveal">Photographs &mdash; add credit here where they are not your own</p>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="reveal">
+        <p class="eyebrow">Competition record</p>
+        <table class="results">
+          <caption class="eyebrow" style="margin-bottom:1rem">Team Black Pearl at the WFSA competition</caption>
+          <thead><tr><th scope="col">Year</th><th scope="col">Result</th></tr></thead>
+          <tbody>
+            <tr><td>2026</td><td class="place">3rd Prize</td></tr>
+            <tr class="win"><td>2025</td><td class="place">Champion</td></tr>
+            <tr><td>2024</td><td class="place">1st Runner-Up</td></tr>
+            <tr><td>2023</td><td class="place">Honourable Mention</td></tr>
+            <tr><td>2021</td><td class="place">2nd Runner-Up</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="font-weight:300;font-size:.95rem">Five entries, five placings. The 2025 title is the team&rsquo;s first championship, and the handover model is why the record reads as a climb rather than a series of unrelated attempts.</p>
+      </div>
+
+      <div class="reveal">
+        <p class="eyebrow">Related recognition</p>
+        <ul class="ticklist">
+          <li>Award and certificate from the Chairman of BIWTC, recognising performance in the WFSA international competition</li>
+          <li>1st prize, NAME Olympiad at NAME Fest 2023</li>
+          <li>University Merit Scholarship, 8 times across 8 semesters</li>
+          <li>University Dean&rsquo;s List Scholarship, 1st and 2nd year</li>
+          <li>Education Board Technical Scholarship, BUET</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:0">
+    <a class="nextpaper" href="#publications">
+      <span class="k">Elsewhere</span>
+      <p class="t">Publications and research</p>
+    </a>
+  </div>
+</section>
+
+</main>
+
 <footer>
   <div class="wrap">
     <span>&copy; <span id="yr">2026</span> Atiqur Rahaman</span>
@@ -1285,7 +1500,8 @@
     var PAGES = {
       'home':           { el:'page-home',  title:'Atiqur Rahaman \u2014 Naval Architecture & Marine Engineering' },
       'pcm-k-fin':      { el:'page-pcm',   title:'K-shaped fins for PCM melting enhancement \u2014 Atiqur Rahaman' },
-      'mooring-spread': { el:'page-moor',  title:'Mooring spread angle, 15 MW floating wind turbine \u2014 Atiqur Rahaman' }
+      'mooring-spread': { el:'page-moor',  title:'Mooring spread angle, 15 MW floating wind turbine \u2014 Atiqur Rahaman' },
+      'black-pearl':    { el:'page-wfsa',  title:'WFSA champion 2025, Team Black Pearl \u2014 Atiqur Rahaman' }
     };
 
     function show(key, anchor){
