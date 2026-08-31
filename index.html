@@ -274,6 +274,38 @@
   .stage .inst{ font-weight:300; color:var(--dim); margin:.15rem 0 0; font-size:.97rem; }
   .gpa{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; border:1px solid var(--rule); padding:.15rem .5rem; display:inline-block; margin-top:.6rem; }
 
+  /* ---- coursework accordion ------------------------------------------------ */
+  .course-list{ margin-top:1.1rem; border-top:1px solid var(--rule); }
+  .course-item{ border-bottom:1px solid var(--rule); }
+  .course-item button{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    background:none; border:0; text-align:left; cursor:pointer; padding:.95rem 0;
+    font-family:var(--display); font-weight:600; font-size:.98rem; letter-spacing:-.01em; color:var(--ink);
+  }
+  .course-item button .cname{ display:flex; align-items:baseline; gap:.65rem; }
+  .course-item button .cnum{ font-family:var(--mono); font-weight:400; font-size:.68rem; color:var(--dim); letter-spacing:.06em; }
+  .course-item button .caret{
+    width:0; height:0; flex:0 0 auto; border-left:4px solid transparent; border-right:4px solid transparent;
+    border-top:5px solid var(--dim); transition:transform .2s ease, border-top-color .2s ease;
+  }
+  .course-item button[aria-expanded="true"] .caret{ transform:rotate(180deg); border-top-color:var(--starboard); }
+  .course-item button:hover .cnum, .course-item button[aria-expanded="true"] .cnum{ color:var(--starboard); }
+  .course-panel{ max-height:0; overflow:hidden; transition:max-height .32s ease; }
+  .course-panel-inner{ padding:0 0 1.35rem; }
+  .course-panel .link{ font-size:.94rem; font-weight:300; margin:0 0 .85rem; max-width:60ch; text-align:left; }
+  .course-panel .link .k{
+    font-family:var(--mono); font-size:.6rem; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--starboard); display:block; margin-bottom:.4rem;
+  }
+  .course-panel ul{ list-style:none; padding:0; margin:0; }
+  .course-panel ul li{
+    position:relative; padding:.4rem 0 .4rem 1.35rem; font-size:.9rem; font-weight:300;
+    color:var(--ink); border-bottom:1px solid color-mix(in srgb,var(--rule) 40%,transparent);
+  }
+  .course-panel ul li:last-child{ border-bottom:0; }
+  .course-panel ul li::before{ content:""; position:absolute; left:0; top:1.05rem; width:.55rem; height:1px; background:var(--starboard); }
+  .course-hint{ font-family:var(--mono); font-size:.68rem; letter-spacing:.04em; color:var(--dim); margin:1rem 0 0; font-style:normal; }
+
   /* ---- tick lists ---------------------------------------------------------- */
   .ticklist{ list-style:none; padding:0; margin:0; }
   .ticklist li{ position:relative; padding:.55rem 0 .55rem 1.6rem; border-bottom:1px solid #223437; font-size:1rem; font-weight:300; color:#C3CECB; }
@@ -774,17 +806,165 @@
 
         <div class="reveal">
           <p class="eyebrow">Relevant coursework</p>
-          <ul class="chips" style="margin-top:0">
-            <li>Fluid Mechanics</li>
-            <li>Marine Hydrodynamics</li>
-            <li>Computational Fluid Dynamics</li>
-            <li>Advanced Ship Structure</li>
-            <li>Ship Vibration</li>
-            <li>FEM for Ship Structure</li>
-            <li>Resistance &amp; Propulsion of Ships</li>
-            <li>Heat Transfer</li>
-            <li>Power &amp; Propulsion Systems</li>
-          </ul>
+          <p class="muted" style="font-weight:300;font-size:.92rem;margin-top:-.5rem">Tap a course to see how it feeds into the current research, and what it covered.</p>
+
+          <div class="course-list" id="courseList">
+
+            <div class="course-item">
+              <button type="button" aria-expanded="false" aria-controls="course-panel-0">
+                <span class="cname"><span class="cnum">01</span> Heat Transfer</span>
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="course-panel" id="course-panel-0">
+                <div class="course-panel-inner">
+                  <p class="link"><span class="k">Why it matters now</span>This is the course the current research traces straight back to. Conduction, convection and the mechanics of a material changing phase are the vocabulary the PCM work is written in &mdash; it's the reason a structural mooring thesis ended up pointing toward a thermal management PhD.</p>
+                  <ul>
+                    <li>Conduction, convection and radiation fundamentals, and the governing equations behind each</li>
+                    <li>Latent heat and phase change, the basis for how the PCM/fin work models melting and solidification</li>
+                    <li>Finned surfaces and extended-surface heat transfer, directly relevant to the K-shaped fin geometry</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-item">
+              <button type="button" aria-expanded="false" aria-controls="course-panel-1">
+                <span class="cname"><span class="cnum">02</span> Computational Fluid Dynamics</span>
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="course-panel" id="course-panel-1">
+                <div class="course-panel-inner">
+                  <p class="link"><span class="k">Why it matters now</span>Every result in the current research comes out of a CFD solver. This course is where the enthalpy&ndash;porosity and Boussinesq-approximation methods used in the PCM enclosure and battery cooling work were first introduced, rather than picked up cold in ANSYS Fluent.</p>
+                  <ul>
+                    <li>Discretization, meshing and grid-independence checks, the same checks run before trusting any PCM result</li>
+                    <li>Solution algorithms (pressure&ndash;velocity coupling, upwind schemes) used directly in the Fluent PCM setup</li>
+                    <li>Convergence and validation practice against experimental or published benchmark data</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-item">
+              <button type="button" aria-expanded="false" aria-controls="course-panel-2">
+                <span class="cname"><span class="cnum">03</span> Marine Hydrodynamics</span>
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="course-panel" id="course-panel-2">
+                <div class="course-panel-inner">
+                  <p class="link"><span class="k">Why it matters now</span>The thesis and mooring paper are built on the potential-flow and floating-body theory from this course. It's also, indirectly, where the pivot toward thermal work began: chasing convection inside the platform's structural problem was what first made heat transfer feel like the more interesting question.</p>
+                  <ul>
+                    <li>Potential flow theory and added mass, damping and wave-exciting force concepts, used directly in the AQWA model</li>
+                    <li>Floating-body motion in six degrees of freedom, the basis of the mooring-spread study</li>
+                    <li>Wave theory and directional wave climates, relevant to the edge-vs-interior turbine question</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-item">
+              <button type="button" aria-expanded="false" aria-controls="course-panel-3">
+                <span class="cname"><span class="cnum">04</span> Fluid Mechanics</span>
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="course-panel" id="course-panel-3">
+                <div class="course-panel-inner">
+                  <p class="link"><span class="k">Why it matters now</span>The foundation everything above is built on &mdash; buoyancy-driven convection in a melting PCM enclosure and flow around a hull are both, underneath, the same continuity and momentum equations from this course.</p>
+                  <ul>
+                    <li>Continuity, momentum and Bernoulli-based analysis of internal and external flows</li>
+                    <li>Viscous flow, boundary layers and laminar vs turbulent regimes</li>
+                    <li>Buoyancy-driven flow, the mechanism behind natural convection in a melting PCM</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-item">
+              <button type="button" aria-expanded="false" aria-controls="course-panel-4">
+                <span class="cname"><span class="cnum">05</span> Resistance &amp; Propulsion of Ships</span>
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="course-panel" id="course-panel-4">
+                <div class="course-panel-inner">
+                  <p class="link"><span class="k">Why it matters now</span>Less directly tied to the PCM line of work, but the methods here (Holtrop &amp; Mennen, propeller selection) carried straight into the 175-passenger ferry design and the propulsion sizing on both WFSA ferries.</p>
+                  <ul>
+                    <li>Resistance estimation methods, including Holtrop &amp; Mennen and Van Oortmerssen</li>
+                    <li>Propeller theory, selection and cavitation checks</li>
+                    <li>Powering margins and engine/gearbox matching for a given hull and speed</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-item">
+              <button type="button" aria-expanded="false" aria-controls="course-panel-5">
+                <span class="cname"><span class="cnum">06</span> Power &amp; Propulsion Systems</span>
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="course-panel" id="course-panel-5">
+                <div class="course-panel-inner">
+                  <p class="link"><span class="k">Why it matters now</span>Not on the PCM path directly, but the thermal side of a machinery space &mdash; the engine-room cooling load, essentially &mdash; is the same kind of problem the current research tackles at battery-pack scale instead of ship scale.</p>
+                  <ul>
+                    <li>Marine engines, gearboxes and shafting arrangements</li>
+                    <li>Auxiliary and hybrid power systems, relevant to the battery-electric and CNG-hybrid WFSA entries</li>
+                    <li>Machinery-space thermal and ventilation loads</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-item">
+              <button type="button" aria-expanded="false" aria-controls="course-panel-6">
+                <span class="cname"><span class="cnum">07</span> Advanced Ship Structure</span>
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="course-panel" id="course-panel-6">
+                <div class="course-panel-inner">
+                  <p class="link"><span class="k">Why it matters now</span>Structural rather than thermal, but this is the course behind the scantling and strength checks that ran on the ferry design and both WFSA entries.</p>
+                  <ul>
+                    <li>Longitudinal and local strength assessment of ship structures</li>
+                    <li>Classification-society scantling rules (used with BV and ABS on the ferry and WFSA designs)</li>
+                    <li>Loading conditions, including the grounding case checked on both WFSA ferries</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-item">
+              <button type="button" aria-expanded="false" aria-controls="course-panel-7">
+                <span class="cname"><span class="cnum">08</span> FEM for Ship Structure</span>
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="course-panel" id="course-panel-7">
+                <div class="course-panel-inner">
+                  <p class="link"><span class="k">Why it matters now</span>The numerical-methods habits from this course &mdash; discretizing a continuous domain, checking mesh sensitivity &mdash; are the same habits the CFD and PCM work leans on, just applied to a solid rather than a fluid domain.</p>
+                  <ul>
+                    <li>Finite element formulation for plates, stiffened panels and framing</li>
+                    <li>Mesh density and convergence checks on a structural model</li>
+                    <li>Applied in Abaqus to hull and framing models</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-item">
+              <button type="button" aria-expanded="false" aria-controls="course-panel-8">
+                <span class="cname"><span class="cnum">09</span> Ship Vibration</span>
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="course-panel" id="course-panel-8">
+                <div class="course-panel-inner">
+                  <p class="link"><span class="k">Why it matters now</span>The furthest from the current PCM work, but a reminder that a structure's response depends on more than static loads &mdash; the same instinct that later made cyclic loading (rather than a single melt cycle) the obvious question to ask about a battery pack.</p>
+                  <ul>
+                    <li>Natural frequencies and mode shapes of ship structures</li>
+                    <li>Forced vibration from machinery and propeller-induced excitation</li>
+                    <li>Resonance avoidance in structural and machinery-foundation design</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <p class="course-hint">Draft copy &mdash; go through each course and adjust the "why it matters" line and bullets to match what you actually took away from it.</p>
         </div>
       </div>
     </div>
@@ -2591,6 +2771,38 @@
   document.querySelectorAll('.reveal').forEach(function(el, i){
     el.style.transitionDelay = (i % 4) * 70 + 'ms';
   });
+  /* ---------- coursework accordion ---------- */
+  (function(){
+    var list = document.getElementById('courseList');
+    if (!list) return;
+    list.querySelectorAll('.course-item').forEach(function(item){
+      var btn = item.querySelector('button');
+      var panel = item.querySelector('.course-panel');
+
+      function closeItem(){
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        requestAnimationFrame(function(){ panel.style.maxHeight = '0px'; });
+        btn.setAttribute('aria-expanded', 'false');
+      }
+      function openItem(){
+        btn.setAttribute('aria-expanded', 'true');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+
+      btn.addEventListener('click', function(){
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
+        if (isOpen) { closeItem(); } else { openItem(); }
+      });
+
+      // keep an open panel's height correct if the layout reflows (e.g. resize)
+      window.addEventListener('resize', function(){
+        if (btn.getAttribute('aria-expanded') === 'true') {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+  })();
+
   /* ---------- publications dropdown ---------- */
   (function(){
     document.querySelectorAll('[data-dropdown]').forEach(function(item){
