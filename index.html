@@ -1691,13 +1691,13 @@
       </figure>
       <figure>
         <img class="figimg" src="assets/img/rao-plot.png" alt="RAO plot" loading="lazy" data-path="assets/img/rao-plot.png" data-label="RAO plot" onerror="slotFallback(this)">
-        <figcaption>Response across headings and spread angles. Withheld until acceptance.</figcaption>
+        <figcaption>Response across headings and spread angles.</figcaption>
       </figure>
     </div>
 
     <div class="note reveal">
-      <span class="k">Why no results here yet</span>
-      <p>The motion statistics, the heading at which the yaw trend changes direction, and the mooring tension utilisation constitute the substance of the manuscript, which is currently under review. This section describes the model and the case grid only.</p>
+      <span class="k">Why the full results are not here yet</span>
+      <p>The panel model, the mooring layout, and the response amplitude operator across headings and spread angles are shown above. The complete motion statistics, the heading at which the yaw trend changes direction, and the mooring tension utilisation constitute the primary contribution of the manuscript, which is currently under review, and will be added once the paper is accepted.</p>
     </div>
   </div>
 </section>
@@ -2916,6 +2916,14 @@
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
+  <div class="lightbox-stage" id="lightboxStage">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+  <p class="lightbox-hint">Click image or press Esc to close</p>
+</div>
+
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 
@@ -3275,13 +3283,5 @@
     }
   })();
 </script>
-
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
-  <div class="lightbox-stage" id="lightboxStage">
-    <img id="lightboxImg" src="" alt="">
-  </div>
-  <p class="lightbox-hint">Click image or press Esc to close</p>
-</div>
 </body>
 </html>
