@@ -36,12 +36,13 @@
   }
 
   *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+  html{ scroll-behavior:smooth; overflow-x:hidden; width:100%; }
   body{
     margin:0; background:var(--paper); color:var(--ink);
     font-family:var(--body);
     font-size:clamp(1.02rem, .55vw + .9rem, 1.14rem);
     line-height:1.72; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden; width:100%;
   }
   a{ color:inherit; }
   img{ max-width:100%; display:block; }
@@ -76,16 +77,22 @@
   /* ---- nav ------------------------------------------------------------- */
   nav{
     position:sticky; top:0; z-index:50;
+    border-bottom:1px solid color-mix(in srgb, var(--rule) 45%, transparent);
+  }
+  /* backdrop-filter lives on a pseudo-element, not on nav itself — applying it directly
+     to nav would make nav a containing block for position:fixed descendants, trapping
+     the mobile menu panel inside the 56px nav bar instead of covering the screen. */
+  nav::before{
+    content:""; position:absolute; inset:0; z-index:-1;
     background:color-mix(in srgb, var(--paper) 88%, transparent);
     backdrop-filter:blur(10px);
-    border-bottom:1px solid color-mix(in srgb, var(--rule) 45%, transparent);
   }
   nav .wrap{ display:flex; align-items:center; justify-content:space-between; gap:1rem; height:56px; overflow:visible; }
   .brand{ flex:0 0 auto; font-family:var(--display); font-weight:800; letter-spacing:-.01em; text-decoration:none; font-size:.95rem; }
-  /* No overflow scrolling here: the dropdown is absolutely positioned inside
-     this flex row, and an abs-positioned child still counts toward a scroll
-     container's overflow — which produced phantom scrollbars and would clip
-     the dropdown. Narrow screens shed links via [data-optional] instead. */
+  /* Desktop: a right-aligned row of links and dropdowns, no wrapping, no scrolling
+     (an abs-positioned dropdown inside a scroll container gets clipped). Below the
+     breakpoint this same markup is restyled into a full-panel mobile menu instead,
+     toggled by the 3-dot button. */
   .navlinks{ display:flex; align-items:center; gap:clamp(.55rem,1.8vw,1.5rem); flex-wrap:nowrap; min-width:0; }
   .navlinks a{
     font-family:var(--mono); font-size:.7rem; letter-spacing:.1em;
@@ -94,11 +101,45 @@
     transition:color .2s, border-color .2s;
   }
   .navlinks a:hover, .navlinks a:focus-visible{ color:var(--ink); border-bottom-color:var(--starboard); }
-  @media(max-width:760px){ .navlinks a[data-optional]{ display:none; } }
-  @media(max-width:620px){ .navlinks a[href$="#photography"]{ display:none; } }
-  @media(max-width:480px){
-    .navlinks a[href$="#research"]{ display:none; }
-    .navlinks a, .navitem > button{ font-size:.66rem; letter-spacing:.06em; }
+
+  /* ---- mobile nav toggle (3-dot button) ---------------------------------- */
+  .nav-toggle{
+    display:none; flex-direction:column; align-items:center; justify-content:center;
+    gap:4px; width:2.25rem; height:2.25rem; flex:0 0 auto;
+    background:none; border:0; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent;
+  }
+  .nav-toggle .dot{ width:4px; height:4px; border-radius:50%; background:var(--ink); transition:background .2s; }
+  .nav-toggle[aria-expanded="true"] .dot{ background:var(--starboard); }
+
+  @media(max-width:760px){
+    .nav-toggle{ display:flex; }
+    .navlinks{
+      display:none; position:fixed; inset:56px 0 0 0; z-index:55;
+      flex-direction:column; align-items:stretch; gap:0;
+      background:var(--hull); padding:.5rem var(--pad) 2rem; overflow-y:auto;
+    }
+    .navlinks.open{ display:flex; }
+    .navlinks a{
+      color:var(--paper); font-size:.8rem; padding:1.1rem 0;
+      border-bottom:1px solid #2A3E41;
+    }
+    .navlinks a:hover, .navlinks a:focus-visible{ color:var(--starboard); }
+    .navitem{ border-bottom:1px solid #2A3E41; }
+    .navitem > button{
+      width:100%; padding:1.1rem 0; color:var(--paper); font-size:.8rem;
+      justify-content:space-between; border-bottom:0;
+    }
+    .navitem > button:hover, .navitem > button[aria-expanded="true"]{ color:var(--starboard); border-bottom:0; }
+    /* dropdown becomes an inline accordion panel instead of an absolute popover */
+    .dropdown{
+      position:static; left:auto; right:auto; top:auto; min-width:0;
+      background:none; border:0; box-shadow:none; padding:0 0 .5rem;
+      opacity:1; visibility:visible; transform:none;
+      display:none;
+    }
+    .navitem.open .dropdown{ display:block; }
+    .dropdown a{ padding:.75rem 0 .75rem 1rem; border-bottom:0; }
+    .dropdown .dall{ border-top:1px solid #2A3E41; }
   }
 
   /* ---- hero ------------------------------------------------------------ */
@@ -585,7 +626,7 @@
 <nav>
   <div class="wrap">
     <a class="brand" href="#top">ATIQUR RAHAMAN</a>
-    <div class="navlinks">
+    <div class="navlinks" id="navLinks">
       <a href="#about">About</a>
       <div class="navitem" data-dropdown>
         <button type="button" aria-expanded="false" aria-haspopup="true">Publications <span class="caret" aria-hidden="true"></span></button>
@@ -667,6 +708,9 @@
       </div>
       <a href="#contact">Contact</a>
     </div>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </button>
   </div>
 </nav>
 
@@ -3002,6 +3046,55 @@
       item.addEventListener('focusout', function(e){ if(!item.contains(e.relatedTarget)) close(); });
       document.addEventListener('click', function(e){ if(!item.contains(e.target)) close(); });
       document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+    });
+  })();
+
+  /* ---------- mobile nav toggle (3-dot button) ---------- */
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var navlinks = document.getElementById('navLinks');
+    if (!toggle || !navlinks) return;
+    var MOBILE_BREAKPOINT = 760;
+
+    function closeAccordions(){
+      navlinks.querySelectorAll('.navitem.open').forEach(function(item){
+        item.classList.remove('open');
+        var btn = item.querySelector('button');
+        if (btn) { btn.setAttribute('aria-expanded', 'false'); }
+      });
+    }
+
+    function closeMenu(){
+      navlinks.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      closeAccordions();
+    }
+
+    function openMenu(){
+      navlinks.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    toggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      if (navlinks.classList.contains('open')) { closeMenu(); } else { openMenu(); }
+    });
+
+    // Tapping an actual link (not a dropdown toggle button) closes the whole panel
+    navlinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        if (window.innerWidth <= MOBILE_BREAKPOINT) { closeMenu(); }
+      });
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && navlinks.classList.contains('open')) { closeMenu(); }
+    });
+
+    window.addEventListener('resize', function(){
+      if (window.innerWidth > MOBILE_BREAKPOINT) { closeMenu(); }
     });
   })();
   /* ---------- hash router: one file, three pages ----------
