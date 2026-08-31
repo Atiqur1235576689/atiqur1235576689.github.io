@@ -305,6 +305,12 @@
   .course-panel ul li:last-child{ border-bottom:0; }
   .course-panel ul li::before{ content:""; position:absolute; left:0; top:1.05rem; width:.55rem; height:1px; background:var(--starboard); }
   .course-hint{ font-family:var(--mono); font-size:.68rem; letter-spacing:.04em; color:var(--dim); margin:1rem 0 0; font-style:normal; }
+  .course-cta{ margin-top:1.1rem; }
+  .course-cta .more{
+    font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--starboard); text-decoration:none; display:inline-block;
+  }
+  .course-cta .more::after{ content:"\2192"; margin-left:.5rem; }
 
   /* ---- tick lists ---------------------------------------------------------- */
   .ticklist{ list-style:none; padding:0; margin:0; }
@@ -580,7 +586,16 @@
           <a href="#research" role="menuitem"><span class="dall">All research &amp; projects</span></a>
         </div>
       </div>
-      <a href="#education" data-optional>Education</a>
+      <div class="navitem" data-dropdown>
+        <button type="button" aria-expanded="false" aria-haspopup="true">Education <span class="caret" aria-hidden="true"></span></button>
+        <div class="dropdown" role="menu">
+          <a href="#coursework" role="menuitem">
+            <span class="dnum">01</span>
+            <p class="dttl">Relevant coursework and its connection to current research</p>
+          </a>
+          <a href="#education" role="menuitem"><span class="dall">All education</span></a>
+        </div>
+      </div>
       <div class="navitem" data-dropdown>
         <button type="button" aria-expanded="false" aria-haspopup="true">Awards <span class="caret" aria-hidden="true"></span></button>
         <div class="dropdown" role="menu">
@@ -806,7 +821,164 @@
 
         <div class="reveal">
           <p class="eyebrow">Relevant coursework</p>
-          <p class="muted" style="font-weight:300;font-size:.92rem;margin-top:-.5rem">Select a course to view its relevance to the current research, along with a summary of its content.</p>
+          <p style="max-width:52ch">Fifteen courses from the undergraduate curriculum connect to the current research to varying degrees, from direct thermal and numerical foundations to more distant structural and design background.</p>
+          <div class="course-cta">
+            <a href="#coursework" class="more">View course-by-course relevance</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ AWARDS + BLACK PEARL ============================ -->
+<section id="awards" class="dark">
+  <div class="wrap">
+    <p class="eyebrow reveal">Honours &amp; awards</p>
+    <h2 class="reveal">Team Black Pearl<br>&amp; other honours.</h2>
+
+    <div class="two-col">
+      <div class="reveal">
+        <div class="ribbon" style="margin-bottom:1.5rem">
+          <span class="yr">2025</span>
+          <span class="pl">WFSA Champion</span>
+        </div>
+        <p class="muted" style="font-weight:300">Team Black Pearl is a student-led design team from the Department of Naval Architecture and Marine Engineering at BUET, competing since 2021 in the Worldwide Ferry Safety Association&rsquo;s International Student Design Competition for a Safe and Affordable Ferry. I joined the team for the 2025 campaign, which resulted in the team&rsquo;s first championship, with the winning design <em>Naija Spirit</em>: a 200-passenger battery-electric catamaran for the Ikorodu&ndash;CMS route across the Lagos lagoon.</p>
+
+        <a class="vessel" href="#black-pearl-2025" style="display:block;text-decoration:none;margin-top:1.5rem">
+          <p class="name" style="margin-bottom:0">The full story</p>
+          <p>Route constraints, vessel particulars, the safety case, cost and payback, and the campaign behind it.</p>
+          <span class="more" style="color:var(--starboard)">Read about Naija Spirit</span>
+        </a>
+        <a class="vessel" href="#black-pearl-2026" style="display:block;text-decoration:none;margin-top:1rem">
+          <p class="name" style="margin-bottom:0">2026 campaign</p>
+          <p>3rd prize with Team Black Pearl, continuing the entry the following year.</p>
+          <span class="more" style="color:var(--starboard)">Read about the 2026 entry</span>
+        </a>
+      </div>
+
+      <div class="reveal">
+        <p class="eyebrow">Other honours &amp; scholarships</p>
+        <ul class="ticklist">
+          <li>Award and certificate from the Chairman of BIWTC, recognising performance in the WFSA international competition</li>
+          <li>1st prize, NAME Olympiad at NAME Fest 2023</li>
+          <li>University Merit Scholarship (8 times across 8 semesters)</li>
+          <li>University Dean&rsquo;s List Scholarship (1st and 2nd year)</li>
+          <li>Education Board Technical Scholarship, BUET</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================ LIFE BESIDE ACADEMICS (teaser) ============================ -->
+<section id="life-teaser">
+  <div class="wrap">
+    <p class="eyebrow reveal">Beyond academics</p>
+    <h2 class="reveal">Activities beyond<br>academic work.</h2>
+    <p class="reveal" style="max-width:64ch">In addition to academic and research work, my activities include photography, learning guitar, and organising events such as a department fest&rsquo;s cultural program and a month-long dining committee responsible for feeding 550 people. These interpersonal and organisational activities are not reflected in technical results such as a CFD analysis, but they form a significant part of how I approach engineering work.</p>
+
+    <div class="reveal" style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem">
+      <a class="btn" href="#life-photography" style="border-color:var(--rule);color:var(--ink)">Photography</a>
+      <a class="btn" href="#life-music" style="border-color:var(--rule);color:var(--ink)">Music</a>
+      <a class="btn" href="#life-organizing" style="border-color:var(--rule);color:var(--ink)">Organizing &amp; responsibility</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================ LEADERSHIP + SKILLS ============================ -->
+<section id="leadership">
+  <div class="wrap">
+    <p class="eyebrow reveal">Leadership &amp; activities</p>
+    <ul class="ticklist reveal">
+      <li><strong>Team Member</strong>, Black Pearl, BUET, WFSA Design Competition <span class="muted">(Sept 2024 to present)</span></li>
+      <li><strong>Vice President</strong>, BUET Photographic Society <span class="muted">(Jun 2025 to Jul 2026)</span></li>
+      <li><strong>Co-Organiser</strong>, &ldquo;Voyage of Visuals: Resonance,&rdquo; BUET Photographic Society exhibition, with the club's current President <span class="muted">(Jan 2027)</span></li>
+      <li><strong>Director of Design and Creation</strong>, BUET Entrepreneurship Development Club <span class="muted">(Jun 2025 to Jul 2026)</span></li>
+      <li><strong>Class Representative</strong>, Dept. of NAME, BUET <span class="muted">(Jan 2022 to Feb 2023)</span> &middot; <a href="assets/img/certificates/class-representative.jpg" target="_blank" rel="noopener" style="color:var(--starboard);text-decoration:none;font-family:var(--mono);font-size:.72rem">View certificate &rarr;</a></li>
+      <li><strong>Volunteer</strong>, MARTEC 2022, International Conference on Marine Technology <span class="muted">(Dec 2022)</span> &middot; <a href="assets/img/certificates/martec-2022.jpg" target="_blank" rel="noopener" style="color:var(--starboard);text-decoration:none;font-family:var(--mono);font-size:.72rem">View certificate &rarr;</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <p class="eyebrow reveal">Skills</p>
+    <h2 class="reveal">Tools I work in.</h2>
+
+    <div class="skills reveal" style="margin-top:1rem">
+      <div>
+        <span class="k">Simulation</span>
+        <div class="v">ANSYS Fluent<br>ANSYS AQWA<br>Abaqus</div>
+      </div>
+      <div>
+        <span class="k">Programming</span>
+        <div class="v">C++<br>Python<br>Fortran</div>
+      </div>
+      <div>
+        <span class="k">CAD &amp; 3D modelling</span>
+        <div class="v">AutoCAD<br>Rhinoceros 3D</div>
+      </div>
+      <div>
+        <span class="k">Ship design</span>
+        <div class="v">Maxsurf<br>DELFTship</div>
+      </div>
+      <div>
+        <span class="k">Referencing software</span>
+        <div class="v">Zotero</div>
+      </div>
+      <div>
+        <span class="k">Soft skills</span>
+        <div class="v">Leadership<br>Team Work<br>Mass Communication</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PHOTOGRAPHY ============================ -->
+<!-- ============================ CONTACT ============================ -->
+<section id="contact" class="dark">
+  <div class="wrap">
+    <p class="eyebrow reveal">Contact</p>
+    <h2 class="reveal">Say hello.</h2>
+    <p class="reveal muted" style="max-width:46ch;margin-top:-.75rem;font-weight:300">Open to PhD opportunities in thermal management, phase change materials, and heat transfer.</p>
+
+    <div class="contact-grid reveal">
+      <div>
+        <span class="k">Email</span>
+        <a href="mailto:rhatik.atik.1@gmail.com">rhatik.atik.1@gmail.com</a>
+      </div>
+      <div>
+        <span class="k">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/atiqurrahaman/">/in/atiqurrahaman</a>
+      </div>
+      <div>
+        <span class="k">Curriculum vitae</span>
+        <a href="assets/cv.pdf">Download PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== PAGE: RELEVANT COURSEWORK ==================== -->
+<main id="page-coursework" hidden>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="backlink" href="#education">All education</a>
+    <p class="eyebrow">Education &middot; Coursework</p>
+    <h1>Relevant coursework and<br>its connection to current research.</h1>
+    <p class="byline">Bangladesh University of Engineering and Technology, Dhaka &middot; B.Sc. in Naval Architecture &amp; Marine Engineering</p>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <p class="reveal muted" style="max-width:62ch;font-weight:300;margin-top:-.5rem">Select a course to view its relevance to the current research, along with a summary of its content.</p>
 
           <div class="course-list" id="courseList">
 
@@ -1066,141 +1238,17 @@
             </div>
 
           </div>
-          <p class="course-hint">Course content is based on the official departmental syllabus. It is recommended to review the relevance statements to confirm they reflect personal experience in each course.</p>
-        </div>
-      </div>
-    </div>
+
+    <p class="course-hint reveal">Course content is based on the official departmental syllabus. It is recommended to review the relevance statements to confirm they reflect personal experience in each course.</p>
   </div>
 </section>
 
-<!-- ============================ AWARDS + BLACK PEARL ============================ -->
-<section id="awards" class="dark">
-  <div class="wrap">
-    <p class="eyebrow reveal">Honours &amp; awards</p>
-    <h2 class="reveal">Team Black Pearl<br>&amp; other honours.</h2>
-
-    <div class="two-col">
-      <div class="reveal">
-        <div class="ribbon" style="margin-bottom:1.5rem">
-          <span class="yr">2025</span>
-          <span class="pl">WFSA Champion</span>
-        </div>
-        <p class="muted" style="font-weight:300">Team Black Pearl is a student-led design team from the Department of Naval Architecture and Marine Engineering at BUET, competing since 2021 in the Worldwide Ferry Safety Association&rsquo;s International Student Design Competition for a Safe and Affordable Ferry. I joined the team for the 2025 campaign, which resulted in the team&rsquo;s first championship, with the winning design <em>Naija Spirit</em>: a 200-passenger battery-electric catamaran for the Ikorodu&ndash;CMS route across the Lagos lagoon.</p>
-
-        <a class="vessel" href="#black-pearl-2025" style="display:block;text-decoration:none;margin-top:1.5rem">
-          <p class="name" style="margin-bottom:0">The full story</p>
-          <p>Route constraints, vessel particulars, the safety case, cost and payback, and the campaign behind it.</p>
-          <span class="more" style="color:var(--starboard)">Read about Naija Spirit</span>
-        </a>
-        <a class="vessel" href="#black-pearl-2026" style="display:block;text-decoration:none;margin-top:1rem">
-          <p class="name" style="margin-bottom:0">2026 campaign</p>
-          <p>3rd prize with Team Black Pearl, continuing the entry the following year.</p>
-          <span class="more" style="color:var(--starboard)">Read about the 2026 entry</span>
-        </a>
-      </div>
-
-      <div class="reveal">
-        <p class="eyebrow">Other honours &amp; scholarships</p>
-        <ul class="ticklist">
-          <li>Award and certificate from the Chairman of BIWTC, recognising performance in the WFSA international competition</li>
-          <li>1st prize, NAME Olympiad at NAME Fest 2023</li>
-          <li>University Merit Scholarship (8 times across 8 semesters)</li>
-          <li>University Dean&rsquo;s List Scholarship (1st and 2nd year)</li>
-          <li>Education Board Technical Scholarship, BUET</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================ LIFE BESIDE ACADEMICS (teaser) ============================ -->
-<section id="life-teaser">
-  <div class="wrap">
-    <p class="eyebrow reveal">Beyond academics</p>
-    <h2 class="reveal">Activities beyond<br>academic work.</h2>
-    <p class="reveal" style="max-width:64ch">In addition to academic and research work, my activities include photography, learning guitar, and organising events such as a department fest&rsquo;s cultural program and a month-long dining committee responsible for feeding 550 people. These interpersonal and organisational activities are not reflected in technical results such as a CFD analysis, but they form a significant part of how I approach engineering work.</p>
-
-    <div class="reveal" style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem">
-      <a class="btn" href="#life-photography" style="border-color:var(--rule);color:var(--ink)">Photography</a>
-      <a class="btn" href="#life-music" style="border-color:var(--rule);color:var(--ink)">Music</a>
-      <a class="btn" href="#life-organizing" style="border-color:var(--rule);color:var(--ink)">Organizing &amp; responsibility</a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================ LEADERSHIP + SKILLS ============================ -->
-<section id="leadership">
-  <div class="wrap">
-    <p class="eyebrow reveal">Leadership &amp; activities</p>
-    <ul class="ticklist reveal">
-      <li><strong>Team Member</strong>, Black Pearl, BUET, WFSA Design Competition <span class="muted">(Sept 2024 to present)</span></li>
-      <li><strong>Vice President</strong>, BUET Photographic Society <span class="muted">(Jun 2025 to Jul 2026)</span></li>
-      <li><strong>Co-Organiser</strong>, &ldquo;Voyage of Visuals: Resonance,&rdquo; BUET Photographic Society exhibition, with the club's current President <span class="muted">(Jan 2027)</span></li>
-      <li><strong>Director of Design and Creation</strong>, BUET Entrepreneurship Development Club <span class="muted">(Jun 2025 to Jul 2026)</span></li>
-      <li><strong>Class Representative</strong>, Dept. of NAME, BUET <span class="muted">(Jan 2022 to Feb 2023)</span> &middot; <a href="assets/img/certificates/class-representative.jpg" target="_blank" rel="noopener" style="color:var(--starboard);text-decoration:none;font-family:var(--mono);font-size:.72rem">View certificate &rarr;</a></li>
-      <li><strong>Volunteer</strong>, MARTEC 2022, International Conference on Marine Technology <span class="muted">(Dec 2022)</span> &middot; <a href="assets/img/certificates/martec-2022.jpg" target="_blank" rel="noopener" style="color:var(--starboard);text-decoration:none;font-family:var(--mono);font-size:.72rem">View certificate &rarr;</a></li>
-    </ul>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="wrap">
-    <p class="eyebrow reveal">Skills</p>
-    <h2 class="reveal">Tools I work in.</h2>
-
-    <div class="skills reveal" style="margin-top:1rem">
-      <div>
-        <span class="k">Simulation</span>
-        <div class="v">ANSYS Fluent<br>ANSYS AQWA<br>Abaqus</div>
-      </div>
-      <div>
-        <span class="k">Programming</span>
-        <div class="v">C++<br>Python<br>Fortran</div>
-      </div>
-      <div>
-        <span class="k">CAD &amp; 3D modelling</span>
-        <div class="v">AutoCAD<br>Rhinoceros 3D</div>
-      </div>
-      <div>
-        <span class="k">Ship design</span>
-        <div class="v">Maxsurf<br>DELFTship</div>
-      </div>
-      <div>
-        <span class="k">Referencing software</span>
-        <div class="v">Zotero</div>
-      </div>
-      <div>
-        <span class="k">Soft skills</span>
-        <div class="v">Leadership<br>Team Work<br>Mass Communication</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ PHOTOGRAPHY ============================ -->
-<!-- ============================ CONTACT ============================ -->
-<section id="contact" class="dark">
-  <div class="wrap">
-    <p class="eyebrow reveal">Contact</p>
-    <h2 class="reveal">Say hello.</h2>
-    <p class="reveal muted" style="max-width:46ch;margin-top:-.75rem;font-weight:300">Open to PhD opportunities in thermal management, phase change materials, and heat transfer.</p>
-
-    <div class="contact-grid reveal">
-      <div>
-        <span class="k">Email</span>
-        <a href="mailto:rhatik.atik.1@gmail.com">rhatik.atik.1@gmail.com</a>
-      </div>
-      <div>
-        <span class="k">LinkedIn</span>
-        <a href="https://www.linkedin.com/in/atiqurrahaman/">/in/atiqurrahaman</a>
-      </div>
-      <div>
-        <span class="k">Curriculum vitae</span>
-        <a href="assets/cv.pdf">Download PDF</a>
-      </div>
-    </div>
+<section class="tight">
+  <div class="wrap" style="padding-top:0">
+    <a class="nextpaper" href="#education">
+      <span class="k">Education</span>
+      <p class="t">Back to academic background</p>
+    </a>
   </div>
 </section>
 
@@ -2929,6 +2977,7 @@
   (function(){
     var PAGES = {
       'home':           { el:'page-home',  title:'Atiqur Rahaman \u2014 Naval Architecture & Marine Engineering' },
+      'coursework':     { el:'page-coursework', title:'Relevant coursework \u2014 Atiqur Rahaman' },
       'pcm-k-fin':      { el:'page-pcm',   title:'K-shaped fins for PCM melting enhancement \u2014 Atiqur Rahaman' },
       'mooring-spread': { el:'page-moor',  title:'Mooring spread angle, 15 MW floating wind turbine \u2014 Atiqur Rahaman' },
       'black-pearl-2025': { el:'page-wfsa25', title:'WFSA champion 2025, Team Black Pearl \u2014 Atiqur Rahaman' },
