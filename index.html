@@ -412,14 +412,14 @@
   img.figimg{
     display:block; max-width:100%; height:auto; width:auto;
     margin-inline:auto; border:1px solid var(--rule);
-    cursor:zoom-in;
+    cursor:pointer;
   }
   section.dark img.figimg{ border-color:#3A4E51; }
   figcaption{ font-family:var(--mono); font-size:.66rem; letter-spacing:.05em; color:var(--dim); margin-top:.7rem; line-height:1.8; }
   section.dark figcaption{ color:#7B8C88; }
 
-  /* ---- lightbox / image zoom ------------------------------------------------ */
-  .portrait{ cursor:zoom-in; }
+  /* ---- lightbox: click a figure or the portrait to view it fullscreen ------ */
+  .portrait{ cursor:pointer; }
   .lightbox{
     position:fixed; inset:0; z-index:200;
     background:rgba(12,19,21,.94);
@@ -433,16 +433,11 @@
     max-width:100%; max-height:100%; overflow:hidden;
     display:flex; align-items:center; justify-content:center;
   }
-  .lightbox-stage.zoomed{
-    overflow:auto; align-items:flex-start; justify-content:flex-start;
-    -webkit-overflow-scrolling:touch;
-  }
   .lightbox-stage img{
     display:block; max-width:100%; max-height:calc(100vh - 8rem);
-    width:auto; height:auto; cursor:zoom-in;
+    width:auto; height:auto; cursor:zoom-out;
     box-shadow:0 20px 60px rgba(0,0,0,.5);
   }
-  .lightbox-stage.zoomed img{ max-width:none; max-height:none; cursor:zoom-out; }
   .lightbox-close{
     position:absolute; top:1.1rem; right:1.25rem; z-index:1;
     font-family:var(--mono); font-size:1.4rem; line-height:1;
@@ -1476,17 +1471,17 @@
       </figure>
       <figure>
         <img class="figimg" src="assets/img/pcm-contour.png" alt="PCM contour" loading="lazy" data-path="assets/img/pcm-contour.png" data-label="PCM contour" onerror="slotFallback(this)">
-        <figcaption>Melting front at a representative instant. Withheld until acceptance.</figcaption>
+        <figcaption>Melting front at a representative instant.</figcaption>
       </figure>
       <figure>
         <img class="figimg" src="assets/img/pcm-validation.png" alt="PCM validation" loading="lazy" data-path="assets/img/pcm-validation.png" data-label="PCM validation" onerror="slotFallback(this)">
-        <figcaption>Comparison of the model against published experimental data. Withheld until acceptance.</figcaption>
+        <figcaption>Comparison of the model against published experimental data.</figcaption>
       </figure>
     </div>
 
     <div class="note reveal">
-      <span class="k">Why no results here yet</span>
-      <p>The melting curves, contour fields, the performance ranking across configurations, and the melting-uniformity index introduced in this work constitute the primary contribution of the paper, which is currently under review. This section presents the geometry and method only. Findings will be added once the paper is accepted.</p>
+      <span class="k">Why the full results are not here yet</span>
+      <p>The mesh, a representative melting front, and the validation against published experimental data are shown above. The complete set of melting curves, the performance ranking across configurations, and the melting-uniformity index introduced in this work constitute the primary contribution of the paper, which is currently under review, and will be added once the paper is accepted.</p>
     </div>
   </div>
 </section>
@@ -3218,30 +3213,20 @@
     draw();
   })();
 
-  /* ================= lightbox: click any figure or the portrait to view full-size, click again to zoom ================= */
+  /* ================= lightbox: click any figure or the portrait to view it fullscreen ================= */
   (function(){
     var lightbox = document.getElementById('lightbox');
     var stage = document.getElementById('lightboxStage');
     var lbImg = document.getElementById('lightboxImg');
     var closeBtn = document.getElementById('lightboxClose');
     if (!lightbox || !stage || !lbImg || !closeBtn) return;
-    var ZOOM = 1.8;
     var lastFocused = null;
-
-    function resetZoom(){
-      stage.classList.remove('zoomed');
-      lbImg.style.width = '';
-      lbImg.style.height = '';
-      stage.scrollTop = 0;
-      stage.scrollLeft = 0;
-    }
 
     function openLightbox(src, alt, triggerEl){
       if (!src) return;
       lastFocused = triggerEl || document.activeElement;
       lbImg.src = src;
       lbImg.alt = alt || '';
-      resetZoom();
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       closeBtn.focus();
@@ -3249,26 +3234,11 @@
 
     function closeLightbox(){
       lightbox.classList.remove('open');
-      resetZoom();
       document.body.style.overflow = '';
       if (lastFocused && typeof lastFocused.focus === 'function') { lastFocused.focus(); }
     }
 
-    function toggleZoom(){
-      if (stage.classList.contains('zoomed')) {
-        resetZoom();
-      } else {
-        stage.classList.add('zoomed');
-        var w = lbImg.naturalWidth * ZOOM;
-        var h = lbImg.naturalHeight * ZOOM;
-        if (w > 0 && h > 0) {
-          lbImg.style.width = w + 'px';
-          lbImg.style.height = h + 'px';
-        }
-      }
-    }
-
-    lbImg.addEventListener('click', function(e){ e.stopPropagation(); toggleZoom(); });
+    lbImg.addEventListener('click', closeLightbox);
     closeBtn.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', function(e){ if (e.target === lightbox) { closeLightbox(); } });
     document.addEventListener('keydown', function(e){
@@ -3279,7 +3249,7 @@
     document.querySelectorAll('img.figimg').forEach(function(img){
       img.setAttribute('tabindex', '0');
       img.setAttribute('role', 'button');
-      if (!img.hasAttribute('aria-label')) { img.setAttribute('aria-label', 'View larger image'); }
+      if (!img.hasAttribute('aria-label')) { img.setAttribute('aria-label', 'View fullscreen'); }
       function open(){ openLightbox(img.currentSrc || img.src, img.alt, img); }
       img.addEventListener('click', open);
       img.addEventListener('keydown', function(e){
@@ -3311,7 +3281,7 @@
   <div class="lightbox-stage" id="lightboxStage">
     <img id="lightboxImg" src="" alt="">
   </div>
-  <p class="lightbox-hint">Click image to zoom &middot; Esc to close</p>
+  <p class="lightbox-hint">Click image or press Esc to close</p>
 </div>
 </body>
 </html>
