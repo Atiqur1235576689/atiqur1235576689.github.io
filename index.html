@@ -817,11 +817,11 @@
               </button>
               <div class="course-panel" id="course-panel-0">
                 <div class="course-panel-inner">
-                  <p class="link"><span class="k">Why it matters now</span>This is the course the current research traces straight back to. Conduction, convection and the mechanics of a material changing phase are the vocabulary the PCM work is written in &mdash; it's the reason a structural mooring thesis ended up pointing toward a thermal management PhD.</p>
+                  <p class="link"><span class="k">Why it matters now</span>This is the course the current research traces straight back to &mdash; it's also, literally, where fins first showed up in the curriculum. The conduction and convection vocabulary from NAME 329 is what the PCM/K-fin work is written in.</p>
                   <ul>
-                    <li>Conduction, convection and radiation fundamentals, and the governing equations behind each</li>
-                    <li>Latent heat and phase change, the basis for how the PCM/fin work models melting and solidification</li>
-                    <li>Finned surfaces and extended-surface heat transfer, directly relevant to the K-shaped fin geometry</li>
+                    <li>Steady and unsteady conduction, including fins of uniform cross-section &mdash; the direct forerunner of the K-shaped fin analysis</li>
+                    <li>Forced and natural convection, non-dimensional parameters and empirical correlations, the same convection modes competing inside a melting PCM enclosure</li>
+                    <li>Applied heat-transfer cases in ship design (insulation, refrigerated spaces, fish holds), the ship-specific side of the same conduction/convection toolkit</li>
                   </ul>
                 </div>
               </div>
@@ -834,11 +834,11 @@
               </button>
               <div class="course-panel" id="course-panel-1">
                 <div class="course-panel-inner">
-                  <p class="link"><span class="k">Why it matters now</span>Every result in the current research comes out of a CFD solver. This course is where the enthalpy&ndash;porosity and Boussinesq-approximation methods used in the PCM enclosure and battery cooling work were first introduced, rather than picked up cold in ANSYS Fluent.</p>
+                  <p class="link"><span class="k">Why it matters now</span>Every result in the current research comes out of a CFD solver, and this is the course that built the numerical foundation for that &mdash; discretization, grid generation and Navier&ndash;Stokes-based flow computation, all reused directly in the Fluent PCM and battery-cooling models.</p>
                   <ul>
-                    <li>Discretization, meshing and grid-independence checks, the same checks run before trusting any PCM result</li>
-                    <li>Solution algorithms (pressure&ndash;velocity coupling, upwind schemes) used directly in the Fluent PCM setup</li>
-                    <li>Convergence and validation practice against experimental or published benchmark data</li>
+                    <li>Discretization schemes &mdash; finite difference, finite volume, finite element and spectral methods &mdash; and grid generation</li>
+                    <li>Navier&ndash;Stokes-based flow computation and turbulence modeling, the same solver logic behind the buoyancy-driven melting flow in the PCM enclosure</li>
+                    <li>Free-surface and RANSE-based ship-flow applications, the ship-hydrodynamics use case the same numerical methods were first applied to</li>
                   </ul>
                 </div>
               </div>
@@ -851,11 +851,11 @@
               </button>
               <div class="course-panel" id="course-panel-2">
                 <div class="course-panel-inner">
-                  <p class="link"><span class="k">Why it matters now</span>The thesis and mooring paper are built on the potential-flow and floating-body theory from this course. It's also, indirectly, where the pivot toward thermal work began: chasing convection inside the platform's structural problem was what first made heat transfer feel like the more interesting question.</p>
+                  <p class="link"><span class="k">Why it matters now</span>The thesis and mooring paper are built on the potential-flow theory from this course. It's also, indirectly, where the pivot toward thermal work began: chasing the real-fluid, viscous side of this course's material inside a structural mooring problem is what first made heat transfer feel like the more interesting question.</p>
                   <ul>
-                    <li>Potential flow theory and added mass, damping and wave-exciting force concepts, used directly in the AQWA model</li>
-                    <li>Floating-body motion in six degrees of freedom, the basis of the mooring-spread study</li>
-                    <li>Wave theory and directional wave climates, relevant to the edge-vs-interior turbine question</li>
+                    <li>Ideal-fluid theory &mdash; velocity potential, stream functions, circulation, sources and sinks, Bernoulli's equation &mdash; the foundation of the AQWA potential-flow mooring model</li>
+                    <li>Conformal transformation and the theorems of Green, Stokes and Cauchy, used in computing added mass, radiation damping and wave-exciting forces</li>
+                    <li>Real-fluid, boundary-layer theory (Navier&ndash;Stokes, momentum and energy thickness) describing viscous flow around a hull, the counterpart the potential-flow model leaves out</li>
                   </ul>
                 </div>
               </div>
@@ -868,11 +868,11 @@
               </button>
               <div class="course-panel" id="course-panel-3">
                 <div class="course-panel-inner">
-                  <p class="link"><span class="k">Why it matters now</span>The foundation everything above is built on &mdash; buoyancy-driven convection in a melting PCM enclosure and flow around a hull are both, underneath, the same continuity and momentum equations from this course.</p>
+                  <p class="link"><span class="k">Why it matters now</span>The foundation everything above is built on &mdash; buoyancy-driven convection in a melting PCM enclosure and flow around a hull are both, underneath, the same continuity, energy and momentum principles from this course.</p>
                   <ul>
-                    <li>Continuity, momentum and Bernoulli-based analysis of internal and external flows</li>
-                    <li>Viscous flow, boundary layers and laminar vs turbulent regimes</li>
-                    <li>Buoyancy-driven flow, the mechanism behind natural convection in a melting PCM</li>
+                    <li>Fluid statics and kinematics, continuity, energy and momentum principles</li>
+                    <li>Laminar and turbulent flow, boundary layers, drag and wakes</li>
+                    <li>Dimensional analysis and similitude/model testing, the reasoning behind scaling a small enclosure model or a scaled ship test</li>
                   </ul>
                 </div>
               </div>
@@ -885,11 +885,11 @@
               </button>
               <div class="course-panel" id="course-panel-4">
                 <div class="course-panel-inner">
-                  <p class="link"><span class="k">Why it matters now</span>Less directly tied to the PCM line of work, but the methods here (Holtrop &amp; Mennen, propeller selection) carried straight into the 175-passenger ferry design and the propulsion sizing on both WFSA ferries.</p>
+                  <p class="link"><span class="k">Why it matters now</span>Less directly tied to the PCM line of work, but the resistance and propeller methods here carried straight into the 175-passenger ferry design and the propulsion sizing on both WFSA ferries.</p>
                   <ul>
-                    <li>Resistance estimation methods, including Holtrop &amp; Mennen and Van Oortmerssen</li>
-                    <li>Propeller theory, selection and cavitation checks</li>
-                    <li>Powering margins and engine/gearbox matching for a given hull and speed</li>
+                    <li>Resistance components (friction, wave-making, form, appendage, shallow-water effects) and powering estimation by methodical series and statistical methods</li>
+                    <li>Screw propeller geometry, momentum and blade-element theory, and propeller coefficients/design charts</li>
+                    <li>Hull&ndash;propeller interaction (wake, thrust deduction), propeller cavitation and blade strength</li>
                   </ul>
                 </div>
               </div>
@@ -902,11 +902,11 @@
               </button>
               <div class="course-panel" id="course-panel-5">
                 <div class="course-panel-inner">
-                  <p class="link"><span class="k">Why it matters now</span>Not on the PCM path directly, but the thermal side of a machinery space &mdash; the engine-room cooling load, essentially &mdash; is the same kind of problem the current research tackles at battery-pack scale instead of ship scale.</p>
+                  <p class="link"><span class="k">Why it matters now</span>Not on the PCM path directly, but the comparative-propulsion thinking here &mdash; weighing propulsor and power-plant options against each other &mdash; is the same reasoning behind ruling battery-electric out in favour of CNG for Niger Drift.</p>
                   <ul>
-                    <li>Marine engines, gearboxes and shafting arrangements</li>
-                    <li>Auxiliary and hybrid power systems, relevant to the battery-electric and CNG-hybrid WFSA entries</li>
-                    <li>Machinery-space thermal and ventilation loads</li>
+                    <li>Steam, diesel and gas-turbine power plants together with speed reducers and propulsors</li>
+                    <li>Propulsor types &mdash; fixed pitch, controllable pitch, contra-rotating, ducted, water jet &mdash; and their comparative performance</li>
+                    <li>Comparative studies of different propulsion arrangements, used when weighing battery-electric against CNG serial-hybrid propulsion</li>
                   </ul>
                 </div>
               </div>
@@ -919,11 +919,11 @@
               </button>
               <div class="course-panel" id="course-panel-6">
                 <div class="course-panel-inner">
-                  <p class="link"><span class="k">Why it matters now</span>Structural rather than thermal, but this is the course behind the scantling and strength checks that ran on the ferry design and both WFSA entries.</p>
+                  <p class="link"><span class="k">Why it matters now</span>Structural rather than thermal, but this is the course behind the finite-element strength checks that ran on the ferry design and both WFSA entries, including the grounding case.</p>
                   <ul>
-                    <li>Longitudinal and local strength assessment of ship structures</li>
-                    <li>Classification-society scantling rules (used with BV and ABS on the ferry and WFSA designs)</li>
-                    <li>Loading conditions, including the grounding case checked on both WFSA ferries</li>
+                    <li>Energy and matrix methods of structural analysis, and stiffness-matrix formulation for beam, bar and shell elements</li>
+                    <li>Hull girder response and application of the finite element method to ship structures</li>
+                    <li>Plastic analysis and an introduction to fatigue and fracture, relevant to the grounding and structural checks on the WFSA ferries</li>
                   </ul>
                 </div>
               </div>
@@ -936,11 +936,11 @@
               </button>
               <div class="course-panel" id="course-panel-7">
                 <div class="course-panel-inner">
-                  <p class="link"><span class="k">Why it matters now</span>The numerical-methods habits from this course &mdash; discretizing a continuous domain, checking mesh sensitivity &mdash; are the same habits the CFD and PCM work leans on, just applied to a solid rather than a fluid domain.</p>
+                  <p class="link"><span class="k">Why it matters now</span>The numerical-methods habits from this course &mdash; discretizing a continuous domain, checking convergence &mdash; are the same habits the CFD and PCM work leans on, just applied to a solid rather than a fluid domain.</p>
                   <ul>
-                    <li>Finite element formulation for plates, stiffened panels and framing</li>
-                    <li>Mesh density and convergence checks on a structural model</li>
-                    <li>Applied in Abaqus to hull and framing models</li>
+                    <li>Finite element fundamentals: local/global coordinate transformations, stiffness matrices and global assembly</li>
+                    <li>Isoparametric elements, plane strain/stress analysis and convergence requirements &mdash; the same convergence logic behind a CFD grid-independence check</li>
+                    <li>Applied to real finite element software and frame-structure analysis, the direct precursor to running Abaqus on the ferry and WFSA hull structures</li>
                   </ul>
                 </div>
               </div>
@@ -953,18 +953,18 @@
               </button>
               <div class="course-panel" id="course-panel-8">
                 <div class="course-panel-inner">
-                  <p class="link"><span class="k">Why it matters now</span>The furthest from the current PCM work, but a reminder that a structure's response depends on more than static loads &mdash; the same instinct that later made cyclic loading (rather than a single melt cycle) the obvious question to ask about a battery pack.</p>
+                  <p class="link"><span class="k">Why it matters now</span>The furthest from the current PCM work, but a reminder that a system's response depends on more than a single static load &mdash; the same instinct that later made cyclic loading, not a single melt cycle, the obvious question to ask about a battery pack.</p>
                   <ul>
-                    <li>Natural frequencies and mode shapes of ship structures</li>
-                    <li>Forced vibration from machinery and propeller-induced excitation</li>
-                    <li>Resonance avoidance in structural and machinery-foundation design</li>
+                    <li>Free and forced vibration of single, two and multi-degree-of-freedom systems, and transverse vibration of beams</li>
+                    <li>Torsional, flexural and longitudinal vibration of the propeller-shafting system</li>
+                    <li>Allowable vibration limits and reduction through propeller/machinery selection, isolation and insulation &mdash; managing a repeated response, echoed later in managing PCM behaviour across repeated charge&ndash;discharge cycles</li>
                   </ul>
                 </div>
               </div>
             </div>
 
           </div>
-          <p class="course-hint">Draft copy &mdash; go through each course and adjust the "why it matters" line and bullets to match what you actually took away from it.</p>
+          <p class="course-hint">Topics pulled from the department's official course list &mdash; worth a quick pass to make sure the "why it matters" line still matches what you personally took from each course.</p>
         </div>
       </div>
     </div>
